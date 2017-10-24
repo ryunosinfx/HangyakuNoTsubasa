@@ -1,0 +1,22 @@
+{
+  "name": "test",
+  "version": "0.0.1",
+  "description": "aaaaa",
+  "main": "index.js",
+  "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "webpack-dev-server --hot --inline --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "./"
+  },
+  "keywords": [
+    "aaaaa"
+  ],
+  "author": "aaaaa",
+  "license": "MIT",
+  "dependencies": {
+    "encrypt-indexeddb-entity-manager": "0.0.4"
+  }
+}
