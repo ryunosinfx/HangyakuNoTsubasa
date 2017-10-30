@@ -4,4 +4,5 @@ export default class Searcher extends BaseView {
   constructor() {
     super.constructor();
   }
+  show(){}
 }

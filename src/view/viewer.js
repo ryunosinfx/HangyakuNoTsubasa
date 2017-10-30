@@ -4,4 +4,5 @@ export default class Viewer extends BaseView {
   constructor() {
     super.constructor();
   }
+  show(){}
 }

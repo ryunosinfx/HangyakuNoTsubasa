@@ -4,4 +4,5 @@ export default class Manager extends BaseView {
   constructor() {
     super.constructor();
   }
+  show(){}
 }

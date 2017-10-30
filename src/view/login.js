@@ -4,4 +4,10 @@ export default class Login extends BaseView {
   constructor() {
     super.constructor();
   }
+  show(){
+
+  }
+  login(){
+
+  }
 }
