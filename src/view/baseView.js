@@ -7,7 +7,7 @@ export default class BaseView {
   show(data){
 
   }
-  isEquals(){
-    
+  isEquals(baseView){
+    return baseView,name ===  this,name;
   }
 }

@@ -5,6 +5,10 @@ export default class Activate extends BaseView {
   constructor() {
     super.constructor();
   }
-  show(){}
-  activste(){}
+  show(){
+
+  }
+  async activste(){
+
+  }
 }

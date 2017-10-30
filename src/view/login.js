@@ -7,7 +7,7 @@ export default class Login extends BaseView {
   show(){
 
   }
-  login(){
+  async login(){
 
   }
 }

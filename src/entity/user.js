@@ -5,4 +5,10 @@ export default class User {
     super(key,data,pkHash);
   }
   // 何にしましょうか。
+  set setName(name){
+    super.set("name",name);
+  }
+  get getName(){
+    return super.get("name");
+  }
 }
