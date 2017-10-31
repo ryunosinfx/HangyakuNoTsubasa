@@ -17,6 +17,6 @@
   "author": "aaaaa",
   "license": "MIT",
   "dependencies": {
-    "encrypt-indexeddb-entity-manager": "0.0.4"
+    "encrypt-indexeddb-entity-manager": "0.0.5"
   }
 }
