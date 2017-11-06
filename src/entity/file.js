@@ -5,10 +5,22 @@ export default class File {
     super(key,data,pkHash);
   }
   // 何にしましょうか。
-  set setName(name){
-    super.set("name",name);
+  set fileName(fileName){
+    super.set("fileName",fileName);
   }
-  get getName(){
-    return super.get("name");
+  get fileName(){
+    return super.get("fileName");
+  }
+  set fileData(fileData){
+    super.set("fileData",fileData);
+  }
+  get fileData(){
+    return super.get("fileData");
+  }
+  set fileType(fileType){
+    super.set("fileType",fileType);
+  }
+  get fileType(){
+    return super.get("fileType");
   }
 }

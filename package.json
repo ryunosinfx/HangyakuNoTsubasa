@@ -14,9 +14,9 @@
   "keywords": [
     "aaaaa"
   ],
-  "author": "aaaaa",
+  "author": "ryunosinfx",
   "license": "MIT",
   "dependencies": {
-    "encrypt-indexeddb-entity-manager": "0.0.5"
+    "encrypt-indexeddb-entity-manager": "0.0.6"
   }
 }
