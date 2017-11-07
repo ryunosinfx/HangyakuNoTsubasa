@@ -1,12 +1,25 @@
+import Activate from '../view/activate'
+import Editor from '../view/editor'
+import Login from '../view/login'
+import Manage from '../view/manage'
+import Search from '../view/search'
+import Viewer from '../view/viewer'
 
-import BaseView from '../view/baseView'
-import BaseView from '../view/baseView'
-import BaseView from '../view/baseView'
-import BaseView from '../view/baseView'
-import BaseView from '../view/baseView'
-
+const pageMap = {};
 export default class Router extends BaseView {
-  constructor() {
+  constructor(pageBase) {
     super.constructor();
+  }
+  static add(key, page, filter) {
+    pageMap[key]={page:page,filter:filter};
+  }
+  init(href) {
+
+  }
+  filter() {
+
+  }
+  goto(page) {
+
   }
 }
