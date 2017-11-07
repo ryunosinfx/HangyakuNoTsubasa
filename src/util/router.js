@@ -5,7 +5,8 @@ import Manage from '../view/manage'
 import Search from '../view/search'
 import Viewer from '../view/viewer'
 
-const pageMap = {};
+const pageList = [];
+const pageKeyMap = [];
 export default class Router extends BaseView {
   constructor(pageBase) {
     super.constructor();
