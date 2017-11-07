@@ -18,7 +18,7 @@ export default class Servicess {
   /*
    */
   async isLogiedIn() {
-    return await this.authoricator.isLogedIn();
+    return await ECIDBEMfunc.isLogedIn();
   }
   async createEntityManager() {
     if (await this.isLogiedIn()) {
