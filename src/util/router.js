@@ -18,7 +18,13 @@ export default class Router extends BaseView {
 
   }
   filter() {
+    let search = location.search;
 
+    for(let key of pageList){
+      let route = pageKeyMap[key];
+
+
+    }
   }
   goto(page) {
 
