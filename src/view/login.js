@@ -8,7 +8,7 @@ export default class Login extends BaseView {
   show(){
 
   }
-  
+
   async login(userId,Password){
     await ECIDBEMfunc.signin(userId,Password);
     return await ECIDBEMfunc,isLogiedIn();
