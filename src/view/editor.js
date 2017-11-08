@@ -5,4 +5,19 @@ export default class Editor extends BaseView {
   constructor() {
     super.constructor();
   }
+  load(key){
+
+  }
+  save(){
+
+  }
+  undo(){
+
+  }
+  redo(){
+
+  }
+  record(){
+
+  }
 }
