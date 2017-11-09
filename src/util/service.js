@@ -13,7 +13,11 @@ import Router from './router'
 const router = new Router();
 export default class Servicess {
   constructor() {
-    router.add();
+    router.add(new Login());
+      router.add(new Activate());
+        router.add(new Manage());
+          router.add(new Search());
+            router.add(new Viewer());
   }
   async registerUser(userId, password) {
     await ECIDBEMfunc.signup(userId, password);
@@ -34,5 +38,10 @@ export default class Servicess {
       return new Query(isOnTranzaction, this.dbScanner);
     }
     return null;
+  }
+
+  async goToNext（key）{
+    let page = router.getPage();
+    return ;
   }
 }

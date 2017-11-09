@@ -10,4 +10,10 @@ export default class BaseView {
   isEquals(baseView){
     return baseView,name ===  this,name;
   }
+  getKey(){
+    return this.name;
+  }
+  getFilter(){
+    return this.filter;
+  }
 }

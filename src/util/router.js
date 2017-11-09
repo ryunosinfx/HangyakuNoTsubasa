@@ -4,7 +4,8 @@ export default class Router extends BaseView {
   constructor(pageBase) {
     super.constructor();
   }
-  static add(key, page, filter) {
+  static add( page, filter) {
+    let key = page.getKey();
     pageKeyMap[key] = {
       page: page,
       filter: filter
