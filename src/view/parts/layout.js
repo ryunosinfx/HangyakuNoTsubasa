@@ -3,8 +3,9 @@ import BaseView from '../baseView'
 export default class Layout extends BaseView {
   constructor() {
     super.constructor();
+      super.constructor();
   }
-  show(){
+  show(page){
 
   }
   add(view){}
