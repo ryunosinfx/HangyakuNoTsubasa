@@ -4,6 +4,10 @@ import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/functions'
 export default class Editor extends BaseView {
   constructor() {
     super.constructor();
+    this.currentVnode = '';
+  }
+  show(){
+      return this.currentVnode;
   }
   load(key){
 

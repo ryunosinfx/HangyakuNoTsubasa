@@ -4,9 +4,10 @@ import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/functions'
 export default class Login extends BaseView {
   constructor() {
     super.constructor();
+    this.currentVnode = '';
   }
   show(){
-
+      return this.currentVnode;
   }
 
   async login(userId,Password){

@@ -5,11 +5,12 @@ import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/functions'
 export default class Activate extends BaseView {
   constructor() {
     super.constructor();
+    this.currentVnode = '';
   }
   show(){
-
+    return this.currentVnode;
   }
-  async activste(userId,Password){
+  async activste(){
 
   }
 }

@@ -12,13 +12,14 @@ export default class Layout extends BaseView {
     super.header = new Header();
     super.footer = new Footer();
     super.menu = new Menue();
-    this.baseFrame=null;
+    this.baseFrame = null;
+    this.currentVnode = '';
   }
   show(page) {
 
   }
   add(view) {}
-  createBsaeFrame(){
+  createBsaeFrame() {
 
   }
 }
