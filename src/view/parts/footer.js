@@ -3,10 +3,17 @@ import BaseView from '../baseView'
 export default class Footer extends BaseView {
   constructor() {
     super.constructor();
-    this.currentVnode = '';
+    this.currentVnode = null;
   }
-  show(){
+  show(node,viewState){
+    if(node!==null && this.currentVnode===null){
+      patch(node,)
+    }
       return this.currentVnode;
+  }
+  crateVnode(viewState){
+    let newVnode = null;
+    return newVnode;
   }
   add(view){}
 }
