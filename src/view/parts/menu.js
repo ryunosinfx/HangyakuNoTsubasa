@@ -3,10 +3,20 @@ import BaseView from '../baseView'
 export default class Menue extends BaseView {
   constructor() {
     super.constructor();
-    this.currentVnode = '';
+    this.currentVnode = null;
   }
-  show(){
-      return this.currentVnode;
+  show(node, viewState) {
+    let newNode = this.crateVnode(,nodeviewState);
+    if (node !== null && this.currentVnode === null) {
+      patch(node, newNode);
+    }else{
+      patch(this.currentVnode, newNode);
+    }
+    this.currentVnode = newNode;
+    return this.currentVnode;
   }
-  add(view){}
+  crateVnode(oldNode, viewState) {
+    let newVnode = null;
+    return newVnode;
+  }
 }
