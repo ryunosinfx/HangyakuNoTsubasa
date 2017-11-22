@@ -6,6 +6,7 @@ import BaseView from '../baseView'
 import Header from './header'
 import Footer from './footer'
 import Menue from './menu'
+import css from '../css'
 export default class Layout extends BaseView {
   constructor() {
     super.constructor();
@@ -17,9 +18,14 @@ export default class Layout extends BaseView {
   }
   init() {
     let elements = document.getElementsByTagName("body");
-    let layout = document.createNode('div');
+    //let layout = document.createNode('div');
     elements[0].innerHTML = this.createBsaeFrame();
     // build frme
+    let header = document.getElementById("header");
+    let footer = document.getElementById("footer");
+    let menu = document.getElementById("menu");
+    let content = document.getElementById("content");
+
   }
   // from service
   show(page) {
@@ -27,6 +33,6 @@ export default class Layout extends BaseView {
   }
   add(view) {}
   createBsaeFrame() {
-    return '<h1>Hellow!</h1><div id="c2"></div><div id="container"></div>';
+    return '<header>Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer></footer>';
   }
 }
