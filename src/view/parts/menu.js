@@ -20,14 +20,21 @@ export default class Menue extends BaseView {
     return this.currentVnode;
   }
   crateVnode(oldNode, viewState) {
+    let liNides = [];
+    for(let value of [{href:'', name:''}]){
+      liNides.push(this.createMenuItem(value));
+    }
     let newVnode = h('div', {
         style: {
           color: '#000'
         }
       }, [
         h('h1', 'i am menue'),
-        h('ul', ['li',{style:css.menu.item},h('a',)]),
+        h('ul', liNides),
       ]);;
     return newVnode;
+  }
+  createMenuItem(data){
+    return h('li',{style:css.menu.item},h('a',href:data.href,data.name));
   }
 }
