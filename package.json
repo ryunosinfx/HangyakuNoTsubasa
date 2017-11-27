@@ -4,8 +4,8 @@
   "description": "aaaaa",
   "main": "index.js",
   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "webpack-dev-server --hot --inline --progress --colors"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --hot --inline --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,10 @@
   "license": "MIT",
   "dependencies": {
     "encrypt-indexeddb-entity-manager": "0.0.6"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.2",
+    "eslint": "^4.12.0",
+    "eslint-loader": "^1.9.0"
   }
 }
