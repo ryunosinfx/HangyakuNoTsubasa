@@ -1,5 +1,6 @@
 
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/functions'
+import constants from './constants'
 import Activate from '../view/activate'
 import Editor from '../view/editor'
 import Login from '../view/login'

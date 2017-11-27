@@ -1,3 +1,5 @@
+import constants from './constants'
+
 const pageList = [];
 const pageKeyMap = {};
 export default class Router extends BaseView {

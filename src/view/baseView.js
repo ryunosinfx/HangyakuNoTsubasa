@@ -17,4 +17,7 @@ export default class BaseView {
   getFilter(){
     return this.filter;
   }
+  getName(){
+    this.name;
+  }
 }
