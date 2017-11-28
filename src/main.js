@@ -1,9 +1,7 @@
+import service from './service/service'
 
-const {width, height, scale} = Dimensions.get("window"),
-    vw = width / 100,
-    vh = height / 100,
-    vmin = Math.min(vw, vh),
-    vmax = Math.max(vw, vh);
-
-export default StyleSheet.create({});
-alert('teeest!')
+const serviceInst = new service();
+console.log('logger.js is now loaded...');
+window.onload = () => {
+  //全てはここから始まる。
+}
