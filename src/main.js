@@ -6,3 +6,4 @@ const {width, height, scale} = Dimensions.get("window"),
     vmax = Math.max(vw, vh);
 
 export default StyleSheet.create({});
+alert('teeest!')
