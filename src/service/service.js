@@ -1,12 +1,11 @@
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/functions'
-import constants from './constants'
 import Activate from '../view/activate'
 import Editor from '../view/editor'
 import Login from '../view/login'
 import Manage from '../view/manage'
-import Search from '../view/search'
+import Search from '../view/searcher'
 import Viewer from '../view/viewer'
-import Router from '../utilstate/router'
+import Router from '../util/router'
 import State from './state'
 
 const router = new Router();

@@ -1,4 +1,4 @@
-const bname = location.pathname.split('\/');
+const bnames = location.pathname.split('\/');
 export default {
-  bname:bname[bname.length -1];
+  bname:bnames[(bname.length -1)]
 }
