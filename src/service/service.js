@@ -1,4 +1,4 @@
-import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/functions'
+import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 import Activate from '../view/activate'
 import Editor from '../view/editor'
 import Login from '../view/login'

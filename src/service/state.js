@@ -1,4 +1,4 @@
-import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/functions'
+import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class State {
   constructor() {
     this.isLogedIn = false;
