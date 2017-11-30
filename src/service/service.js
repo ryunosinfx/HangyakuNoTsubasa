@@ -9,6 +9,7 @@ import Router from '../util/router'
 import State from './state'
 
 const router = new Router();
+const state =new State();
 export default class Servicess {
   constructor() {
     router.add(new Login(), (state) => {
@@ -29,6 +30,11 @@ export default class Servicess {
     router.add(new Viewer(), (state) => {
       return state.isLogiedIn
     });
+  }
+  start(){
+    let search = location.search;
+
+    router.filter(state, search);
   }
   async registerUser(userId, password) {
     await ECIDBEMfunc.signup(userId, password);
