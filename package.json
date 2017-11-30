@@ -17,7 +17,7 @@
   "author": "ryunosinfx",
   "license": "MIT",
   "dependencies": {
-    "encrypt-indexeddb-entity-manager": "^0.0.15"
+    "encrypt-indexeddb-entity-manager": "~0.0.17"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",
