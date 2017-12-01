@@ -21,7 +21,7 @@ export default class Menue extends BaseView {
   }
   crateVnode(oldNode, viewState) {
     let liNides = [];
-    for(let value of [{href:'', name:''}]){
+    for(let value of [{href:'constant', name:''}]){
       liNides.push(this.createMenuItem(value));
     }
     let newVnode = h('div', {
