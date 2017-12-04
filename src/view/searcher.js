@@ -3,7 +3,7 @@ import BaseView from './baseView'
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Searcher extends BaseView {
   constructor() {
-    super.constructor();
+    super();
     this.currentVnode = '';
   }
   show(){

@@ -6,7 +6,7 @@ export default class Router {
   constructor(pageBase) {
     super.constructor();
   }
-  static add( page, filter) {
+  add( page, filter) {
     let key = page.getKey();
     pageKeyMap[key] = {
       page: page,

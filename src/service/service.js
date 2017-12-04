@@ -6,10 +6,12 @@ import Manage from '../view/manage'
 import Search from '../view/searcher'
 import Viewer from '../view/viewer'
 import Router from '../util/router'
+import Layout from '../view/parts/layout'
 import State from './state'
 
 const router = new Router();
 const state =new State();
+const layout =new Layout();
 export default class Servicess {
   constructor() {
     router.add(new Login(), (state) => {
@@ -34,7 +36,9 @@ export default class Servicess {
   start(){
     let search = location.search;
 
-    router.filter(state, search);
+    let nextView = router.filter(state, search);
+    layout.init();
+
   }
   async registerUser(userId, password) {
     await ECIDBEMfunc.signup(userId, password);

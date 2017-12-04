@@ -1,26 +1,26 @@
 export default class State {
   constructor() {
-    this.isLogedIn = false;
-    this.isActivated = false;
-    this.route='';
+    this._isLogedIn = false;
+    this._isActivated = false;
+    this._route='';
 
   }
   set isLogedIn(isLogedIn) {
-    this.isLogedIn = isLogedIn;
+    this._isLogedIn = isLogedIn;
   }
   get isLogedIn() {
-    return this.isLogedIn;
+    return this._isLogedIn;
   }
   set isActivated(isActivated) {
-    this.isActivated = isActivated;
+    this._isActivated = isActivated;
   }
   get isActivated() {
-    return this.isActivated;
+    return this._isActivated;
   }
   set route(route) {
-    this.route = route;
+    this._route = route;
   }
   get route() {
-    return this.route;
+    return this._route;
   }
 }
