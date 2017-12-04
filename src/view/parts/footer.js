@@ -6,11 +6,11 @@ import BaseView from '../baseView'
 import css from './css'
 export default class Footer extends BaseView {
   constructor() {
-    super.constructor();
+    super();
     this.currentVnode = null;
   }
   show(node, viewState) {
-    let newNode = this.crateVnode(,nodeviewState);
+    let newNode = this.crateVnode(node,nodeviewState);
     if (node !== null && this.currentVnode === null) {
       patch(node, newNode);
     }else{

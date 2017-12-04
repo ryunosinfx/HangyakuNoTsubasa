@@ -4,7 +4,7 @@ import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Login extends BaseView {
   constructor() {
     super();
-    this.currentVnode = '';
+    this.currentVnode = h('h1', 'i am Login!');
   }
   show(){
       return this.currentVnode;

@@ -9,10 +9,8 @@ const css = {
     display: 'block'
   },
   menu: {
-    item:{
-      
-    },
+    item: {},
     display: 'block'
-  },
-}
-export css;
+  }
+};
+export default css;

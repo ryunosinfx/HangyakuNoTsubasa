@@ -9,7 +9,7 @@ import Menue from './menu'
 import css from './css'
 export default class Layout extends BaseView {
   constructor() {
-    super.constructor();
+    super();
     this.header = new Header();
     this.footer = new Footer();
     this.menu = new Menue();
