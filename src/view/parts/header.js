@@ -17,7 +17,13 @@ export default class Header extends BaseView {
       return this.currentVnode;
     }
     crateVnode(oldNode, viewState) {
-      let newVnode = null;
+      let newVnode = h('div', {
+        style: {
+          color: '#000'
+        }
+      }, [
+        h('h1', 'i am header')
+      ]);;
       return newVnode;
     }
 }

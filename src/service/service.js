@@ -37,7 +37,7 @@ export default class Servicess {
     let search = location.search;
 
     let nextView = router.filter(state, search);
-    layout.init();
+    layout.init(nextView);
 
   }
   async registerUser(userId, password) {

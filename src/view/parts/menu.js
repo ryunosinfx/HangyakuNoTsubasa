@@ -7,7 +7,7 @@ export default class Menue extends BaseView {
     this.currentVnode = null;
   }
   show(node, viewState) {
-    let newNode = this.crateVnode(node, nodeviewState);
+    let newNode = this.crateVnode(node, viewState);
     if (node !== null && this.currentVnode === null) {
       patch(node, newNode);
     } else {

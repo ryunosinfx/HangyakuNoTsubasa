@@ -6,10 +6,28 @@ export default class Login extends BaseView {
     super();
     this.currentVnode = h('h1', 'i am Login!');
   }
-  show(){
-      return this.currentVnode;
+
+  show(node, viewState) {
+    let newNode = this.crateVnode(node,viewState);
+    if (node !== null && this.currentVnode === null) {
+      patch(node, newNode);
+    }else{
+      patch(this.currentVnode, newNode);
+    }
+    this.currentVnode = newNode;
+    return this.currentVnode;
   }
 
+  crateVnode(oldNode, viewState) {
+    let newVnode = h('div', {
+      style: {
+        color: '#000'
+      }
+    }, [
+      h('h1', 'i am Login')
+    ]);
+    return newVnode;
+  }
   async login(userId,Password){
     await ECIDBEMfunc.signin(userId,Password);
     return await ECIDBEMfunc,isLogiedIn();

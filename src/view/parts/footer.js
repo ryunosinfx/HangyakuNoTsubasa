@@ -10,7 +10,7 @@ export default class Footer extends BaseView {
     this.currentVnode = null;
   }
   show(node, viewState) {
-    let newNode = this.crateVnode(node,nodeviewState);
+    let newNode = this.crateVnode(node,viewState);
     if (node !== null && this.currentVnode === null) {
       patch(node, newNode);
     }else{
@@ -20,7 +20,13 @@ export default class Footer extends BaseView {
     return this.currentVnode;
   }
   crateVnode(oldNode, viewState) {
-    let newVnode = null;
+    let newVnode = h('div', {
+      style: {
+        color: '#000'
+      }
+    }, [
+      h('h1', 'i am footer!!')
+    ]);
     return newVnode;
   }
 }

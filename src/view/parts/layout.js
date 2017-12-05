@@ -16,7 +16,8 @@ export default class Layout extends BaseView {
     this.baseFrame = null;
     this.currentVnode = '';
   }
-  init() {
+  init(currentVnode) {
+    this.currentVnode = currentVnode;
     let elements = document.getElementsByTagName("body");
     //let layout = document.createNode('div');
     elements[0].innerHTML = this.createBsaeFrame();
@@ -25,10 +26,10 @@ export default class Layout extends BaseView {
     let footer = document.getElementById("footer");
     let menu = document.getElementById("menu");
     let content = document.getElementById("content");
-    patch(header,this.header.show());
-    patch(footer,this.footer.show());
-    patch(menu,this.menu.show());
-    patch(content,this.currentVnode.show());
+    this.header.show(header);
+    this.footer.show(footer);
+    this.menu.show(menu);
+    this.currentVnode.show(content);
   }
   // from service
   show(page) {
