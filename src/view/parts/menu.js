@@ -17,15 +17,7 @@ export default class Menue extends BaseView {
     return this.currentVnode;
   }
   crateVnode(oldNode, viewState) {
-    let liNides = [];
-    for (let value of[
-      {
-        href : 'constant',
-        name: ''
-      }
-    ]) {
-      liNides.push(this.createMenuItem(value));
-    }
+    let liNides = this.createMenuLink();
     let newVnode = h('div', {
       style: {
         color: '#000'
@@ -40,5 +32,17 @@ export default class Menue extends BaseView {
     return h('li', {
       style: css.menu.item
     }, h('a', {href : data.href}, data.name));
+  }
+  createMenuLink(){
+    let liNides = [];
+    for (let value of[
+      {
+        href : 'constant',
+        name: ''
+      }
+    ]) {
+      liNides.push(this.createMenuItem(value));
+    }
+    return liNides;
   }
 }

@@ -17,6 +17,7 @@ export default class Layout extends BaseView {
     this.currentVnode = '';
   }
   init(currentVnode) {
+    alert(currentVnode);
     this.currentVnode = currentVnode;
     let elements = document.getElementsByTagName("body");
     //let layout = document.createNode('div');

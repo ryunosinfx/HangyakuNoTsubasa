@@ -15,7 +15,6 @@ export default class Login extends BaseView {
       patch(this.currentVnode, newNode);
     }
     this.currentVnode = newNode;
-    return this.currentVnode;
   }
 
   crateVnode(oldNode, viewState) {
