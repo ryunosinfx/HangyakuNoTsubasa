@@ -5,6 +5,10 @@ export default class Menue extends BaseView {
   constructor() {
     super();
     this.currentVnode = null;
+    this.menuPageList = [];
+  }
+  init(data){
+    this.menuPageList = data;
   }
   show(node, viewState) {
     let newNode = this.crateVnode(node, viewState);
@@ -31,16 +35,11 @@ export default class Menue extends BaseView {
   createMenuItem(data) {
     return h('li', {
       style: css.menu.item
-    }, h('a', {href : data.href}, data.name));
+    }, h('a', {href : data.getHref()}, data.getName()));
   }
   createMenuLink(){
     let liNides = [];
-    for (let value of[
-      {
-        href : 'constant',
-        name: ''
-      }
-    ]) {
+    for (let value of this.menuPageList) {
       liNides.push(this.createMenuItem(value));
     }
     return liNides;

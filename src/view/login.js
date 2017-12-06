@@ -3,7 +3,7 @@ import BaseView from './baseView'
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Login extends BaseView {
   constructor() {
-    super();
+    super('Login','Login');
     this.currentVnode = h('h1', 'i am Login!');
   }
 
