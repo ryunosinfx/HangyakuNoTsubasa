@@ -8,14 +8,19 @@ import Footer from './footer'
 import Menue from './menu'
 import css from './css'
 export default class Layout extends BaseView {
-  constructor(menuPageList = []) {
+  constructor() {
     super();
     this.header = new Header();
     this.footer = new Footer();
     this.menu = new Menue();
     this.baseFrame = null;
     this.currentVnode = '';
-    this.menu.init(menuPageList);
+  }
+  setMenuList(menuPageList = []) {
+    this.menu.init(menuPageList
+    aa
+  );
+
   }
   init(currentVnode) {
     alert(currentVnode);

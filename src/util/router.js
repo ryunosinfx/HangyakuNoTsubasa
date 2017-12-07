@@ -3,10 +3,8 @@ import constants from './constants'
 const pageList = [];
 const pageKeyMap = {};
 export default class Router {
-  constructor(pageBase) {
-    super.constructor();
-  }
-  add( page, filter) {
+  constructor(pageBase) {}
+  add(page, filter) {
     let key = page.getKey();
     pageKeyMap[key] = {
       page: page,
@@ -34,7 +32,15 @@ export default class Router {
     let defaultRoute = pageKeyMap[defaultRouteKey];
     return defaultRoute.page;
   }
-  getPage(state,key) {
+  getPage(state, key) {
     return this.filter(state, key);
+  }
+  getMenuList() {
+    let menuPageList + [];
+    for (let key of pageList) {
+      let route = pageKeyMap[key];
+      menuPageList.push(route.page);
+    }
+    return menuPageList;
   }
 }
