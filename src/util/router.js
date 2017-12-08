@@ -36,7 +36,7 @@ export default class Router {
     return this.filter(state, key);
   }
   getMenuList() {
-    let menuPageList + [];
+    let menuPageList = [];
     for (let key of pageList) {
       let route = pageKeyMap[key];
       menuPageList.push(route.page);

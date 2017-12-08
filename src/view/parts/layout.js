@@ -17,10 +17,7 @@ export default class Layout extends BaseView {
     this.currentVnode = '';
   }
   setMenuList(menuPageList = []) {
-    this.menu.init(menuPageList
-    aa
-  );
-
+    this.menu.init(menuPageList);
   }
   init(currentVnode) {
     alert(currentVnode);

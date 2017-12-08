@@ -32,7 +32,7 @@ export default class Servicess {
     router.add(new Viewer(), (state) => {
       return state.isLogiedIn
     });
-    layout.setMenuList([]);
+    layout.setMenuList(router.getMenuList());
   }
   start(){
     let search = location.search;
