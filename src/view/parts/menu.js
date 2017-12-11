@@ -32,16 +32,16 @@ export default class Menue extends BaseView {
     ]);
     return newVnode;
   }
-  createMenuItem(data) {
-    return h('li', {
-      style: css.menu.item
-    }, h('a', {href : data.getHref()}, data.getName()));
-  }
   createMenuLink(){
     let liNides = [];
     for (let value of this.menuPageList) {
       liNides.push(this.createMenuItem(value));
     }
     return liNides;
+  }
+  createMenuItem(data) {
+    return h('li', {
+      style: css.menu.item
+    }, h('a', {href : data.getHref()}, data.getName()));
   }
 }
