@@ -1,27 +1,33 @@
-import {patch, h} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
+import {
+  patch,
+  h
+} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 
 export default class BaseView {
   constructor(name, key) {
     this.name = name;
-      this.vss = key;
-    this.filter = (state)=>{return true}
+    this.key = key;
+    this.filter = (state) => {
+      return true
+    }
+    console.log('name='+name+'/key:'+key);
   }
-  show(data){
+  show(data) {
 
   }
-  isEquals(baseView){
-    return baseView,name ===  this,name;
+  isEquals(baseView) {
+    return baseView, name === this, name;
   }
-  getKey(){
+  getKey() {
     return this.key;
   }
-  getFilter(){
+  getFilter() {
     return this.filter;
   }
-  getName(){
+  getName() {
     return this.name;
   }
-  getHref(){
+  getHref() {
     return this.name;
   }
 }
