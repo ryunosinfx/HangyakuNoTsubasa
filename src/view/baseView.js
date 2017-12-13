@@ -28,6 +28,8 @@ export default class BaseView {
     return this.name;
   }
   getHref() {
-    return this.name;
+    let href = location.pathname+'?'+this.key;
+    console.log('href='+href);
+    return href;
   }
 }
