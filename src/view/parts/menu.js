@@ -42,6 +42,13 @@ export default class Menue extends BaseView {
   createMenuItem(data) {
     return h('li', {
       style: css.menu.item
-    }, h('a', {href : data.getHref()}, data.getName()));
+    }, h('a',{
+    on: {
+        click: (event) => {
+          alert("here we are!"+ event+'/'+data.getHref());
+          event.stopPropagation();
+          return false;
+        }
+      }}, data.getName()));
   }
 }

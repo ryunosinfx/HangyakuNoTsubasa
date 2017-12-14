@@ -20,7 +20,7 @@ export default class Layout extends BaseView {
     this.menu.init(menuPageList);
   }
   init(currentVnode) {
-    alert(currentVnode);
+    //alert(currentVnode);
     this.currentVnode = currentVnode;
     let elements = document.getElementsByTagName("body");
     //let layout = document.createNode('div');
