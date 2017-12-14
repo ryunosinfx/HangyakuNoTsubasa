@@ -28,7 +28,7 @@ export default class BaseView {
     return this.name;
   }
   getHref() {
-    let href = location.pathname+'?'+this.key;
+    let href = location.href.split(/\?/)[0]+'?'+this.key;
     console.log('href='+href);
     return href;
   }
