@@ -43,4 +43,11 @@ export default class Router {
     }
     return menuPageList;
   }
+  getGoNextEventhandler(href){
+    return (event) => {
+      alert("here we are!"+ event+'/'+href);
+      event.stopPropagation();
+      return false;
+    }
+  }
 }

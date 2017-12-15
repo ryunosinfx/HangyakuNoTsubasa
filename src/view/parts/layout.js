@@ -15,6 +15,9 @@ export default class Layout extends BaseView {
     this.menu = new Menue();
     this.baseFrame = null;
     this.currentVnode = '';
+    this.header.setRouter(this.router);
+    this.footer.setRouter(this.router);
+    this.menu.setRouter(this.router);
   }
   setMenuList(menuPageList = []) {
     this.menu.init(menuPageList);

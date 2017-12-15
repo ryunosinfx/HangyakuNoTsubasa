@@ -10,6 +10,7 @@ export default class BaseView {
     this.filter = (state) => {
       return true
     }
+    this.router = null;
     console.log('name='+name+'/key:'+key);
   }
   show(data) {
@@ -31,5 +32,8 @@ export default class BaseView {
     let href = location.href.split(/\?/)[0]+'?'+this.key;
     console.log('href='+href);
     return href;
+  }
+  setRouter(router){
+    this.router = router
   }
 }
