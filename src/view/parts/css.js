@@ -9,7 +9,7 @@ const css = {
     display: 'block'
   },
   menu: {
-    item: 'cursor:pointer',
+    item: {'cursor':'pointer'},
     display: 'block'
   }
 };

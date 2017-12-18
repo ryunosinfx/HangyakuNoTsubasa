@@ -20,7 +20,7 @@ export default class Layout extends BaseView {
     this.menu.setRouter(this.router);
   }
   setMenuList(menuPageList = []) {
-    this.menu.init(menuPageList);
+    this.menu.init(menuPageList,this);
   }
   init(currentVnode) {
     //alert(currentVnode);
@@ -40,7 +40,7 @@ export default class Layout extends BaseView {
   }
   // from service
   show(page) {
-
+    this.currentVnode.show(page);
   }
   add(view) {}
   createBsaeFrame() {
