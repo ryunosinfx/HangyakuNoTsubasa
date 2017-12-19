@@ -5,7 +5,7 @@ const pageKeyMap = {};
 export default class Router {
   constructor(layoutView) {
     this.layoutView = layoutView;
-
+    this.layoutView.setRouter(this);
   }
   add(page, filter) {
     let key = page.getKey();
@@ -47,9 +47,11 @@ export default class Router {
     }
     return menuPageList;
   }
-  getGoNextEventhandler(href){
+  getGoNextEventhandler(page){
+    let self = this;
     return (event) => {
       alert("here we are!"+ event+'/'+href);
+      self.layoutView.show(page);
       event.stopPropagation();
       return false;
     }

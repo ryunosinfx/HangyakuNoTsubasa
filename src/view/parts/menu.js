@@ -47,12 +47,7 @@ export default class Menue extends BaseView {
       style: css.menu.item
     }, h('a',{
     on: {
-        click: (event) => {
-          alert("here we are!"+ event+'/'+data.getHref());
-
-          event.stopPropagation();
-          return false;
-        }
+        click: getGoNextEventhandler(data);
       }}, data.getName()));
   }
 }

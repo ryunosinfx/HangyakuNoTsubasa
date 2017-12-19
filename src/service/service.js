@@ -12,7 +12,6 @@ import State from './state'
 const layout =new Layout();
 const router = new Router(layout);
 const state =new State();
-layout.setRouter(router);
 export default class Servicess {
   constructor() {
     router.add(new Login(), (state) => {
