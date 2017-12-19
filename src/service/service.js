@@ -9,9 +9,9 @@ import Router from '../util/router'
 import Layout from '../view/parts/layout'
 import State from './state'
 
-const router = new Router();
-const state =new State();
 const layout =new Layout();
+const router = new Router(layout);
+const state =new State();
 layout.setRouter(router);
 export default class Servicess {
   constructor() {

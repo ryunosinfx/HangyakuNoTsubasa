@@ -5,8 +5,9 @@ import {
 import BaseView from '../baseView'
 import css from './css'
 export default class Footer extends BaseView {
-  constructor() {
+  constructor(layoutView) {
     super();
+    this.layoutView = layoutView;
     this.currentVnode = null;
   }
   show(node, viewState) {

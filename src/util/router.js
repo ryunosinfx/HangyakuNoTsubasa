@@ -3,13 +3,17 @@ import constants from './constants'
 const pageList = [];
 const pageKeyMap = {};
 export default class Router {
-  constructor(pageBase) {}
+  constructor(layoutView) {
+    this.layoutView = layoutView;
+
+  }
   add(page, filter) {
     let key = page.getKey();
     pageKeyMap[key] = {
       page: page,
       filter: filter
     };
+
     pageList.push(key);
   }
   init(state) {

@@ -10,9 +10,9 @@ import css from './css'
 export default class Layout extends BaseView {
   constructor() {
     super();
-    this.header = new Header();
-    this.footer = new Footer();
-    this.menu = new Menue();
+    this.header = new Header(this);
+    this.footer = new Footer(this);
+    this.menu = new Menue(this);
     this.baseFrame = null;
     this.currentVnode = '';
     this.header.setRouter(this.router);
@@ -20,7 +20,7 @@ export default class Layout extends BaseView {
     this.menu.setRouter(this.router);
   }
   setMenuList(menuPageList = []) {
-    this.menu.init(menuPageList,this);
+    this.menu.init(menuPageList);
   }
   init(currentVnode) {
     //alert(currentVnode);

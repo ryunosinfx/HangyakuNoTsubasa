@@ -2,10 +2,12 @@ import {patch, h} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 import BaseView from '../baseView'
 import css from './css'
 export default class Menue extends BaseView {
-  constructor() {
+  constructor(layoutView) {
     super();
+    this.layoutView = layoutView;
     this.currentVnode = null;
     this.menuPageList = [];
+    this.layout = [];
   }
   init(data){
     this.menuPageList = data;
@@ -40,12 +42,14 @@ export default class Menue extends BaseView {
     return liNides;
   }
   createMenuItem(data) {
+    let self = this;
     return h('li', {
       style: css.menu.item
     }, h('a',{
     on: {
         click: (event) => {
           alert("here we are!"+ event+'/'+data.getHref());
+
           event.stopPropagation();
           return false;
         }
