@@ -13,7 +13,7 @@ export default class BaseView {
     this.router = null;
     console.log('name='+name+'/key:'+key);
   }
-  show(data) {
+  show(page) {
 
   }
   isEquals(baseView) {

@@ -47,7 +47,7 @@ export default class Menue extends BaseView {
       style: css.menu.item
     }, h('a',{
     on: {
-        click: getGoNextEventhandler(data);
+        click: self.router.getGoNextEventhandler(data)
       }}, data.getName()));
   }
 }

@@ -15,14 +15,14 @@ export default class Layout extends BaseView {
     this.menu = new Menue(this);
     this.baseFrame = null;
     this.currentVnode = '';
-    this.header.setRouter(this.router);
-    this.footer.setRouter(this.router);
-    this.menu.setRouter(this.router);
   }
   setMenuList(menuPageList = []) {
     this.menu.init(menuPageList);
   }
   init(currentVnode) {
+    this.header.setRouter(this.router);
+    this.footer.setRouter(this.router);
+    this.menu.setRouter(this.router);
     //alert(currentVnode);
     this.currentVnode = currentVnode;
     let elements = document.getElementsByTagName("body");
@@ -40,6 +40,8 @@ export default class Layout extends BaseView {
   }
   // from service
   show(page) {
+    let oldVnode = this.currentVnode;
+    this.currentVnode = page;
     this.currentVnode.show(page);
   }
   add(view) {}
