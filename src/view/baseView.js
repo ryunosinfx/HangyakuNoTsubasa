@@ -5,23 +5,26 @@ import {
 
 export default class BaseView {
   constructor(name, key) {
-    this.name  = name;
+    this.name = name;
     this.key = key;
     this.filter = (state) => {
       return true
     }
     this.router = null;
     this.currentVnode = null;
-    console.log('name='+name+'/key:'+key);
+    console.log('name=' + name + '/key:' + key);
   }
   show(page) {
 
   }
-  goAnotherPage(page,viewState) {
+  goAnotherPage(page, viewState) {
     let newNode = page.getViewNode(viewState);
+    console.log('A00 baseView.goAnotherPage page;'+page.getName()+'/this.name:'+this.name);
     if (newNode && this.currentVnode === null) {
-      patch( newNode);
+    console.log('A01 baseView.goAnotherPage page;'+page.getName());
+      patch(newNode);
     } else {
+    console.log('A02 baseView.goAnotherPage page;'+page.getName());
       patch(this.currentVnode, newNode);
     }
     this.currentVnode = newNode;
@@ -32,7 +35,8 @@ export default class BaseView {
       style: {
         color: '#099'
       }
-    }, [h('h1', 'i am '+this.name +'!')]);
+    }, [h('h1', 'i am ' + this.name + '!')]);
+    console.log('baseView.crateVnode');
     return newVnode;
   }
   isEquals(baseView) {
@@ -48,14 +52,15 @@ export default class BaseView {
     return this.name;
   }
   getHref() {
-    let href = location.href.split(/\?/)[0]+'?'+this.key;
-    console.log('href='+href);
+    let href = location.href.split(/\?/)[0] + '?' + this.key;
+    console.log('href=' + href);
     return href;
   }
-  getViewNode(viewState){
-    return this.currentVnode == null ? this.crateVnode( viewState):this.currentVnode;
+  getViewNode(viewState) {
+  console.log('baseView.getViewNode this.name:'+this.name);
+    return this.currentVnode == null ? this.crateVnode(viewState) : this.currentVnode;
   }
-  setRouter(router){
+  setRouter(router) {
     this.router = router
   }
 }

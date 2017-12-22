@@ -42,7 +42,7 @@ export default class Layout extends BaseView {
   show(page) {
     let oldVnode = this.currentVnode;
     this.currentVnode = page;
-    this.currentVnode.goAnotherPage(page);
+    oldVnode.goAnotherPage(page);
   }
   add(view) {}
   createBsaeFrame() {

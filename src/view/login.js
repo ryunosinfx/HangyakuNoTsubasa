@@ -18,6 +18,8 @@ export default class Login extends BaseView {
   }
 
   crateVnode(viewState) {
+
+    console.log('Login.crateVnode');
     let newVnode = h('div', {
       style: {
         color: '#000'
