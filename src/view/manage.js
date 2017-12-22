@@ -7,7 +7,7 @@ export default class Manager extends BaseView {
     this.currentVnode = null;
   }
   show(node, viewState) {
-    let newNode = this.crateVnode(node, viewState);
+    let newNode = this.crateVnode(viewState);
     if (node !== null && this.currentVnode === null) {
       patch(node, newNode);
     } else {
@@ -16,7 +16,7 @@ export default class Manager extends BaseView {
     this.currentVnode = newNode;
   }
 
-  crateVnode(oldNode, viewState) {
+  crateVnode(viewState) {
     let newVnode = h('div', {
       style: {
         color: '#a00'

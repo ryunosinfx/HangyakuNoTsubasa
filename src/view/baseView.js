@@ -18,16 +18,16 @@ export default class BaseView {
 
   }
   goAnotherPage(page,viewState) {
-    let newNode = page.getViewNode();
-    if (node !== null && this.currentVnode === null) {
-      patch(node, newNode);
+    let newNode = page.getViewNode(viewState);
+    if (newNode && this.currentVnode === null) {
+      patch( newNode);
     } else {
       patch(this.currentVnode, newNode);
     }
     this.currentVnode = newNode;
 
   }
-  crateVnode(oldNode, viewState) {
+  crateVnode(viewState) {
     let newVnode = h('div', {
       style: {
         color: '#099'
@@ -52,8 +52,8 @@ export default class BaseView {
     console.log('href='+href);
     return href;
   }
-  getViewNode(){
-    return this.currentVnode == null ? this.crateVnode(node, viewState):this.currentVnode;
+  getViewNode(viewState){
+    return this.currentVnode == null ? this.crateVnode( viewState):this.currentVnode;
   }
   setRouter(router){
     this.router = router

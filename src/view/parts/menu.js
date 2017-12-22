@@ -13,7 +13,7 @@ export default class Menue extends BaseView {
     this.menuPageList = data;
   }
   show(node, viewState) {
-    let newNode = this.crateVnode(node, viewState);
+    let newNode = this.crateVnode(viewState);
     if (node !== null && this.currentVnode === null) {
       patch(node, newNode);
     } else {
@@ -22,7 +22,7 @@ export default class Menue extends BaseView {
     this.currentVnode = newNode;
     return this.currentVnode;
   }
-  crateVnode(oldNode, viewState) {
+  crateVnode(viewState) {
     let liNides = this.createMenuLink();
     let newVnode = h('div', {
       style: {
