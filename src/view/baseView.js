@@ -11,15 +11,21 @@ export default class BaseView {
       return true
     }
     this.router = null;
-    this.currentVnode = null;
+    this.currentVnode = null; //this.crateVnode(null);
     console.log('name=' + name + '/key:' + key);
   }
-  show(page) {
-
+  show(node,viewState) {
+      let newNode = this.crateVnode( viewState);
+      if (node !== null && this.currentVnode === null) {
+        patch(node, newNode);
+      } else {
+        patch(this.currentVnode, newNode);
+      }
+      this.currentVnode = newNode;
   }
   goAnotherPage(page, viewState) {
     let newNode = page.getViewNode(viewState);
-    console.log('A00 baseView.goAnotherPage page;'+page.getName()+'/this.name:'+this.name);
+    console.log('A00 baseView.goAnotherPage page;'+page.getName()+'/this.name:'+this.name+'/current:'+this.currentVnode);
     if (newNode && this.currentVnode === null) {
     console.log('A01 baseView.goAnotherPage page;'+page.getName());
       patch(newNode);

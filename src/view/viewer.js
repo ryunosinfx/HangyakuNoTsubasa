@@ -4,7 +4,6 @@ import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Viewer extends BaseView {
   constructor() {
     super('Viewer','Viewer');
-    this.currentVnode = null;
   }
   show(node, viewState) {
     let newNode = this.crateVnode(node, viewState);

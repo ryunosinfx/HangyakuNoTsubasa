@@ -50,7 +50,7 @@ export default class Router {
   getGoNextEventhandler(page){
     let self = this;
     return (event) => {
-      alert("here we are!"+ event+'/'+page.getHref());
+      console.log("here we are!"+ event+'/'+page.getHref());
       self.layoutView.show(page);
       event.stopPropagation();
       return false;
