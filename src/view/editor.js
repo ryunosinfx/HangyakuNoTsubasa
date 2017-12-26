@@ -5,15 +5,6 @@ export default class Editor extends BaseView {
   constructor() {
     super('Editor','Editor');
   }
-  show(node, viewState) {
-    let newNode = this.crateVnode( viewState);
-    if (node !== null && this.currentVnode === null) {
-      patch(node, newNode);
-    } else {
-      patch(this.currentVnode, newNode);
-    }
-    this.currentVnode = newNode;
-  }
 
   crateVnode(viewState) {
     let newVnode = h('div', {

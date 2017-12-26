@@ -6,16 +6,6 @@ export default class Login extends BaseView {
     super('Login','Login');
   }
 
-  show(node, viewState) {
-    let newNode = this.crateVnode(viewState);
-    if (node !== null && this.currentVnode === null) {
-      patch(node, newNode);
-    }else{
-      patch(this.currentVnode, newNode);
-    }
-    this.currentVnode = newNode;
-  }
-
   crateVnode(viewState) {
 
     console.log('Login.crateVnode');

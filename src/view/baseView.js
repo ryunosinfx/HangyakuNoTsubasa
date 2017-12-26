@@ -14,26 +14,24 @@ export default class BaseView {
     this.currentVnode = null; //this.crateVnode(null);
     console.log('name=' + name + '/key:' + key);
   }
-  show(node,viewState) {
-      let newNode = this.crateVnode( viewState);
-      if (node !== null && this.currentVnode === null) {
-        patch(node, newNode);
-      } else {
-        patch(this.currentVnode, newNode);
-      }
-      this.currentVnode = newNode;
+  refresh(viewState) {
+    patch(this.currentVnode, newNode);
+    this.currentVnode = newNode;
   }
-  goAnotherPage(page, viewState) {
-    let newNode = page.getViewNode(viewState);
-    console.log('A00 baseView.goAnotherPage page;'+page.getName()+'/this.name:'+this.name+'/current:'+this.currentVnode);
-    if (newNode && this.currentVnode === null) {
-    console.log('A01 baseView.goAnotherPage page;'+page.getName());
-      patch(newNode);
+  show(node, viewState) {
+    console.log('A01 baseView.goAnotherPage page;' + this.getName());
+    let newNode = this.currentVnode=== null ?this.crateVnode(viewState):this.currentVnode;
+    if (node !== null) {
+      patch(node, newNode);
     } else {
-    console.log('A02 baseView.goAnotherPage page;'+page.getName());
       patch(this.currentVnode, newNode);
     }
     this.currentVnode = newNode;
+  }
+  goAnotherPage(page, viewState) {
+    console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
+      console.log('A02 baseView.goAnotherPage page;' + page.getName());
+      page.show(this.currentVnode, viewState);
 
   }
   crateVnode(viewState) {
@@ -63,7 +61,7 @@ export default class BaseView {
     return href;
   }
   getViewNode(viewState) {
-  console.log('baseView.getViewNode this.name:'+this.name);
+    console.log('baseView.getViewNode this.name:' + this.name);
     return this.currentVnode == null ? this.crateVnode(viewState) : this.currentVnode;
   }
   setRouter(router) {
