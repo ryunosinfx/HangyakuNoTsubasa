@@ -9,9 +9,9 @@ import Router from '../util/router'
 import Layout from '../view/parts/layout'
 import State from './state'
 
-const layout =new Layout();
+const layout = new Layout();
 const router = new Router(layout);
-const state =new State();
+const state = new State();
 export default class Servicess {
   constructor() {
     router.add(new Login(), (state) => {
@@ -34,12 +34,10 @@ export default class Servicess {
     });
     layout.setMenuList(router.getMenuList());
   }
-  start(){
+  start() {
     let search = location.search;
-
     let nextView = router.filter(state, search);
-    layout.init(nextView);
-
+    layout.init(nextView, state);
   }
   async registerUser(userId, password) {
     await ECIDBEMfunc.signup(userId, password);
@@ -53,10 +51,10 @@ export default class Servicess {
   /*
    */
   async getCurrentState() {
-    let rettState = new State();
-    rettState.isLogedIn = await ECIDBEMfunc.isLogedIn();
-    rettState.isActivated = await ECIDBEMfunc.isActivated();
-    return rettState;
+    let retState = state ? state : new State();
+    retState.isLogedIn = await ECIDBEMfunc.isLogedIn();
+    retState.isActivated = await ECIDBEMfunc.isActivated();
+    return retState;
   }
   async isLogiedIn() {
     return await ECIDBEMfunc.isLogedIn();
@@ -75,8 +73,8 @@ export default class Servicess {
     return;
   }
   async loadState() {
-    let state = new State();
-    state.isLogiedIn = await ECIDBEMfunc.isLogedIn();
-    return state;
+    let retState = state ? state : new State();
+    retState.isLogiedIn = await ECIDBEMfunc.isLogedIn();
+    return retState;
   }
 }

@@ -15,6 +15,7 @@ export default class BaseView {
     console.log('name=' + name + '/key:' + key);
   }
   refresh(viewState) {
+    let newNode = this.crateVnode(viewState);
     patch(this.currentVnode, newNode);
     this.currentVnode = newNode;
   }

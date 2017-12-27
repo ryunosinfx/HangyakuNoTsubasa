@@ -10,16 +10,6 @@ export default class Footer extends BaseView {
     this.layoutView = layoutView;
     this.currentVnode = null;
   }
-  show(node, viewState) {
-    let newNode = this.crateVnode(viewState);
-    if (node !== null && this.currentVnode === null) {
-      patch(node, newNode);
-    }else{
-      patch(this.currentVnode, newNode);
-    }
-    this.currentVnode = newNode;
-    return this.currentVnode;
-  }
   crateVnode(viewState) {
     let newVnode = h('div', {
       style: {
