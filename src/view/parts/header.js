@@ -16,7 +16,11 @@ export default class Header extends BaseView {
         color: '#000'
       }
     }, [
-      h('h1', 'i am header')
+      h('h1', 'i am header'),
+      h('div', [
+        h('span', 'login:'),
+        h('span', 'activate:')
+      ])
     ]);;
     return newVnode;
   }

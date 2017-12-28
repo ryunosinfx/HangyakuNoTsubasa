@@ -5,6 +5,7 @@ import Login from '../view/login'
 import Manage from '../view/manage'
 import Search from '../view/searcher'
 import Viewer from '../view/viewer'
+import Register from '../view/register'
 import Router from '../util/router'
 import Layout from '../view/parts/layout'
 import State from './state'
@@ -30,6 +31,9 @@ export default class Servicess {
       return state.isLogiedIn
     });
     router.add(new Viewer(), (state) => {
+      return state.isLogiedIn
+    });
+    router.add(new Register(), (state) => {
       return state.isLogiedIn
     });
     layout.setMenuList(router.getMenuList());
