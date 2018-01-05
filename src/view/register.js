@@ -16,7 +16,7 @@ export default class Register extends BaseView {
     }, [
       h('h1', 'i am Register!'),
       h('div', 'SugnUP！'),
-      h('form', {}, [
+      h('div', {}, [
         h('div',{},  [
           h('span', "id"),
           h('input', {
@@ -38,7 +38,8 @@ export default class Register extends BaseView {
           }, '')
         ], 'aaaa'),
         h('div',{}, [
-            h('button', {on: {
+            h('button', {props:{},
+            on: {
                 click: self.signup()
               }},"SugnUP！")
         ], 'cccc')
@@ -48,6 +49,10 @@ export default class Register extends BaseView {
   }
   async activste() {}
   signup(){
-    return (e)=>{}
+    return (event)=>{
+      alert('ok!');
+      event.stopPropagation();
+      return false;
+    }
   }
 }
