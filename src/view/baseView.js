@@ -68,4 +68,7 @@ export default class BaseView {
   setRouter(router) {
     this.router = router
   }
+  getElementById(id){
+
+  }
 }

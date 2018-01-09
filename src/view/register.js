@@ -49,8 +49,10 @@ export default class Register extends BaseView {
   }
   async activste() {}
   signup(){
+    let self = this;
     return (event)=>{
       alert('ok!');
+      self.
       event.stopPropagation();
       return false;
     }
