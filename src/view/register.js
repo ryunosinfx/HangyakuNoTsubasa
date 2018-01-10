@@ -19,21 +19,21 @@ export default class Register extends BaseView {
       h('div', {}, [
         h('div',{},  [
           h('span', "id"),
-          h('input', {
+          h('input#signupId', {
             props: {
               type: 'text',
               name: 'ID',
-              id: "signupId"
+              value:"aaaaz"
             }
           }, 'bbbb')
         ]),
         h('div',{}, [
           h('span', "password"),
-          h('input', {
+          h('input#signupPasswd', {
             props: {
               type: 'password',
               name: 'passwd',
-              id: "signupPasswd"
+              value:"aaaa"
             }
           }, '')
         ], 'aaaa'),
@@ -52,7 +52,9 @@ export default class Register extends BaseView {
     let self = this;
     return (event)=>{
       alert('ok!');
-      self.
+      let pwNode =this.es.getElementById(this.currentVnode,"signupPasswd");
+      let idNode =this.es.getElementById(this.currentVnode,"signupId");
+        alert('ok! pwNode:'+pwNode.elm.value+'/idNode:'+idNode.elm.value);
       event.stopPropagation();
       return false;
     }

@@ -3,10 +3,12 @@ import {
   h
 } from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 
+import ElementSelector from '../util/elementSelector'
 export default class BaseView {
   constructor(name, key) {
     this.name = name;
     this.key = key;
+    this.es = new ElementSelector();
     this.filter = (state) => {
       return true
     }

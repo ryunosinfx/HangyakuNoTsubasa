@@ -3,14 +3,25 @@ export default class ElementSelector {
     this.selectorMap = new Map();
 
   }
-  getElementById(vnode, id) {}
+  getElementById(vnode, id) {
+    let result = this.getElements(vnode, "#" + id);
+    return result.length < 1
+      ? null
+      : result[0];
+  }
+  getElementsByClass(vnode, className) {
+    return this.getElements(vnode, "." + className);
+  }
   getElements(vnode, selector, isEnd = false) {
     let result = [];
     let selectors = selector.split(/ |>/);
     let nextSelector = selector;
     if (selectors.length >= 1) {
       let firstOne = selectors.pop();
-      if (this.isMatch(vnode.sel.firstOne)) {
+      if (!firstOne) {
+        return result;
+      }
+      if (this.isMatch(vnode.sel, firstOne)) {
         if (selectors.length < 1) {
           result.push(vnode);
           return result;
@@ -21,11 +32,16 @@ export default class ElementSelector {
       } else {
         nextSelector = selector;
       }
-    }
-    let delimiter = selector.substring(firstOne.length,firstOne.length+1);
-    let isNextEnd = delimiter==='>';
-    for (let child of vnode.children) {
-      result = result.concat(this.getElements(child, selector,isNextEnd));
+
+      if (!vnode.children) {
+        return result;
+      }
+      let delimiter = selector.substring(firstOne.length, firstOne.length + 1);
+      let isNextEnd = delimiter === '>';
+
+      for (let child of vnode.children) {
+        result = result.concat(this.getElements(child, selector, isNextEnd));
+      }
     }
     return result;
   }
@@ -41,9 +57,9 @@ export default class ElementSelector {
     let id = "";
     let tag = "";
     for (let token of tokens) {
-      if (selector.indexof("#" + token) >= 0) {
+      if (selector.indexOf("#" + token) >= 0) {
         id = token;
-      } else if (selector.indexof("." + token) >= 0) {
+      } else if (selector.indexOf("." + token) >= 0) {
         classes.push(token);
       } else {
         tag = token;
@@ -56,6 +72,7 @@ export default class ElementSelector {
     return map;
   }
   isMatch(sel, selector) {
+    console.log("sel:" + sel + "/selector:" + selector);
     let mapA = this.getSelectorMap(sel);
     let mapB = this.getSelectorMap(selector);
     let tagName = mapB.get("tag");
@@ -85,5 +102,4 @@ export default class ElementSelector {
     }
     return true;
   }
-  getElementsByClass(vnode, class) {}
 }
