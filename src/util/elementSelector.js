@@ -4,20 +4,30 @@ export default class ElementSelector {
 
   }
   getElementById(vnode, id) {}
-  getElements(vnode, selector) {
+  getElements(vnode, selector, isEnd = false) {
     let result = [];
     let selectors = selector.split(/ |>/);
     let nextSelector = selector;
     if (selectors.length >= 1) {
       let firstOne = selectors.pop();
-      if (vnode.sel) {}
-      nextSelector = selectors
+      if (this.isMatch(vnode.sel.firstOne)) {
+        if (selectors.length < 1) {
+          result.push(vnode);
+          return result;
+        }
+        nextSelector = selector.substring(firstOne.length + 1, selector.length);
+      } else if (isEnd) {
+        return result;
+      } else {
+        nextSelector = selector;
+      }
     }
-
+    let delimiter = selector.substring(firstOne.length,firstOne.length+1);
+    let isNextEnd = delimiter==='>';
     for (let child of vnode.children) {
-      result = result.concat(this.getElements(child, selector));
+      result = result.concat(this.getElements(child, selector,isNextEnd));
     }
-    vnode.
+    return result;
   }
 
   getSelectorMap(selector) {
