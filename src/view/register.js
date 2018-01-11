@@ -16,7 +16,7 @@ export default class Register extends BaseView {
     }, [
       h('h1', 'i am Register!'),
       h('div', 'SugnUP！'),
-      h('div', {}, [
+      h('div#signupInputArea', {}, [
         h('div',{},  [
           h('span', "id"),
           h('input#signupId', {
@@ -51,12 +51,19 @@ export default class Register extends BaseView {
   signup(){
     let self = this;
     return (event)=>{
-      alert('ok!');
+      //alert('ok!');
       let pwNode =this.es.getElementById(this.currentVnode,"signupPasswd");
       let idNode =this.es.getElementById(this.currentVnode,"signupId");
         alert('ok! pwNode:'+pwNode.elm.value+'/idNode:'+idNode.elm.value);
       event.stopPropagation();
       return false;
     }
+  }
+  async registerSignUp(id,passwd){
+    ECIDBEMfunc.
+
+  }
+  showResult(){
+
   }
 }

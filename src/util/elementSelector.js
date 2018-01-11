@@ -72,7 +72,7 @@ export default class ElementSelector {
     return map;
   }
   isMatch(sel, selector) {
-    console.log("sel:" + sel + "/selector:" + selector);
+    //console.log("sel:" + sel + "/selector:" + selector);
     let mapA = this.getSelectorMap(sel);
     let mapB = this.getSelectorMap(selector);
     let tagName = mapB.get("tag");
