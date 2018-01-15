@@ -21,6 +21,9 @@ export default class BaseView {
     patch(this.currentVnode, newNode);
     this.currentVnode = newNode;
   }
+  patch(currenVnode,newVnode){
+    patch(currenVnode, newVnode);
+  }
   show(node, viewState) {
     //console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = this.currentVnode === null ? this.crateVnode(viewState) : this.currentVnode;

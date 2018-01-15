@@ -72,14 +72,15 @@ export default class Register extends BaseView {
     }
   }
   async registerSignUp(userId, passwd) {
-    let isActivated = await ECIDBEMfunc.signup(userId, passwd);
-
-      alert("registerSignUp isActivated:"+isActivated);
-    if(isActivated){
-
+    let isNotActivated = await ECIDBEMfunc.signup(userId, passwd);
+      console.log("registerSignUp isNotActivated:"+isNotActivated);
+    if(isNotActivated){
+      this.showResult();
     }
   }
   showResult() {
-
+    let resultNode = h('h1#signupInputArea', 'ok!');
+    let signupInputArea = this.es.getElementById(this.currentVnode, "signupInputArea");
+    this.patch(signupInputArea,resultNode);
   }
 }
