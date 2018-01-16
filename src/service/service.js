@@ -13,7 +13,7 @@ import State from './state'
 const layout = new Layout();
 const router = new Router(layout);
 const state = new State();
-export default class Servicess {
+ServiceImpl {
   constructor() {
     router.add(new Login(), (state) => {
       return state.isLogiedIn === false
@@ -76,9 +76,24 @@ export default class Servicess {
     page.show();
     return;
   }
+    async geToAnotherPage(currentVnode,key,data) {
+      let state = await this.getCurrentState();
+      let page = router.getPage(state, key);
+      page.show();
+      return;
+    }
   async loadState() {
     let retState = state ? state : new State();
     retState.isLogiedIn = await ECIDBEMfunc.isLogedIn();
     return retState;
+  }
+}
+const serviceImpl = new ServiceImpl();
+export default class Service {
+  static getInstance(){
+    return serviceImpl;
+  }
+  static getRouter(){
+    return router;
   }
 }

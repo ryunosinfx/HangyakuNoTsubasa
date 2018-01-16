@@ -1,6 +1,6 @@
 import Service from './service/service'
 
-const serviceInst = new Service();
+const serviceInst = Service.getInctance();
 console.log('logger.js is now loaded...');
 window.onload = () => {
   serviceInst.start();
