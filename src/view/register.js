@@ -76,6 +76,7 @@ export default class Register extends BaseView {
       console.log("registerSignUp isNotActivated:"+isNotActivated);
     if(isNotActivated){
       this.showResult();
+      this.geToAnotherPage();
     }
   }
   showResult() {

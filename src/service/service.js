@@ -79,7 +79,7 @@ ServiceImpl {
     async geToAnotherPage(currentVnode,key,data) {
       let state = await this.getCurrentState();
       let page = router.getPage(state, key);
-      page.show();
+      page.show(node, state, data);
       return;
     }
   async loadState() {

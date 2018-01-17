@@ -13,28 +13,36 @@ export default class BaseView {
     this.filter = (state) => {
       return true
     }
-    this.router = router;
     this.service = Service.getInstance();
+    this.router = this.service.getRouter();
     this.currentVnode = null; //this.crateVnode(null);
+    this.viewState = null; //this.crateVnode(null);
     //console.log('name=' + name + '/key:' + key);
   }
   refresh(viewState) {
     let newNode = this.crateVnode(viewState);
     patch(this.currentVnode, newNode);
     this.currentVnode = newNode;
+    this.viewState = viewState;
   }
-  patch(currenVnode,newVnode){
+  patch(currenVnode, newVnode) {
     patch(currenVnode, newVnode);
   }
-  show(node, viewState) {
+
+  refreshView(viewState,data) {
+
+  }
+  show(node, viewState, data) {
     //console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = this.currentVnode === null ? this.crateVnode(viewState) : this.currentVnode;
+    this.refreshView(viewState,data) ;
     if (node !== null) {
       patch(node, newNode);
     } else {
       patch(this.currentVnode, newNode);
     }
     this.currentVnode = newNode;
+    this.viewState = viewState;
   }
   goAnotherPage(page, viewState) {
     //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
@@ -72,10 +80,7 @@ export default class BaseView {
     console.log('baseView.getViewNode this.name:' + this.name);
     return this.currentVnode == null ? this.crateVnode(viewState) : this.currentVnode;
   }
-  setRouter(router) {
-    this.router = router
-  }
-  getElementById(id) {
-
+  async geToAnotherPage(key, data) {
+    return await this.service.geToAnotherPage(this.currentVnode, key, data);
   }
 }
