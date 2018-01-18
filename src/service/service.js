@@ -13,7 +13,7 @@ import State from './state'
 const layout = new Layout();
 const router = new Router(layout);
 const state = new State();
-ServiceImpl {
+class ServiceImpl {
   constructor() {
     router.add(new Login(), (state) => {
       return state.isLogiedIn === false
@@ -80,6 +80,7 @@ ServiceImpl {
       let state = await this.getCurrentState();
       let page = router.getPage(state, key);
       page.show(node, state, data);
+      // TODO add history recording
       return;
     }
   async loadState() {
@@ -90,6 +91,8 @@ ServiceImpl {
 }
 const serviceImpl = new ServiceImpl();
 export default class Service {
+  constructor(name, key) {
+  }
   static getInstance(){
     return serviceImpl;
   }

@@ -5,6 +5,8 @@ import {
 
 import ElementSelector from '../util/elementSelector'
 import Service from '../service/service'
+
+const serviceInst = new Service();//.getInstance();
 export default class BaseView {
   constructor(name, key) {
     this.name = name;
@@ -13,14 +15,14 @@ export default class BaseView {
     this.filter = (state) => {
       return true
     }
-    this.service = Service.getInstance();
+    this.service = serviceInst;
     this.router = this.service.getRouter();
     this.currentVnode = null; //this.crateVnode(null);
     this.viewState = null; //this.crateVnode(null);
     //console.log('name=' + name + '/key:' + key);
   }
   refresh(viewState) {
-    let newNode = this.crateVnode(viewState);
+    let newNode = this.crateVnode(viewState,data);
     patch(this.currentVnode, newNode);
     this.currentVnode = newNode;
     this.viewState = viewState;
@@ -30,7 +32,7 @@ export default class BaseView {
   }
 
   refreshView(viewState,data) {
-
+    this.refresh(viewState,data)
   }
   show(node, viewState, data) {
     //console.log('A01 baseView.goAnotherPage page;' + this.getName());
@@ -50,7 +52,7 @@ export default class BaseView {
     page.show(this.currentVnode, viewState);
 
   }
-  crateVnode(viewState) {
+  crateVnode(viewStatev,data) {
     let newVnode = h('div', {
       style: {
         color: '#099'
@@ -81,6 +83,9 @@ export default class BaseView {
     return this.currentVnode == null ? this.crateVnode(viewState) : this.currentVnode;
   }
   async geToAnotherPage(key, data) {
+    return await this.service.geToAnotherPage(this.currentVnode, key, data);
+  }
+  async goBack(data) {
     return await this.service.geToAnotherPage(this.currentVnode, key, data);
   }
 }
