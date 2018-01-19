@@ -4,18 +4,15 @@ import {
 } from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 
 import ElementSelector from '../util/elementSelector'
-import Service from '../service/service'
-
-const serviceInst = new Service();//.getInstance();
 export default class BaseView {
-  constructor(name, key) {
+  constructor(service, name, key) {
     this.name = name;
     this.key = key;
     this.es = new ElementSelector();
     this.filter = (state) => {
       return true
     }
-    this.service = serviceInst;
+    this.service = service;
     this.router = this.service.getRouter();
     this.currentVnode = null; //this.crateVnode(null);
     this.viewState = null; //this.crateVnode(null);

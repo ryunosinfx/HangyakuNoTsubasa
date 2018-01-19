@@ -4,8 +4,8 @@ import BaseView from './baseView'
 import css from './parts/css'
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Activate extends BaseView {
-  constructor() {
-    super('Activate','Activate');
+  constructor(service) {
+    super(service, 'Activate','Activate');
   }
   crateVnode(viewState) {
     let newVnode = h('div', {

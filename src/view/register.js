@@ -7,8 +7,8 @@ import BaseView from './baseView'
 import css from './parts/css'
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Register extends BaseView {
-  constructor() {
-    super('Register', 'Register');
+  constructor(service) {
+    super(service, 'Register', 'Register');
   }
   crateVnode(viewState) {
     let self = this;

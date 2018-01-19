@@ -3,8 +3,8 @@ import BaseView from './baseView'
 import css from './parts/css'
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Manager extends BaseView {
-  constructor() {
-    super('Manager','Manager');
+  constructor(service) {
+    super(service, 'Manager','Manager');
   }
 
   crateVnode(viewState) {

@@ -3,8 +3,8 @@ import BaseView from './baseView'
 import css from './parts/css'
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Searcher extends BaseView {
-  constructor() {
-    super('Searcher','Searcher');
+  constructor(service) {
+    super(service, 'Searcher','Searcher');
   }
 
   crateVnode(oldNode, viewState) {

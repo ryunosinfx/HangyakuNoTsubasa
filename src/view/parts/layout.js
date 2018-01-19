@@ -8,11 +8,11 @@ import Footer from './footer'
 import Menue from './menu'
 import css from './css'
 export default class Layout extends BaseView {
-  constructor() {
-    super();
-    this.header = new Header(this);
-    this.footer = new Footer(this);
-    this.menu = new Menue(this);
+  constructor(service) {
+    super(service);
+    this.header = new Header(service,this);
+    this.footer = new Footer(service,this);
+    this.menu = new Menue(service,this);
     this.baseFrame = null;
     this.currentVnode = '';
   }
