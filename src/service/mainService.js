@@ -11,10 +11,8 @@ import Layout from '../view/parts/layout'
 import ServiceImpl from './serviceImpl'
 import State from './state'
 
-const layout = new Layout();
-const router = new Router(layout);
 const state = new State();
-const serviceImpl = new ServiceImpl(layout,state);
+const serviceImpl = new ServiceImpl(state);
 export default class Service {
   constructor(name, key) {
   }
@@ -22,6 +20,6 @@ export default class Service {
     return serviceImpl;
   }
   static getRouter(){
-    return router;
+    return serviceImpl.getRouter();
   }
 }

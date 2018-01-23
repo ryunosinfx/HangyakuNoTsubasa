@@ -5,7 +5,7 @@ import {
 import BaseView from '../baseView'
 import css from './css'
 export default class Header extends BaseView {
-  constructor(layoutView,service) {
+  constructor(service,layoutView) {
     super(service);
     this.layoutView = layoutView;
     this.currentVnode = null;

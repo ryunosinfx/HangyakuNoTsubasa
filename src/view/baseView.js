@@ -6,6 +6,7 @@ import {
 import ElementSelector from '../util/elementSelector'
 export default class BaseView {
   constructor(service, name, key) {
+    alert(service);
     this.name = name;
     this.key = key;
     this.es = new ElementSelector();

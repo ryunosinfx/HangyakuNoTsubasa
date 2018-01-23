@@ -11,9 +11,12 @@ import Layout from '../view/parts/layout'
 import State from './state'
 
 export default class ServiceImpl {
-  constructor(layout,state) {
+  constructor(state) {
+    const layout = new Layout(this);
+    const router = new Router(layout);
     this.layout = layout;
     this.state = vstate;
+    this.router = router;
     router.add(new Login(this), (state) => {
       return state.isLogiedIn === false
     });
@@ -39,7 +42,7 @@ export default class ServiceImpl {
   }
   start() {
     let search = location.search;
-    let nextView = router.filter(this.state, search);
+    let nextView = this.router.filter(this.state, search);
     ths.layout.init(nextView, state);
   }
   async registerUser(userId, password) {
@@ -72,21 +75,24 @@ export default class ServiceImpl {
 
   async goToNext(key) {
     let state = await this.getCurrentState();
-    let page = router.getPage(state, key);
+    let page = this.router.getPage(state, key);
     page.show();
     return;
   }
-    async geToAnotherPage(currentVnode,key,data) {
-      let state = await this.getCurrentState();
-      let page = router.getPage(state, key);
-      page.show(node, state, data);
-      // TODO add history recording
-      return;
-    }
+  async geToAnotherPage(currentVnode, key, data) {
+    let state = await this.getCurrentState();
+    let page = this.router.getPage(state, key);
+    page.show(node, state, data);
+    // TODO add history recording
+    return;
+  }
   async loadState() {
     let retState = this.state ? this.state : new State();
     retState.isLogiedIn = await ECIDBEMfunc.isLogedIn();
     this.state = retState;
     return retState;
+  }
+  getRouter(){
+    return this.router;
   }
 }
