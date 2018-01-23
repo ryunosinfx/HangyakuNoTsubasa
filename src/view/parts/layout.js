@@ -20,9 +20,6 @@ export default class Layout extends BaseView {
     this.menu.init(menuPageList);
   }
   init(currentVnode, state) {
-    this.header.setRouter(this.router);
-    this.footer.setRouter(this.router);
-    this.menu.setRouter(this.router);
     //alert(currentVnode);
     this.currentVnode = currentVnode;
     let elements = document.getElementsByTagName("body");

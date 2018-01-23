@@ -6,7 +6,7 @@ import {
 import ElementSelector from '../util/elementSelector'
 export default class BaseView {
   constructor(service, name, key) {
-    alert(service);
+
     this.name = name;
     this.key = key;
     this.es = new ElementSelector();
@@ -19,7 +19,7 @@ export default class BaseView {
     this.viewState = null; //this.crateVnode(null);
     //console.log('name=' + name + '/key:' + key);
   }
-  refresh(viewState) {
+  refresh(viewState,data) {
     let newNode = this.crateVnode(viewState,data);
     patch(this.currentVnode, newNode);
     this.currentVnode = newNode;
@@ -35,7 +35,7 @@ export default class BaseView {
   show(node, viewState, data) {
     //console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = this.currentVnode === null ? this.crateVnode(viewState) : this.currentVnode;
-    this.refreshView(viewState,data) ;
+  //  this.refreshView(viewState,data) ;
     if (node !== null) {
       patch(node, newNode);
     } else {

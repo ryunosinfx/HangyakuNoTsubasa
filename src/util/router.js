@@ -5,7 +5,6 @@ const pageKeyMap = {};
 export default class Router {
   constructor(layoutView) {
     this.layoutView = layoutView;
-    this.layoutView.setRouter(this);
   }
   add(page, filter) {
     let key = page.getKey();
@@ -13,7 +12,6 @@ export default class Router {
       page: page,
       filter: filter
     };
-    page.setRouter(this);
     pageList.push(key);
   }
   init(state) {

@@ -13,9 +13,10 @@ import State from './state'
 export default class ServiceImpl {
   constructor(state) {
     const layout = new Layout(this);
+    alert(layout);
     const router = new Router(layout);
     this.layout = layout;
-    this.state = vstate;
+    this.state = state;
     this.router = router;
     router.add(new Login(this), (state) => {
       return state.isLogiedIn === false
@@ -43,7 +44,7 @@ export default class ServiceImpl {
   start() {
     let search = location.search;
     let nextView = this.router.filter(this.state, search);
-    ths.layout.init(nextView, state);
+    this.layout.init(nextView, this.state);
   }
   async registerUser(userId, password) {
     await ECIDBEMfunc.signup(userId, password);
