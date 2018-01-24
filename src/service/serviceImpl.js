@@ -13,11 +13,11 @@ import State from './state'
 export default class ServiceImpl {
   constructor(state) {
     const layout = new Layout(this);
-    alert(layout);
     const router = new Router(layout);
     this.layout = layout;
     this.state = state;
     this.router = router;
+    layout.initialize();
     router.add(new Login(this), (state) => {
       return state.isLogiedIn === false
     });
@@ -59,8 +59,9 @@ export default class ServiceImpl {
    */
   async getCurrentState() {
     let retState = this.state ? this.state : new State();
+    //alert ('ECIDBEMfunc;'+ECIDBEMfunc);
     retState.isLogedIn = await ECIDBEMfunc.isLogedIn();
-    retState.isActivated = await ECIDBEMfunc.isActivated();
+    retState.isActivated = await ECIDBEMfunc.isActivate();
     this.state = retState;
     return retState;
   }
@@ -83,7 +84,7 @@ export default class ServiceImpl {
   async geToAnotherPage(currentVnode, key, data) {
     let state = await this.getCurrentState();
     let page = this.router.getPage(state, key);
-    page.show(node, state, data);
+    page.show(currentVnode, state, data);
     // TODO add history recording
     return;
   }

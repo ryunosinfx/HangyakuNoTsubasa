@@ -10,9 +10,12 @@ import css from './css'
 export default class Layout extends BaseView {
   constructor(service) {
     super(service);
-    this.header = new Header(service,this);
-    this.footer = new Footer(service,this);
-    this.menu = new Menue(service,this);
+  }
+  initialize() {
+    this.router = this.service.getRouter();
+    this.header = new Header(this.service, this);
+    this.footer = new Footer(this.service, this);
+    this.menu = new Menue(this.service, this);
     this.baseFrame = null;
     this.currentVnode = '';
   }
