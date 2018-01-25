@@ -52,7 +52,6 @@ export default class Register extends BaseView {
     ]);
     return newVnode;
   }
-  async activste() {}
   signup() {
     let self = this;
     return (event) => {
