@@ -11,13 +11,14 @@ export default class Activate extends BaseView {
     super(service, 'Activate', 'Activate');
   }
   crateVnode(viewState) {
+    const self = this;
     let newVnode = h('div', {
       style: {
         color: '#099'
       }
     }, [
       h('h1', 'i am activate!'),
-      h('div', 'Secondary step let`s activate!'),
+      h('div', 'Secondary step let`s activate! Please, input same values again.'),
       h('div#activateInputArea', {}, [
         h('div', {}, [
           h('span', "id"),
@@ -43,7 +44,7 @@ export default class Activate extends BaseView {
           h('button', {
             props: {},
             on: {
-              click: self.activste()
+              click: self.activate()
             }
           }, "Activate!")
         ], 'cccc')
@@ -55,13 +56,13 @@ export default class Activate extends BaseView {
     let self = this;
     return (event) => {
       //alert('ok!');
-      let pwNode = this.es.getElementById(this.currentVnode, "activstePasswd");
-      let idNode = this.es.getElementById(this.currentVnode, "activsteId");
-      let activsteId = idNode.elm.value;
-      let activstePasswd = pwNode.elm.value;
-      alert('ok! pwNode:' + activstePasswd + '/idNode:' + activsteId);
-      if (!!activsteId && !!activstePasswd) {
-        this.registerActivate(activsteId, activstePasswd);
+      let pwNode = this.es.getElementById(this.currentVnode, "activatePasswd");
+      let idNode = this.es.getElementById(this.currentVnode, "activateId");
+      let activateId = idNode.elm.value;
+      let activatePasswd = pwNode.elm.value;
+      alert('ok! ga Activate! pwNode:' + activatePasswd + '/idNode:' + activateId);
+      if (!!activateId && !!activatePasswd) {
+        this.registerActivate(activateId, activatePasswd);
       } else {
         alert("not empty!");
       }
