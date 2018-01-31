@@ -37,7 +37,7 @@ export default class ServiceImpl {
       return state.isLogiedIn
     });
     router.add(new Register(this), (state) => {
-      return state.isLogiedIn
+      return state.isLogiedIn === false
     });
     this.layout.setMenuList(router.getMenuList());
   }
@@ -60,8 +60,9 @@ export default class ServiceImpl {
   async getCurrentState() {
     let retState = this.state ? this.state : new State();
     //alert ('ECIDBEMfunc;'+ECIDBEMfunc);
-    retState.isLogedIn = await ECIDBEMfunc.isLogedIn();
     retState.isActivated = await ECIDBEMfunc.isActivate();
+    retState.isLogedIn = retState.isActivated ? await ECIDBEMfunc.isLogedIn() : false;
+
     this.state = retState;
     return retState;
   }
@@ -84,6 +85,8 @@ export default class ServiceImpl {
   async geToAnotherPage(currentVnode, key, data) {
     let state = await this.getCurrentState();
     let page = this.router.getPage(state, key);
+
+    alert('aaa page:' + page.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
     page.show(currentVnode, state, data);
     // TODO add history recording
     return;
@@ -94,7 +97,7 @@ export default class ServiceImpl {
     this.state = retState;
     return retState;
   }
-  getRouter(){
+  getRouter() {
     return this.router;
   }
 }

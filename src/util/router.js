@@ -19,16 +19,18 @@ export default class Router {
     return this.filter(state, search);
   }
   filter(state, search) {
-
+    // TODO state ni izon
+    let targetRoute = pageKeyMap[search];
+    if (targetRoute) {
+      if (targetRoute && targetRoute.filter && targetRoute.filter(state)) {
+        return targetRoute.page;
+      }
+    }
     for (let key of pageList) {
       let route = pageKeyMap[key];
       if (route && route.filter && route.filter(state)) {
         return route.page;
       }
-    }
-    let targetRoute = pageKeyMap[search];
-    if (targetRoute) {
-      return targetRoute.page;
     }
     let defaultRouteKey = pageList[pageList.length - 1];
     let defaultRoute = pageKeyMap[defaultRouteKey];
