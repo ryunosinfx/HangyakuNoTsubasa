@@ -26,14 +26,17 @@ export default class Router {
         return targetRoute.page;
       }
     }
+    let defaultRouteKey = pageList[0];
+    let defaultRoute = pageKeyMap[defaultRouteKey];
+    if (defaultRoute && defaultRoute.filter && defaultRoute.filter(state)) {
+      return defaultRoute.page;
+    }
     for (let key of pageList) {
       let route = pageKeyMap[key];
       if (route && route.filter && route.filter(state)) {
-        return route.page;
+        //return route.page;
       }
     }
-    let defaultRouteKey = pageList[pageList.length - 1];
-    let defaultRoute = pageKeyMap[defaultRouteKey];
     return defaultRoute.page;
   }
   getPage(state, key) {
