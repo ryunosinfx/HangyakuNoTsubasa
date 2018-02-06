@@ -54,17 +54,17 @@ export default class Login extends BaseView {
     await ECIDBEMfunc.signin(userId,Password);
     return await ECIDBEMfunc,isLogiedIn();
   }
-  signup() {
+  signin() {
     let self = this;
     return (event) => {
       //alert('ok!');
-      let pwNode = this.es.getElementById(this.currentVnode, "signupPasswd");
-      let idNode = this.es.getElementById(this.currentVnode, "signupId");
-      let signupId = idNode.elm.value;
-      let signupPasswd = pwNode.elm.value;
-      alert('ok! pwNode:' + signupPasswd + '/idNode:' + signupId);
-      if (!!signupId && !!signupPasswd) {
-        this.registerSignUp(signupId, signupPasswd);
+      let pwNode = this.es.getElementById(this.currentVnode, "signinPasswd");
+      let idNode = this.es.getElementById(this.currentVnode, "signinId");
+      let signinId = idNode.elm.value;
+      let signinPasswd = pwNode.elm.value;
+      alert('ok! pwNode:' + signinPasswd + '/idNode:' + signinId);
+      if (!!signinId && !!signinPasswd) {
+        this.executeSignin(signinId, signinPasswd);
       }else{
         alert("not empty!");
       }
@@ -72,17 +72,19 @@ export default class Login extends BaseView {
       return false;
     }
   }
-  async registerSignUp(userId, passwd) {
-    let isNotActivated = await ECIDBEMfunc.signup(userId, passwd);
-      console.log("registerSignUp isNotActivated:"+isNotActivated);
-    if(isNotActivated){
+  async executeSignin(userId, passwd) {
+    let isActivated = await ECIDBEMfunc.signin(userId, passwd);
+      console.log("executeSignin isActivated:"+isActivated);
+    if(isActivated){
       this.showResult();
       this.geToAnotherPage('Activate',{isNotActivated:isNotActivated});
+    } else {
+      alert('not regsterd');
     }
   }
   showResult() {
-    let resultNode = h('h1#signupInputArea', 'ok!');
-    let signupInputArea = this.es.getElementById(this.currentVnode, "signupInputArea");
-    this.patch(signupInputArea,resultNode);
+    let resultNode = h('h1#signinInputArea', 'ok!');
+    let signinInputArea = this.es.getElementById(this.currentVnode, "signinInputArea");
+    this.patch(signinInputArea,resultNode);
   }
 }
