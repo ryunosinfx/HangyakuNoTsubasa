@@ -86,7 +86,7 @@ export default class ServiceImpl {
     let state = await this.getCurrentState();
     let page = this.router.getPage(state, key);
 
-    alert('aaa page:' + page.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
+    alert('geToAnotherPage page:' + page.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
     page.show(currentVnode, state, data);
     // TODO add history recording
     return;
