@@ -60,9 +60,10 @@ export default class ServiceImpl {
   async getCurrentState() {
     let retState = this.state ? this.state : new State();
     //alert ('ECIDBEMfunc;'+ECIDBEMfunc);
-    retState.isActivated = await ECIDBEMfunc.isActivate();
-    retState.isLogedIn = retState.isActivated ? await ECIDBEMfunc.isLogedIn() : false;
-
+    //retState.isActivated = await ECIDBEMfunc.isActivate();
+    //alert("retState.isActivated :"+retState.isActivated );
+    retState.isLogedIn = await ECIDBEMfunc.isLogedIn();
+    retState.isActivated = retState.isLogedIn;
     this.state = retState;
     return retState;
   }
