@@ -17,14 +17,14 @@ export default class Layout extends BaseView {
     this.footer = new Footer(this.service, this);
     this.menu = new Menue(this.service, this);
     this.baseFrame = null;
-    this.currentVnode = '';
+    this.page = '';
   }
   setMenuList(menuPageList = []) {
     this.menu.init(menuPageList);
   }
-  init(currentVnode, state) {
+  init(page, state) {
     //alert(currentVnode);
-    this.currentVnode = currentVnode;
+    this.page = page;
     let elements = document.getElementsByTagName("body");
     //let layout = document.createNode('div');
     elements[0].innerHTML = this.createBsaeFrame();
@@ -36,13 +36,13 @@ export default class Layout extends BaseView {
     this.header.show(header);
     this.footer.show(footer);
     this.menu.show(menu);
-    this.currentVnode.show(content);
+    this.page.show(content);
   }
   // from service
   show(page) {
-    let oldVnode = this.currentVnode;
-    this.currentVnode = page;
-    oldVnode.goAnotherPage(page);
+    let oldPage = this.page;
+    this.page = page;
+    oldPage.goAnotherPage(page);
   }
   add(view) {}
   createBsaeFrame() {

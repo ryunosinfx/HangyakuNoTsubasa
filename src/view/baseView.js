@@ -35,6 +35,7 @@ export default class BaseView {
   show(node, viewState, data) {
     //console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = this.currentVnode === null ? this.crateVnode(viewState) : this.currentVnode;
+    alert(this.currentVnode+ '/newNode:'+newNode);
   //  this.refreshView(viewState,data) ;
     if (node !== null) {
       patch(node, newNode);
@@ -47,6 +48,7 @@ export default class BaseView {
   goAnotherPage(page, viewState) {
     //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
     //console.log('A02 baseView.goAnotherPage page;' + page.getName());
+    alert(this.currentVnode);
     page.show(this.currentVnode, viewState);
 
   }

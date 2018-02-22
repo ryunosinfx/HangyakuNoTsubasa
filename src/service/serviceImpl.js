@@ -52,7 +52,7 @@ export default class ServiceImpl {
   async login(userId, password) {
     return await ECIDBEMfunc.signin(userId, password);
   }
-  async activste() {
+  async activste(userId, password) {
     await ECIDBEMfunc.activate(userId, password);
   }
   /*
