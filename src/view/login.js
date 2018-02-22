@@ -4,7 +4,7 @@ import css from './parts/css'
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Login extends BaseView {
   constructor(service) {
-    super(service, 'Login','Login');
+    super(service, 'Login', 'Login');
   }
 
   crateVnode(viewState) {
@@ -38,25 +38,24 @@ export default class Login extends BaseView {
             }
           }, '')
         ], 'aaaa'),
-        h('div', {}, [
-          h('button', {
+        h('div', {}, [h('button', {
             props: {},
             on: {
               click: self.signin()
             }
-          }, "SignIn！")
-        ], 'cccc')
+          }, "SignIn！")], 'cccc')
       ])
     ]);
     return newVnode;
   }
-  async login(userId,Password){
-    await ECIDBEMfunc.signin(userId,Password);
-    return await ECIDBEMfunc,isLogiedIn();
+  async login(userId, Password) {
+    await ECIDBEMfunc.signin(userId, Password);
+    return await ECIDBEMfunc,
+    isLogiedIn();
   }
   signin() {
     let self = this;
-    return (event) => {
+    return(event) => {
       //alert('ok!');
       let pwNode = this.es.getElementById(this.currentVnode, "signinPasswd");
       let idNode = this.es.getElementById(this.currentVnode, "signinId");
@@ -65,7 +64,7 @@ export default class Login extends BaseView {
       alert('ok! pwNode:' + signinPasswd + '/idNode:' + signinId);
       if (!!signinId && !!signinPasswd) {
         this.executeSignin(signinId, signinPasswd);
-      }else{
+      } else {
         alert("not empty!");
       }
       event.stopPropagation();
@@ -74,10 +73,12 @@ export default class Login extends BaseView {
   }
   async executeSignin(userId, passwd) {
     let isActivated = await ECIDBEMfunc.signin(userId, passwd);
-      console.log("executeSignin isActivated:"+isActivated);
-    if(isActivated){
+    console.log("executeSignin isActivated:" + isActivated);
+    if (isActivated) {
       this.showResult();
-      this.geToAnotherPage('Activate',{isNotActivated:!isActivated});
+      this.geToAnotherPage('Activate', {
+        isNotActivated: !isActivated
+      });
     } else {
       alert('not regsterd');
     }
@@ -85,6 +86,6 @@ export default class Login extends BaseView {
   showResult() {
     let resultNode = h('h1#signinInputArea', 'ok!');
     let signinInputArea = this.es.getElementById(this.currentVnode, "signinInputArea");
-    this.patch(signinInputArea,resultNode);
+    this.patch(signinInputArea, resultNode);
   }
 }
