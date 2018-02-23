@@ -1,3 +1,7 @@
+import {
+  patch,
+  h
+} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 export default class ElementSelector {
   constructor() {
     this.selectorMap = new Map();
@@ -11,6 +15,9 @@ export default class ElementSelector {
   }
   getElementsByClass(vnode, className) {
     return this.getElements(vnode, "." + className);
+  }
+  patch(vnode, selector, isEnd = false) {
+    // remove and replace
   }
   getElements(vnode, selector, isEnd = false) {
     let result = [];
