@@ -2,6 +2,7 @@ import {
   patch,
   h
 } from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
+import ObjectUtil from './objectUtil'
 export default class ElementSelector {
   constructor() {
     this.selectorMap = new Map();
@@ -16,14 +17,16 @@ export default class ElementSelector {
   getElementsByClass(vnode, className) {
     return this.getElements(vnode, "." + className);
   }
-  patch(vnode, selector, newNode, isEnd = false) {
+  async patch(vnode, selector, newNode) {
     let nodes = this.getElements(vnode, selector);
+    alert("aaaa-------------"+selector+"/"+(typeof nodes)+"/"+Array.isArray(nodes)+"/"+JSON.stringify(nodes)+"/"+vnode);
     for(let node of nodes){
-      patch(vnode , node);
-      
+      let newOne = await ObjectUtil.deepClone(newNode);
+      let re = patch(node , newOne);
+      alert(re);
     }
     // nothing to do
-    return results;
+    return nodes;
     // remove and replace
   }
   getElements(vnode, selector, isEnd = false) {
