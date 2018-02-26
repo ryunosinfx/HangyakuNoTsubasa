@@ -16,7 +16,14 @@ export default class ElementSelector {
   getElementsByClass(vnode, className) {
     return this.getElements(vnode, "." + className);
   }
-  patch(vnode, selector, isEnd = false) {
+  patch(vnode, selector, newNode, isEnd = false) {
+    let nodes = this.getElements(vnode, selector);
+    for(let node of nodes){
+      patch(vnode , node);
+      
+    }
+    // nothing to do
+    return results;
     // remove and replace
   }
   getElements(vnode, selector, isEnd = false) {
