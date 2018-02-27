@@ -10,26 +10,38 @@ export default class ElementSelector {
   }
   getElementById(vnode, id) {
     let result = this.getElements(vnode, "#" + id);
-    return result.length < 1
-      ? null
-      : result[0];
+    return result.length < 1 ?
+      null :
+      result[0];
   }
   getElementsByClass(vnode, className) {
     return this.getElements(vnode, "." + className);
   }
   async patch(vnode, selector, newNode) {
-    let nodes = this.getElements(vnode, selector);
-    alert("aaaa-------------"+selector+"/"+(typeof nodes)+"/"+Array.isArray(nodes)+"/"+JSON.stringify(nodes)+"/"+vnode);
-    for(let node of nodes){
+    const parentMap = new Map();
+    let nodes = this.getElements(vnode, selector, false, parentMap, null);
+    alert("aaaa-------------" + selector + "/" + (typeof nodes) + "/" + Array.isArray(nodes) + "/" + JSON.stringify(nodes) + "/" + vnode);
+    for (let node of nodes) {
       let newOne = await ObjectUtil.deepClone(newNode);
-      let re = patch(node , newOne);
-      alert(re);
+      let re = patch(node, newOne);
+      for (let [key, parentNode] of parentMap){
+        if(key === node.key){
+          for(let index in parentNode.children){
+            let target = parentNode.children[index];
+            if(target.key === node.key) {
+              parentNode.children[index] = newOne;
+            }
+          }
+
+        }
+      }
+        alert(re);
     }
     // nothing to do
     return nodes;
     // remove and replace
   }
-  getElements(vnode, selector, isEnd = false) {
+  getElements(vnode, selector, isEnd = false, parentMap = new Map(), parentVnode) {
     let result = [];
     let selectors = selector.split(/ |>/);
     let nextSelector = selector;
@@ -41,6 +53,9 @@ export default class ElementSelector {
       if (this.isMatch(vnode.sel, firstOne)) {
         if (selectors.length < 1) {
           result.push(vnode);
+          if(parentVnode){
+            parentMap.set(vnode.key,parentVnode);
+          }
           return result;
         }
         nextSelector = selector.substring(firstOne.length + 1, selector.length);
@@ -57,7 +72,7 @@ export default class ElementSelector {
       let isNextEnd = delimiter === '>';
 
       for (let child of vnode.children) {
-        result = result.concat(this.getElements(child, selector, isNextEnd));
+        result = result.concat(this.getElements(child, selector, isNextEnd, parentMap, vnode));
       }
     }
     return result;
