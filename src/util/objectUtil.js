@@ -11,4 +11,7 @@ export default class ObjectUtil {
       outPort.postMessage(obj);
     });
   }
+    static simpleDeepClone(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
 }
