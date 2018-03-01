@@ -25,8 +25,9 @@ export default class BaseView {
     this.currentVnode = newNode;
     this.viewState = viewState;
   }
-  patch(currenVnode, newVnode) {
-    alert(patch(currenVnode.elm? currentVnode.elm:currenVnode, newVnode));
+  patch(currentVnode, newVnode) {
+    alert(currentVnode.elm? currentVnode.elm.id :currentVnode.elm);
+    patch(currentVnode.elm? currentVnode.elm.parentNode:currentVnode, newVnode);
   }
 
   refreshView(viewState,data) {
@@ -38,9 +39,9 @@ export default class BaseView {
     alert("node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
   //  this.refreshView(viewState,data) ;
     if (node !== null) {
-      patch(node, newNode);
+      this.patch(node, newNode);
     } else {
-      patch(this.currentVnode, newNode);
+      this.patch(this.currentVnode, newNode);
     }
     this.currentVnode = newNode;
     this.viewState = viewState;
