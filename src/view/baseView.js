@@ -21,12 +21,12 @@ export default class BaseView {
   }
   refresh(viewState,data) {
     let newNode = this.crateVnode(viewState,data);
-    patch(this.currentVnode, newNode);
+    patch(this.currentVnode.elm, newNode);
     this.currentVnode = newNode;
     this.viewState = viewState;
   }
   patch(currenVnode, newVnode) {
-    alert(patch(currenVnode, newVnode));
+    alert(patch(currenVnode.elm? currentVnode.elm:currenVnode, newVnode));
   }
 
   refreshView(viewState,data) {

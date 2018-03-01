@@ -87,6 +87,7 @@ export default class Login extends BaseView {
     let resultNode = h('h1#signinInputArea', 'ok!');
     //let signinInputArea = this.es.getElementById(this.currentVnode, "signinInputArea");
 
-    this.es.patch(this.currentVnode, "#signinInputArea", resultNode);
+    //this.es.
+    patch(document.getElementById('signinInputArea'), resultNode);
   }
 }

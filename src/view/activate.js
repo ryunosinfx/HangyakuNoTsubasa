@@ -82,7 +82,8 @@ export default class Activate extends BaseView {
   }
   showResult() {
     let resultNode = h('h1#activateInputArea', 'ok!');
-    let activateInputArea = this.es.getElementById(this.currentVnode, "activateInputArea");
+    let activateInputArea = documet.getElementById('activateInputArea');
+    //this.es.getElementById(this.currentVnode, "activateInputArea");
     this.patch(activateInputArea, resultNode);
   }
 }
