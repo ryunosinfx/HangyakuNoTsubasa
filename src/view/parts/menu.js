@@ -12,16 +12,6 @@ export default class Menue extends BaseView {
   init(data){
     this.menuPageList = data;
   }
-  show(node, viewState) {
-    let newNode = this.crateVnode(viewState);
-    if (node !== null && this.currentVnode === null) {
-      this.patch(node, newNode);
-    } else {
-      this.patch(this.currentVnode, newNode);
-    }
-    this.currentVnode = newNode;
-    return this.currentVnode;
-  }
   crateVnode(viewState) {
     let liNides = this.createMenuLink();
     let newVnode = h('div', {

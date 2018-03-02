@@ -26,8 +26,11 @@ export default class BaseView {
     this.viewState = viewState;
   }
   patch(currentVnode, newVnode) {
-    alert(currentVnode.elm? currentVnode.elm.id :currentVnode.elm);
-    patch(currentVnode.elm? currentVnode.elm.parentNode:currentVnode, newVnode);
+    alert('patch currentVnode:'+(currentVnode.elm? currentVnode.elm.id :currentVnode.elm )+'/!!currentVnode.elm:'+(!!currentVnode.elmss));
+    // parentNode
+    let result = patch(!!currentVnode.elm? currentVnode.elm:currentVnode, newVnode);
+    result = newVnode;
+    return result;
   }
 
   refreshView(viewState,data) {
@@ -36,14 +39,15 @@ export default class BaseView {
   show(node, viewState, data) {
     //console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = this.currentVnode === null ? this.crateVnode(viewState) : this.currentVnode;
-    alert("node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
+    alert("show node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
   //  this.refreshView(viewState,data) ;
+   let result = null;
     if (node !== null) {
-      this.patch(node, newNode);
+      result = this.patch(node, newNode);
     } else {
-      this.patch(this.currentVnode, newNode);
+      result = this.patch(this.currentVnode, newNode);
     }
-    this.currentVnode = newNode;
+    this.currentVnode = result;
     this.viewState = viewState;
   }
   goAnotherPage(page, viewState) {
