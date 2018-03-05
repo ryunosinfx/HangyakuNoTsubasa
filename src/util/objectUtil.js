@@ -11,7 +11,25 @@ export default class ObjectUtil {
       outPort.postMessage(obj);
     });
   }
-    static simpleDeepClone(obj) {
-      return JSON.parse(JSON.stringify(obj));
+  static simpleDeepClone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+  static deepVnodeClone(target) {
+    let obj = {
+      sel: target.sel,
+      data: ObjectUtil.simpleDeepClone(target.data),
+      children: undefined,
+      text: target.text,
+      elm: target.elm,
+      key: target.key
+    };
+    if(target.children&& target.children.length > 0){
+      obj.children = [];
+      for(let childTarget of target.children){
+        obj.push(ObjectUtil.deepVnodeClone(childTarget));
+      }
     }
+    return obj;
+  }
+
 }
