@@ -27,8 +27,8 @@ export default class BaseView {
   }
   patch(currentVnode, newVnode) {
     alert('patch currentVnode:'+(currentVnode.elm? currentVnode.elm.id :currentVnode.elm )+'/!!currentVnode.elm:'+(!!currentVnode.elmss));
-    // parentNode
-    let result = patch(!!currentVnode.elm? currentVnode.elm:currentVnode, newVnode);
+    // !!currentVnode.elm? currentVnode.elm: parentNode
+    let result = patch(currentVnode, newVnode);
     result = newVnode;
     return result;
   }
