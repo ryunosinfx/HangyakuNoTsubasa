@@ -1,7 +1,4 @@
-import {
-  patch,
-  h
-} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
+import {patch, h} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 import ObjectUtil from './objectUtil'
 export default class ElementSelector {
   constructor() {
@@ -10,9 +7,9 @@ export default class ElementSelector {
   }
   getElementById(vnode, id) {
     let result = this.getElements(vnode, "#" + id);
-    return result.length < 1 ?
-      null :
-      result[0];
+    return result.length < 1
+      ? null
+      : result[0];
   }
   getElementsByClass(vnode, className) {
     return this.getElements(vnode, "." + className);
@@ -20,8 +17,8 @@ export default class ElementSelector {
   patch(vnode, selector, newNode) {
     console.log('patch00 START of Patch');
     if (!newNode) {
-      console.log('patch01');
       let re = patch(vnode, selector);
+      console.log('patch01  END of Patch');
       return selector;
     }
     let cloneNode = ObjectUtil.deepVnodeClone(vnode);

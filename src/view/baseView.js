@@ -26,7 +26,6 @@ export default class BaseView {
     this.viewState = viewState;
   }
   patch(currentVnode, selector,newVnode) {
-
     //alert('patch currentVnode:'+(currentVnode.elm? currentVnode.elm.id :currentVnode.elm )+'/!!currentVnode.elm:'+(!!currentVnode.elmss));
     // !!currentVnode.elm? currentVnode.elm: parentNode
     let result = this.es.patch(currentVnode, selector, newVnode);
@@ -39,9 +38,9 @@ export default class BaseView {
     this.refresh(viewState,data)
   }
   show(node, viewState, data) {
-    //console.log('A01 baseView.goAnotherPage page;' + this.getName());
+    console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
-    alert("show node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
+    //alert("show node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
   //  this.refreshView(viewState,data) ;
    let result = null;
     if (node !== null) {
@@ -53,7 +52,7 @@ export default class BaseView {
   }
   goAnotherPage(page, viewState) {
     //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
-    //console.log('A02 baseView.goAnotherPage page;' + page.getName());
+    console.log('A02 baseView.goAnotherPage page;' + page.getName());
     page.show(this.currentVnode, viewState);
 
   }
@@ -85,9 +84,10 @@ export default class BaseView {
   }
   getViewNode(viewState) {
     console.log('baseView.getViewNode this.name:' + this.name);
-    return this.currentVnode === null ? this.crateVnode(viewState) : this.currentVnode;
+    return !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
   }
   async geToAnotherPage(key, data) {
+    console.log('A03 baseView.geToAnotherPage key;' + key);
     return await this.service.geToAnotherPage(this.currentVnode, key, data);
   }
   async goBack(data) {
