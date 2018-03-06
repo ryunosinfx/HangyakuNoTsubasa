@@ -17,19 +17,19 @@ export default class ElementSelector {
   getElementsByClass(vnode, className) {
     return this.getElements(vnode, "." + className);
   }
-  async patch(vnode, selector, newNode) {
-    let clonNode = ObjectUtil.deepVnodeClone(vnode);
+  patch(vnode, selector, newNode) {
+    let cloneNode = ObjectUtil.deepVnodeClone(vnode);
     console.log('patch01');
     const parentMap = new Map();
         console.log('patch01aa:'+JSON.stringify(vnode));
     //let newVnode =  ObjectUtil.simpleDeepClone(vnode);
         console.log('patch01ab');
     let nodes = this.getElements(cloneNode, selector, false, parentMap, null);
-    alert("aaaa-------------" + selector + "/" + (typeof nodes) + "/" + Array.isArray(nodes) + "/" + JSON.stringify(nodes) + "/" + vnode);
+    //alert("aaaa-------------" + selector + "/" + (typeof nodes) + "/" + Array.isArray(nodes) + "/" + JSON.stringify(nodes) + "/" + vnode);
     for (let node of nodes) {
       console.log('patch01a');
       //let newOne = await ObjectUtil.deepClone(newNode);
-      let newOne = newNodeCreator();
+      let newOne = ObjectUtil.deepVnodeClone(newNode);
       console.log('patch01b');
       console.log(re);
       for (let [key, parentNode] of parentMap) {
@@ -46,7 +46,7 @@ export default class ElementSelector {
       }
     }
 
-    let re = patch(vnode, clonNode);
+    let re = patch(vnode, cloneNode);
     console.log('patch02');
     // nothing to do
     return vnode;
