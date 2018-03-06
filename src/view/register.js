@@ -80,7 +80,8 @@ export default class Register extends BaseView {
   }
   showResult() {
     let resultNode = h('h1#signupInputArea', 'ok!');
-    let signupInputArea = this.es.getElementById(this.currentVnode, "signupInputArea");
-    this.patch(signupInputArea,resultNode);
+    //let signupInputArea = this.es.getElementById(this.currentVnode, "signupInputArea");
+    //this.patch(signupInputArea,resultNode);
+    this.currentVnode = this.patch(this.currentVnode,"#signupInputArea",resultNode);
   }
 }

@@ -25,11 +25,12 @@ export default class BaseView {
     this.currentVnode = newNode;
     this.viewState = viewState;
   }
-  patch(currentVnode, newVnode) {
+  patch(currentVnode, selector,newVnode) {
+
     alert('patch currentVnode:'+(currentVnode.elm? currentVnode.elm.id :currentVnode.elm )+'/!!currentVnode.elm:'+(!!currentVnode.elmss));
     // !!currentVnode.elm? currentVnode.elm: parentNode
-    let result = patch(currentVnode, newVnode);
-    result = newVnode;
+    let result = this.es.patch(currentVnode, selector, newVnode);
+    //result = newVnode;
     return result;
   }
 

@@ -18,12 +18,16 @@ export default class ElementSelector {
     return this.getElements(vnode, "." + className);
   }
   patch(vnode, selector, newNode) {
+    if (!newNode) {
+      let re = patch(vnode, selector);
+      return selector;
+    }
     let cloneNode = ObjectUtil.deepVnodeClone(vnode);
     console.log('patch01');
     const parentMap = new Map();
-        console.log('patch01aa:'+JSON.stringify(vnode));
+    console.log('patch01aa:' + JSON.stringify(vnode));
     //let newVnode =  ObjectUtil.simpleDeepClone(vnode);
-        console.log('patch01ab');
+    console.log('patch01ab');
     let nodes = this.getElements(cloneNode, selector, false, parentMap, null);
     //alert("aaaa-------------" + selector + "/" + (typeof nodes) + "/" + Array.isArray(nodes) + "/" + JSON.stringify(nodes) + "/" + vnode);
     for (let node of nodes) {
@@ -31,7 +35,7 @@ export default class ElementSelector {
       //let newOne = await ObjectUtil.deepClone(newNode);
       let newOne = ObjectUtil.deepVnodeClone(newNode);
       console.log('patch01b');
-      console.log(re);
+
       for (let [key, parentNode] of parentMap) {
         if (key === node.key) {
           for (let index in parentNode.children) {
@@ -47,9 +51,10 @@ export default class ElementSelector {
     }
 
     let re = patch(vnode, cloneNode);
+    console.log(re);
     console.log('patch02');
     // nothing to do
-    return vnode;
+    return cloneNode;
     // remove and replace
   }
   getElements(vnode, selector, isEnd = false, parentMap = new Map(), parentVnode) {

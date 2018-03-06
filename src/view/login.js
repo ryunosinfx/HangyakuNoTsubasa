@@ -88,6 +88,6 @@ export default class Login extends BaseView {
     //let signinInputArea = this.es.getElementById(this.currentVnode, "signinInputArea");
 
     //this.es.
-    patch(document.getElementById('signinInputArea'), resultNode);
+    this.currentVnode = this.patch(this.currentVnode,"#signinInputArea",resultNode);
   }
 }
