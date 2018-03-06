@@ -21,16 +21,17 @@ export default class BaseView {
   }
   refresh(viewState,data) {
     let newNode = this.crateVnode(viewState,data);
-    patch(this.currentVnode.elm, newNode);
+    this.patch(this.currentVnode.elm, newNode);
     this.currentVnode = newNode;
     this.viewState = viewState;
   }
   patch(currentVnode, selector,newVnode) {
 
-    alert('patch currentVnode:'+(currentVnode.elm? currentVnode.elm.id :currentVnode.elm )+'/!!currentVnode.elm:'+(!!currentVnode.elmss));
+    //alert('patch currentVnode:'+(currentVnode.elm? currentVnode.elm.id :currentVnode.elm )+'/!!currentVnode.elm:'+(!!currentVnode.elmss));
     // !!currentVnode.elm? currentVnode.elm: parentNode
     let result = this.es.patch(currentVnode, selector, newVnode);
     //result = newVnode;
+    this.currentVnode = result;
     return result;
   }
 
@@ -39,7 +40,7 @@ export default class BaseView {
   }
   show(node, viewState, data) {
     //console.log('A01 baseView.goAnotherPage page;' + this.getName());
-    let newNode = this.currentVnode === null ? this.crateVnode(viewState) : this.currentVnode;
+    let newNode = !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
     alert("show node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
   //  this.refreshView(viewState,data) ;
    let result = null;
@@ -48,7 +49,6 @@ export default class BaseView {
     } else {
       result = this.patch(this.currentVnode, newNode);
     }
-    this.currentVnode = result;
     this.viewState = viewState;
   }
   goAnotherPage(page, viewState) {

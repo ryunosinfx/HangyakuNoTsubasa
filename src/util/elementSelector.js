@@ -18,7 +18,9 @@ export default class ElementSelector {
     return this.getElements(vnode, "." + className);
   }
   patch(vnode, selector, newNode) {
+    console.log('patch00 START of Patch');
     if (!newNode) {
+      console.log('patch01');
       let re = patch(vnode, selector);
       return selector;
     }
@@ -37,11 +39,12 @@ export default class ElementSelector {
       console.log('patch01b');
 
       for (let [key, parentNode] of parentMap) {
-        if (key === node.key) {
+        if (key === node) {
           for (let index in parentNode.children) {
             let target = parentNode.children[index];
-            if (target.key === node.key) {
+            if (target === node) {
               parentNode.children[index] = newOne;
+              console.log('★patch01c AS REPLACE!');
               break;
             }
           }
@@ -52,7 +55,7 @@ export default class ElementSelector {
 
     let re = patch(vnode, cloneNode);
     console.log(re);
-    console.log('patch02');
+    console.log('patch02 END of Patch');
     // nothing to do
     return cloneNode;
     // remove and replace
@@ -70,7 +73,7 @@ export default class ElementSelector {
         if (selectors.length < 1) {
           result.push(vnode);
           if (parentVnode) {
-            parentMap.set(vnode.key, parentVnode);
+            parentMap.set(vnode, parentVnode);
           }
           return result;
         }
