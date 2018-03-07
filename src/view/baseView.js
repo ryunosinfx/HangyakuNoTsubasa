@@ -40,19 +40,17 @@ export default class BaseView {
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
     console.log("show node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
-  //  this.refreshView(viewState,data) ;
-   let result = null;
     if (node !== null) {
-      result = this.patch(node, newNode);
+      this.patch(node, newNode);
     } else {
-      result = this.patch(this.currentVnode, newNode);
+      this.patch(this.currentVnode, newNode);
     }
     this.viewState = viewState;
   }
-  goAnotherPage(page, viewState) {
+  goAnotherPage(page, viewState, data) {
     //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
-    console.log('A02 baseView.goAnotherPage page;' + page.getName());
-    page.show(this.currentVnode, viewState);
+    console.log('A02 baseView.goAnotherPage from '+ this.getName()+' to page;' + page.getName());
+    page.show(this.currentVnode, viewState, data);
 
   }
   crateVnode(viewStatev,data) {

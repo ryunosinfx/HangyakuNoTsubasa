@@ -82,6 +82,6 @@ export default class Activate extends BaseView {
   }
   showResult() {
     let resultNode = h('h1#activateInputArea', 'ok!');
-    this.currentVnode = this.patch(this.currentVnode,"#activateInputArea",resultNode);
+    this.patch(this.currentVnode,"#activateInputArea",resultNode);
   }
 }
