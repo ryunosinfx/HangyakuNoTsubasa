@@ -75,7 +75,7 @@ export default class Activate extends BaseView {
     console.log("Activate! isNotActivated:" + isNotActivated);
     if (isNotActivated) {
       this.showResult();
-      this.geToAnotherPage('Login', {
+      this.goToAnotherPage('Login', {
         isNotActivated: isNotActivated
       });
     }

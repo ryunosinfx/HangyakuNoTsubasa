@@ -76,7 +76,7 @@ export default class Login extends BaseView {
     console.log("executeSignin isActivated:" + isActivated);
     if (isActivated) {
       this.showResult();
-      this.geToAnotherPage('Activate', {
+      this.goToAnotherPage('Activate', {
         isNotActivated: !isActivated
       });
     } else {

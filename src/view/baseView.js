@@ -22,7 +22,6 @@ export default class BaseView {
   refresh(viewState,data) {
     let newNode = this.crateVnode(viewState,data);
     this.patch(this.currentVnode.elm, newNode);
-    this.currentVnode = newNode;
     this.viewState = viewState;
   }
   patch(currentVnode, selector,newVnode) {
@@ -40,7 +39,7 @@ export default class BaseView {
   show(node, viewState, data) {
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
-    //alert("show node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
+    console.log("show node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
   //  this.refreshView(viewState,data) ;
    let result = null;
     if (node !== null) {
@@ -86,11 +85,11 @@ export default class BaseView {
     console.log('baseView.getViewNode this.name:' + this.name);
     return !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
   }
-  async geToAnotherPage(key, data) {
-    console.log('A03 baseView.geToAnotherPage key;' + key);
-    return await this.service.geToAnotherPage(this.currentVnode, key, data);
+  async goToAnotherPage(key, data) {
+    console.log('A03 baseView.goToAnotherPage key;' + key);
+    return await this.service.goToAnotherPage(this.currentVnode, key, data);
   }
   async goBack(data) {
-    return await this.service.geToAnotherPage(this.currentVnode, key, data);
+    return await this.service.goToAnotherPage(this.currentVnode, key, data);
   }
 }
