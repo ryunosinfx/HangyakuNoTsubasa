@@ -50,6 +50,7 @@ export default class Activate extends BaseView {
         ], 'cccc')
       ])
     ]);
+
     return newVnode;
   }
   activate() {

@@ -83,13 +83,13 @@ export default class ServiceImpl {
     page.show();
     return;
   }
-  async goToAnotherPage(currentVnode, key, data) {
+  async goToAnotherPage(key, data) {
     let state = await this.getCurrentState();
     let page = this.router.getPage(state, key);
-
     console.log('geToAnotherPage page:' + page.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
-    page.show(currentVnode, state, data);
-    // TODO add history recording
+  //  page.show(currentVnode, state, data);
+      // TODO add history recording
+    this.layout.show(page, state, data);
     return;
   }
   async loadState() {

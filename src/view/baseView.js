@@ -51,6 +51,24 @@ export default class BaseView {
     //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
     console.log('A02 baseView.goAnotherPage from '+ this.getName()+' to page;' + page.getName());
     page.show(this.currentVnode, viewState, data);
+  }
+  // Event listener
+  onPageLoad(page, viewState, data){
+
+  }
+  onPageLoaded(page, viewState, data){
+
+  }
+  onPageShow(page, viewState, data){
+
+  }
+  onPageShown(page, viewState, data){
+
+  }
+  onPageHide(page, viewState, data){
+
+  }
+  onPageHidden(page, viewState, data){
 
   }
   crateVnode(viewStatev,data) {
@@ -85,9 +103,9 @@ export default class BaseView {
   }
   async goToAnotherPage(key, data) {
     console.log('A03 baseView.goToAnotherPage key;' + key);
-    return await this.service.goToAnotherPage(this.currentVnode, key, data);
+    return await this.service.goToAnotherPage(key, data);
   }
   async goBack(data) {
-    return await this.service.goToAnotherPage(this.currentVnode, key, data);
+    return await this.service.goToAnotherPage(key, data);
   }
 }

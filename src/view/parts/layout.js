@@ -39,10 +39,10 @@ export default class Layout extends BaseView {
     this.page.show(content);
   }
   // from service
-  show(page) {
+  show(page, viewState, data) {
     let oldPage = this.page;
     this.page = page;
-    oldPage.goAnotherPage(page);
+    oldPage.goAnotherPage(page, viewState, data);
   }
   add(view) {}
   createBsaeFrame() {
