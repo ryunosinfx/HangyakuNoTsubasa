@@ -53,6 +53,9 @@ export default class Activate extends BaseView {
 
     return newVnode;
   }
+  onPageShow(page, viewState, data){
+    alert(viewState);
+  }
   activate() {
     let self = this;
     return (event) => {

@@ -6,7 +6,7 @@ import {
 import ElementSelector from '../util/elementSelector'
 export default class BaseView {
   constructor(service, name, key) {
-
+    this.onPageLoad(service, name, key);
     this.name = name;
     this.key = key;
     this.es = new ElementSelector();
@@ -18,6 +18,7 @@ export default class BaseView {
     this.currentVnode = null; //this.crateVnode(null);
     this.viewState = null; //this.crateVnode(null);
     //console.log('name=' + name + '/key:' + key);
+      this.onPageLoaded(service, name, key);
   }
   refresh(viewState,data) {
     let newNode = this.crateVnode(viewState,data);
@@ -37,6 +38,7 @@ export default class BaseView {
     this.refresh(viewState,data)
   }
   show(node, viewState, data) {
+    this.onPageShow(node, viewState, data);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
     console.log("show node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
@@ -46,30 +48,37 @@ export default class BaseView {
       this.patch(this.currentVnode, newNode);
     }
     this.viewState = viewState;
+      this.onPageShown(node, viewState, data);
   }
   goAnotherPage(page, viewState, data) {
+    if(this.onPageHide(page, viewState, data) === false){
+      return;
+    };
     //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
     console.log('A02 baseView.goAnotherPage from '+ this.getName()+' to page;' + page.getName());
     page.show(this.currentVnode, viewState, data);
+    this.onPageHidden(page, viewState, data)
   }
   // Event listener
-  onPageLoad(page, viewState, data){
+  onPageLoad(service, name, key){
+    console.log('m001 baseView.onPageLoad service:' + service+'/name:'+name+'/key:'+key);
+  }
+  onPageLoaded(service, name, key){
+    console.log('m002 baseView.onPageLoaded service:' + service+'/name:'+name+'/key:'+key);
 
   }
-  onPageLoaded(page, viewState, data){
-
+  onPageShow(node, viewState, data){
+    console.log('m003 baseView.onPageShow node:' + node+'/viewState:'+viewState+'/data:'+data);
   }
-  onPageShow(page, viewState, data){
-
-  }
-  onPageShown(page, viewState, data){
-
+  onPageShown(node, viewState, data){
+    console.log('m004 baseView.onPageShown node:' + node+'/viewState:'+viewState+'/data:'+data);
   }
   onPageHide(page, viewState, data){
-
+    console.log('m005 baseView.onPageHide page:' + page+'/viewState:'+viewState+'/data:'+data);
+    return true;
   }
   onPageHidden(page, viewState, data){
-
+    console.log('m006 baseView.onPageHidden page:' + page+'/viewState:'+viewState+'/data:'+data);
   }
   crateVnode(viewStatev,data) {
     let newVnode = h('div', {
