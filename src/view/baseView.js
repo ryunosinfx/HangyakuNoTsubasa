@@ -18,14 +18,15 @@ export default class BaseView {
     this.currentVnode = null; //this.crateVnode(null);
     this.viewState = null; //this.crateVnode(null);
     //console.log('name=' + name + '/key:' + key);
-      this.onPageLoaded(service, name, key);
+    this.onPageLoaded(service, name, key);
   }
-  refresh(viewState,data) {
-    let newNode = this.crateVnode(viewState,data);
+  refresh(viewStateImput, data) {
+    let viewState = viewStateImput ? viewStateImput : this.viewState;
+    let newNode = this.crateVnode(viewState, data);
     this.patch(this.currentVnode.elm, newNode);
     this.viewState = viewState;
   }
-  patch(currentVnode, selector,newVnode) {
+  patch(currentVnode, selector, newVnode) {
     //alert('patch currentVnode:'+(currentVnode.elm? currentVnode.elm.id :currentVnode.elm )+'/!!currentVnode.elm:'+(!!currentVnode.elmss));
     // !!currentVnode.elm? currentVnode.elm: parentNode
     let result = this.es.patch(currentVnode, selector, newVnode);
@@ -34,53 +35,57 @@ export default class BaseView {
     return result;
   }
 
-  refreshView(viewState,data) {
-    this.refresh(viewState,data)
+  refreshView(viewState, data) {
+    this.refresh(viewState, data)
   }
-  show(node, viewState, data) {
+  show(node, viewStateImput, data) {
+    let viewState = viewStateImput ? viewStateImput : this.viewState;
     this.onPageShow(node, viewState, data);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
-    console.log("show node:"+node+"/this.currentVnode:"+this.currentVnode+ '/newNode:'+newNode);
+    console.log("show node:" + node + "/this.currentVnode:" + this.currentVnode + '/newNode:' + newNode);
     if (node !== null) {
       this.patch(node, newNode);
     } else {
       this.patch(this.currentVnode, newNode);
     }
+    this.onPageShown(node, viewState, data);
     this.viewState = viewState;
-      this.onPageShown(node, viewState, data);
   }
-  goAnotherPage(page, viewState, data) {
-    if(this.onPageHide(page, viewState, data) === false){
+  //
+  goAnotherPage(page, viewStateImput, data, nextViewStateImput) {
+    let viewState = viewStateImput ? viewStateImput : this.viewState;
+    if (this.onPageHide(page, viewState, data) === false) {
       return;
     };
     //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
-    console.log('A02 baseView.goAnotherPage from '+ this.getName()+' to page;' + page.getName());
-    page.show(this.currentVnode, viewState, data);
+    console.log('A02 baseView.goAnotherPage from ' + this.getName() + ' to page;' + page.getName());
+    page.show(this.currentVnode, nextViewStateImput, data);
     this.onPageHidden(page, viewState, data)
+    this.viewState = viewState;
   }
   // Event listener
-  onPageLoad(service, name, key){
-    console.log('m001 baseView.onPageLoad service:' + service+'/name:'+name+'/key:'+key);
+  onPageLoad(service, name, key) {
+    console.log('m001 baseView.onPageLoad service:' + service + '/name:' + name + '/key:' + key);
   }
-  onPageLoaded(service, name, key){
-    console.log('m002 baseView.onPageLoaded service:' + service+'/name:'+name+'/key:'+key);
+  onPageLoaded(service, name, key) {
+    console.log('m002 baseView.onPageLoaded service:' + service + '/name:' + name + '/key:' + key);
 
   }
-  onPageShow(node, viewState, data){
-    console.log('m003 baseView.onPageShow node:' + node+'/viewState:'+viewState+'/data:'+data);
+  onPageShow(node, viewState, data) {
+    console.log('m003 baseView.onPageShow node:' + node + '/viewState:' + viewState + '/data:' + data);
   }
-  onPageShown(node, viewState, data){
-    console.log('m004 baseView.onPageShown node:' + node+'/viewState:'+viewState+'/data:'+data);
+  onPageShown(node, viewState, data) {
+    console.log('m004 baseView.onPageShown node:' + node + '/viewState:' + viewState + '/data:' + data);
   }
-  onPageHide(page, viewState, data){
-    console.log('m005 baseView.onPageHide page:' + page+'/viewState:'+viewState+'/data:'+data);
+  onPageHide(page, viewState, data) {
+    console.log('m005 baseView.onPageHide page:' + page + '/viewState:' + viewState + '/data:' + data);
     return true;
   }
-  onPageHidden(page, viewState, data){
-    console.log('m006 baseView.onPageHidden page:' + page+'/viewState:'+viewState+'/data:'+data);
+  onPageHidden(page, viewState, data) {
+    console.log('m006 baseView.onPageHidden page:' + page + '/viewState:' + viewState + '/data:' + data);
   }
-  crateVnode(viewStatev,data) {
+  crateVnode(viewStatev, data) {
     let newVnode = h('div', {
       style: {
         color: '#099'
