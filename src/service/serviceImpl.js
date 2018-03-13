@@ -14,6 +14,7 @@ export default class ServiceImpl {
   constructor(state) {
     const layout = new Layout(this);
     const router = new Router(layout);
+    this.store = new Map();
     this.layout = layout;
     this.state = state;
     this.router = router;
@@ -85,11 +86,12 @@ export default class ServiceImpl {
   }
   async goToAnotherPage(key, data) {
     let state = await this.getCurrentState();
+    this.store.set('state',state);
     let page = this.router.getPage(state, key);
     console.log('geToAnotherPage page:' + page.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
-  //  page.show(currentVnode, state, data);
-      // TODO add history recording
-    this.layout.show(page, state, data);
+    //  page.show(currentVnode, state, data);
+    // TODO add history recording
+    this.layout.show(page, null, data);
     return;
   }
   async loadState() {

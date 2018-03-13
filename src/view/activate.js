@@ -54,7 +54,8 @@ export default class Activate extends BaseView {
     return newVnode;
   }
   onPageShow(page, viewState, data){
-    alert(viewState);
+    const state = this.getCurrentState();
+    alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
   }
   activate() {
     let self = this;

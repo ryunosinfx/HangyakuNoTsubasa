@@ -97,6 +97,9 @@ export default class BaseView {
   isEquals(baseView) {
     return baseView, name === this, name;
   }
+  update(action){
+
+  }
   getKey() {
     return this.key;
   }
@@ -121,5 +124,8 @@ export default class BaseView {
   }
   async goBack(data) {
     return await this.service.goToAnotherPage(key, data);
+  }
+  getCurrentState(){
+    return this.service.store.get('state');
   }
 }
