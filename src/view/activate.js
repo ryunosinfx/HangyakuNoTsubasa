@@ -53,9 +53,13 @@ export default class Activate extends BaseView {
 
     return newVnode;
   }
-  onPageShow(page, viewState, data){
+  onPageShow(newNode, viewState, data){
     const state = this.getCurrentState();
     alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
+    if(state.isActivated){
+      let resultNode = h('h1#activateInputArea', 'ok!');
+      this.prePatch(newNode, "#activateInputArea", resultNode);
+    }
   }
   activate() {
     let self = this;

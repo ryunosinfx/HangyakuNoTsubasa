@@ -44,21 +44,21 @@ export default class ElementSelector {
     //     }
     //   }
     // }
-    const cloneNode = this.prePatch(vnode, selector, newNode);
+    console.log('patch00 START of Patch');
+    if (!newNode) {
+      return selector;
+    }
+    const cloneNode = this.prePatch(ObjectUtil.deepVnodeClone(vnode), selector, newNode);
     const re = patch(vnode, cloneNode);
     //console.log(re);
     console.log('patch02 END of Patch');
     return cloneNode;
   }
+  // Not cloneNode
   prePatch(vnode, selector, newNode) {
-    console.log('patch00 START of Patch');
-    if (!newNode) {
-      return selector;
-    }
-    let cloneNode = ObjectUtil.deepVnodeClone(vnode);
     const parentMap = new Map();
     console.log('prepatch01aa:' + JSON.stringify(vnode));
-    let nodes = this.getElements(cloneNode, selector, false, parentMap, null);
+    let nodes = this.getElements(vnode, selector, false, parentMap, null);
     for (let node of nodes) {
       console.log('prepatch01a');
       let newOne = ObjectUtil.deepVnodeClone(newNode);
@@ -79,7 +79,7 @@ export default class ElementSelector {
       }
     }
     console.log('patch02 END of prePatch');
-    return cloneNode;
+    return vnode;
   }
   getElements(vnode, selector, isEnd = false, parentMap = new Map(), parentVnode) {
     let result = [];

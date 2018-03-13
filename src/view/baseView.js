@@ -21,35 +21,36 @@ export default class BaseView {
     this.onPageLoaded(service, name, key);
   }
   refresh(viewStateImput, data) {
-    let viewState = viewStateImput ? viewStateImput : this.viewState;
-    let newNode = this.crateVnode(viewState, data);
-    this.patch(this.currentVnode.elm, newNode);
+    const viewState = viewStateImput ? viewStateImput : this.viewState;
+    const newNode = this.crateVnode(viewState, data);
+    this.patch(this.currentVnode, newNode);
     this.viewState = viewState;
   }
   patch(currentVnode, selector, newVnode) {
-    //alert('patch currentVnode:'+(currentVnode.elm? currentVnode.elm.id :currentVnode.elm )+'/!!currentVnode.elm:'+(!!currentVnode.elmss));
-    // !!currentVnode.elm? currentVnode.elm: parentNode
-    let result = this.es.patch(currentVnode, selector, newVnode);
-    //result = newVnode;
+    const result = this.es.patch(currentVnode, selector, newVnode);
     this.currentVnode = result;
     return result;
   }
+  prePatch(currentVnode, selector, newVnode)｛
+    return this.es.prePatch(currentVnode, selector, newVnode);
+  ｝
 
   refreshView(viewState, data) {
     this.refresh(viewState, data)
   }
-  show(node, viewStateImput, data) {
+  show(oldNode, viewStateImput, data) {
     let viewState = viewStateImput ? viewStateImput : this.viewState;
-    this.onPageShow(node, viewState, data);
+    this.onPageShow(oldNode, viewState, data);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
-    console.log("show node:" + node + "/this.currentVnode:" + this.currentVnode + '/newNode:' + newNode);
-    if (node !== null) {
-      this.patch(node, newNode);
+    this.onPageShow(newNode, viewState, data);
+    console.log("show oldNode:" + oldNode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + newNode);
+    if (oldNode) {
+      this.patch(oldNode, newNode);
     } else {
       this.patch(this.currentVnode, newNode);
     }
-    this.onPageShown(node, viewState, data);
+    this.onPageShown(newNode, viewState, data);
     this.viewState = viewState;
   }
   //
@@ -72,11 +73,14 @@ export default class BaseView {
     console.log('m002 baseView.onPageLoaded service:' + service + '/name:' + name + '/key:' + key);
 
   }
-  onPageShow(node, viewState, data) {
-    console.log('m003 baseView.onPageShow node:' + node + '/viewState:' + viewState + '/data:' + data);
+  onPrePageBuild(oldNode, viewState, data) {
+    console.log('m003a baseView.onPrePageBuild oldNode:' + oldNode + '/viewState:' + viewState + '/data:' + data);
   }
-  onPageShown(node, viewState, data) {
-    console.log('m004 baseView.onPageShown node:' + node + '/viewState:' + viewState + '/data:' + data);
+  onPageShow(newNode, viewState, data) {
+    console.log('m003 baseView.onPageShow newNode:' + newNode + '/viewState:' + viewState + '/data:' + data);
+  }
+  onPageShown(newNode, viewState, data) {
+    console.log('m004 baseView.onPageShown newNode:' + newNode + '/viewState:' + viewState + '/data:' + data);
   }
   onPageHide(page, viewState, data) {
     console.log('m005 baseView.onPageHide page:' + page + '/viewState:' + viewState + '/data:' + data);
