@@ -31,9 +31,9 @@ export default class BaseView {
     this.currentVnode = result;
     return result;
   }
-  prePatch(currentVnode, selector, newVnode)｛
+  prePatch(currentVnode, selector, newVnode){
     return this.es.prePatch(currentVnode, selector, newVnode);
-  ｝
+  }
 
   refreshView(viewState, data) {
     this.refresh(viewState, data)
@@ -101,7 +101,7 @@ export default class BaseView {
   isEquals(baseView) {
     return baseView, name === this, name;
   }
-  update(action){
+  update(action) {
 
   }
   getKey() {
@@ -129,7 +129,7 @@ export default class BaseView {
   async goBack(data) {
     return await this.service.goToAnotherPage(key, data);
   }
-  getCurrentState(){
+  getCurrentState() {
     return this.service.store.get('state');
   }
 }

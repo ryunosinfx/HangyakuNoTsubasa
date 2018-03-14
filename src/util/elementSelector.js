@@ -46,6 +46,7 @@ export default class ElementSelector {
     // }
     console.log('patch00 START of Patch');
     if (!newNode) {
+      const re = patch(vnode, selector);
       return selector;
     }
     const cloneNode = this.prePatch(ObjectUtil.deepVnodeClone(vnode), selector, newNode);

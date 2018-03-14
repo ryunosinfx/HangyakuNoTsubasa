@@ -55,9 +55,9 @@ export default class Activate extends BaseView {
   }
   onPageShow(newNode, viewState, data){
     const state = this.getCurrentState();
-    alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
-    if(state.isActivated){
-      let resultNode = h('h1#activateInputArea', 'ok!');
+  //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
+    if(state && state.isActivated){
+      let resultNode = h('h1#activateInputArea', 'ok! you are logedin!');
       this.prePatch(newNode, "#activateInputArea", resultNode);
     }
   }

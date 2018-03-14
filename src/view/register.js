@@ -52,6 +52,14 @@ export default class Register extends BaseView {
     ]);
     return newVnode;
   }
+  onPageShow(newNode, viewState, data){
+    const state = this.getCurrentState();
+  //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
+    if(state && state.isActivated){
+      let resultNode = h('h1#signupInputArea', 'ok! you are logedin!');
+      this.prePatch(newNode, "#signupInputArea", resultNode);
+    }
+  }
   signup() {
     let self = this;
     return (event) => {
