@@ -2,9 +2,9 @@ import {patch, h} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 import BaseView from './parts/baseView'
 import css from './parts/css'
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
-export default class Viewer extends BaseView {
+export default class Logout extends BaseView {
   constructor(service) {
-    super(service, 'Viewer','Viewer');
+    super(service, 'Logout','Logout');
   }
 
   crateVnode(oldNode, viewState) {
@@ -12,7 +12,10 @@ export default class Viewer extends BaseView {
       style: {
         color: '#00a'
       }
-    }, [h('h1', 'i am Viewer!')]);
+    }, [h('h1', 'i am Logout!')]);
     return newVnode;
+  }
+  onPageShown(newNode, viewState, data) {
+    this.goToAnotherPage('Login');
   }
 }

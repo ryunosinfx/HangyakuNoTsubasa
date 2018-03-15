@@ -3,7 +3,7 @@ import {
   h
 } from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 import Router from '../util/router'
-import BaseView from './baseView'
+import BaseView from './parts/baseView'
 import css from './parts/css'
 import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Register extends BaseView {

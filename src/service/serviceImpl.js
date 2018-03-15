@@ -5,6 +5,7 @@ import Login from '../view/login'
 import Manage from '../view/manage'
 import Search from '../view/searcher'
 import Viewer from '../view/viewer'
+import Logout from '../view/logout'
 import Register from '../view/register'
 import Router from '../util/router'
 import Layout from '../view/parts/layout'
@@ -21,6 +22,9 @@ export default class ServiceImpl {
     layout.initialize();
     router.add(new Login(this), (state) => {
       return state.isLogiedIn === false
+    });
+    router.add(new Logout(this), (state) => {
+      return state.isLogiedIn
     });
     router.add(new Activate(this), (state) => {
       return state.isActivated === false
