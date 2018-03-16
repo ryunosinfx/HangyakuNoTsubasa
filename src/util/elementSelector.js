@@ -125,6 +125,9 @@ export default class ElementSelector {
       return map;
     }
     map = new Map();
+    if(!selector){
+      return map;
+    }
     let tokens = selector.split(/\.|#/g);
     let classes = [];
     let id = "";

@@ -10,7 +10,7 @@ export default class Footer extends BaseView {
     this.layoutView = layoutView;
     this.currentVnode = null;
   }
-  crateVnode(viewState) {
+  createVnode(viewState) {
     let newVnode = h('div', {
       style: {
         color: '#000'

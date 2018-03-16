@@ -12,7 +12,7 @@ export default class Menue extends BaseView {
   init(data){
     this.menuPageList = data;
   }
-  crateVnode(viewState) {
+  createVnode(viewState) {
     let liNides = this.createMenuLink();
     let newVnode = h('div', {
       style: {

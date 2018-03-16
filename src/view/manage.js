@@ -7,12 +7,16 @@ export default class Manager extends BaseView {
     super(service, 'Manager','Manager');
   }
 
-  crateVnode(viewState) {
+  cresateVnode(viewState) {
     let newVnode = h('div', {
       style: {
         color: '#a00'
       }
     }, [h('h1', 'i am Manager!')]);
     return newVnode;
+  }
+
+  createList(){
+    //select data
   }
 }

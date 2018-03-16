@@ -10,7 +10,7 @@ export default class Activate extends BaseView {
   constructor(service) {
     super(service, 'Activate', 'Activate');
   }
-  crateVnode(viewState) {
+  createVnode(viewState) {
     const self = this;
     let newVnode = h('div', {
       style: {

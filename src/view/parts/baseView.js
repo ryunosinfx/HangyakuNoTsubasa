@@ -15,15 +15,17 @@ export default class BaseView {
     }
     this.service = service;
     this.router = this.service.getRouter();
-    this.currentVnode = null; //this.crateVnode(null);
-    this.viewState = null; //this.crateVnode(null);
+    this.currentVnode = null;
+    this.viewState = null;
     //console.log('name=' + name + '/key:' + key);
     this.onPageLoaded(service, name, key);
   }
   refresh(viewStateImput, data) {
     const viewState = viewStateImput ? viewStateImput : this.viewState;
-    const newNode = this.crateVnode(viewState, data);
+    const newNode = this.createVnode(viewState, data);
+    this.onPageShow(newNode, viewState, data);
     this.patch(this.currentVnode, newNode);
+    this.onPageShown(newNode, viewState, data);
     this.viewState = viewState;
   }
   patch(currentVnode, selector, newVnode) {
@@ -42,7 +44,7 @@ export default class BaseView {
     let viewState = viewStateImput ? viewStateImput : this.viewState;
     this.onPageShow(oldNode, viewState, data);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
-    let newNode = !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
+    let newNode = !this.currentVnode ? this.createVnode(viewState) : this.currentVnode;
     this.onPageShow(newNode, viewState, data);
     console.log("show oldNode:" + oldNode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + newNode);
     if (oldNode) {
@@ -89,13 +91,12 @@ export default class BaseView {
   onPageHidden(page, viewState, data) {
     console.log('m006 baseView.onPageHidden page:' + page + '/viewState:' + viewState + '/data:' + data);
   }
-  crateVnode(viewStatev, data) {
+  createVnode(viewStatev, data) {
     let newVnode = h('div', {
       style: {
         color: '#099'
       }
     }, [h('h1', 'i am ' + this.name + '!')]);
-    //console.log('baseView.crateVnode');
     return newVnode;
   }
   isEquals(baseView) {
@@ -117,10 +118,6 @@ export default class BaseView {
     let href = location.href.split(/\?/)[0] + '?' + this.key;
     console.log('href=' + href);
     return href;
-  }
-  getViewNode(viewState) {
-    console.log('baseView.getViewNode this.name:' + this.name);
-    return !this.currentVnode ? this.crateVnode(viewState) : this.currentVnode;
   }
   async goToAnotherPage(key, data) {
     console.log('A03 baseView.goToAnotherPage key;' + key);

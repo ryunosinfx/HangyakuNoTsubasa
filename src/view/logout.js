@@ -7,7 +7,7 @@ export default class Logout extends BaseView {
     super(service, 'Logout','Logout');
   }
 
-  crateVnode(oldNode, viewState) {
+  createVnode(oldNode, viewState) {
     let newVnode = h('div', {
       style: {
         color: '#00a'
@@ -16,6 +16,10 @@ export default class Logout extends BaseView {
     return newVnode;
   }
   onPageShown(newNode, viewState, data) {
-    this.goToAnotherPage('Login');
+    ECIDBEMfunc.signout().then(
+      ()=>{
+        this.goToAnotherPage('Login');
+      }
+    )
   }
 }
