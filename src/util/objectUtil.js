@@ -23,9 +23,13 @@ export default class ObjectUtil {
       elm: target.elm,
       key: target.key
     };
-    if(target.children&& target.children.length > 0){
+    const key = 'on';
+    if (target.data[key]) {
+      obj.data[key] = target.data[key];
+    }
+    if (target.children && target.children.length > 0) {
       obj.children = [];
-      for(let childTarget of target.children){
+      for (let childTarget of target.children) {
         obj.children.push(ObjectUtil.deepVnodeClone(childTarget));
       }
     }

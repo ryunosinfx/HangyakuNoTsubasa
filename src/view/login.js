@@ -41,7 +41,7 @@ export default class Login extends BaseView {
   signin() {
     let self = this;
     alert('aaaaA');
-    return function(event){
+    return function(event) {
       //alert('ok!');
       let pwNode = self.es.getElementById(self.currentVnode, "signinPasswd");
       let idNode = self.es.getElementById(self.currentVnode, "signinId");
@@ -71,14 +71,13 @@ export default class Login extends BaseView {
   }
   createFormVnode() {
     let self = this;
-    alert("self.signin():"+self.signin()+"/(typeof on[nameA]):"+(typeof self.signin()));
+    //alert("self.signin():"+self.signin()+"/(typeof on[nameA]):"+(typeof self.signin()));
     const button = h('button', {
-      on:{
-      click: self.signin(),
-        change: self.signin(),
-        mouseover:function(e){alert("a")}
+      on: {
+        click: self.signin()
       },
-      props: {"data-aa":"aaaaAzA"
+      props: {
+        "data-aa": "aaaaAzA"
       }
 
     }, "SignIn！");
