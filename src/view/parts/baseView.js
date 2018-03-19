@@ -42,7 +42,7 @@ export default class BaseView {
   }
   show(oldNode, viewStateImput, data) {
     let viewState = viewStateImput ? viewStateImput : this.viewState;
-    this.onPageShow(oldNode, viewState, data);
+    this.onPrePageBuild(oldNode, viewState, data);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
     let newNode = !this.currentVnode ? this.createVnode(viewState) : this.currentVnode;
     this.onPageShow(newNode, viewState, data);
