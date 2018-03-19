@@ -41,15 +41,15 @@ export default class Login extends BaseView {
   signin() {
     let self = this;
     alert('aaaaA');
-    return (event) => {
+    return function(event){
       //alert('ok!');
-      let pwNode = this.es.getElementById(this.currentVnode, "signinPasswd");
-      let idNode = this.es.getElementById(this.currentVnode, "signinId");
+      let pwNode = self.es.getElementById(self.currentVnode, "signinPasswd");
+      let idNode = self.es.getElementById(self.currentVnode, "signinId");
       let signinId = idNode.elm.value;
       let signinPasswd = pwNode.elm.value;
       alert('ok! pwNode:' + signinPasswd + '/idNode:' + signinId);
       if (!!signinId && !!signinPasswd) {
-        this.executeSignin(signinId, signinPasswd);
+        self.executeSignin(signinId, signinPasswd);
       } else {
         alert("not empty!");
       }
@@ -71,12 +71,15 @@ export default class Login extends BaseView {
   }
   createFormVnode() {
     let self = this;
+    alert("self.signin():"+self.signin()+"/(typeof on[nameA]):"+(typeof self.signin()));
     const button = h('button', {
-      props: {
+      on:{
+      click: self.signin(),
+        change: self.signin(),
+        mouseover:function(e){alert("a")}
       },
-        on: {
-          click: self.signin()
-        }
+      props: {"data-aa":"aaaaAzA"
+      }
 
     }, "SignIn！");
     return h('div#signinInputArea', {}, [
