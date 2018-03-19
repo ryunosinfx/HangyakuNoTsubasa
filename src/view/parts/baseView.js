@@ -83,9 +83,11 @@ export default class BaseView {
   }
   onPageShown(newNode, viewState, data) {
     console.log('m004 baseView.onPageShown newNode:' + newNode + '/viewState:' + viewState + '/data:' + data);
+      console.log(JSON.stringify(this.currentVnode));
   }
   onPageHide(page, viewState, data) {
     console.log('m005 baseView.onPageHide page:' + page + '/viewState:' + viewState + '/data:' + data);
+      console.log(JSON.stringify(this.currentVnode));
     return true;
   }
   onPageHidden(page, viewState, data) {
