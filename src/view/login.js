@@ -33,15 +33,9 @@ export default class Login extends BaseView {
       this.prePatch(newNode, "#signinInputArea", this.createFormVnode());
     }
   }
-  async login(userId, Password) {
-    await ECIDBEMfunc.signin(userId, Password);
-    return await ECIDBEMfunc,
-      isLogiedIn();
-  }
   signin() {
     let self = this;
-    alert('aaaaA');
-    return function(event) {
+    return (event)=> {
       //alert('ok!');
       let pwNode = self.es.getElementById(self.currentVnode, "signinPasswd");
       let idNode = self.es.getElementById(self.currentVnode, "signinId");

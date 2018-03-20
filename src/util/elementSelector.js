@@ -44,7 +44,7 @@ export default class ElementSelector {
     //     }
     //   }
     // }
-    console.log('patch00 START of Patch newNode'+newNode);
+    console.log('patch00 START of Patch newNode:'+newNode);
     if (!newNode) {
       const re = patch(vnode, selector);
       return selector;

@@ -15,7 +15,7 @@ export default class ObjectUtil {
     return JSON.parse(JSON.stringify(obj));
   }
   static deepVnodeClone(target) {
-    let obj = {
+    const obj = {
       sel: target.sel,
       data: ObjectUtil.simpleDeepClone(target.data),
       children: undefined,

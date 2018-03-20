@@ -30,10 +30,12 @@ export default class BaseView {
   }
   patch(currentVnode, selector, newVnode) {
     const result = this.es.patch(currentVnode, selector, newVnode);
+    result.data['name']= this.name+Date.now();
     this.currentVnode = result;
     return result;
   }
   prePatch(currentVnode, selector, newVnode){
+    currentVnode.data['name']= this.name+Date.now();
     return this.es.prePatch(currentVnode, selector, newVnode);
   }
 
