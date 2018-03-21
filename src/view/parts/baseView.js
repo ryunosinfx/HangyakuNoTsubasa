@@ -28,7 +28,10 @@ export default class BaseView {
     this.onPageShown(viewState, data);
     this.viewState = viewState;
   }
-  patch(currentVnode, selector, newVnode) {
+  patch(selector, newVnode) {
+    return this.patchFromOtherVnode(this.currentVnode, selector, newVnode);
+  }
+  patchFromOtherVnode(currentVnode, selector, newVnode) {
     const result = this.es.patch(currentVnode, selector, newVnode);
     result.data['name']= this.name+Date.now();
     this.currentVnode = result;
@@ -51,9 +54,9 @@ export default class BaseView {
     this.onPageShow(viewState, data);
     console.log("show oldNode:" + oldNode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + this.currentVnode);
     if (oldNode) {
-      this.patch(oldNode, this.currentVnode);
+      this.patchFromOtherVnode(oldNode, this.currentVnode);
     } else {
-      this.patch(this.currentVnode, this.currentVnode);
+      this.patchFromOtherVnode(this.currentVnode, this.currentVnode);
     }
     this.onPageShown(viewState, data);
     this.viewState = viewState;

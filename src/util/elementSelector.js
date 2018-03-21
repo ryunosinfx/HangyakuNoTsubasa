@@ -62,8 +62,7 @@ export default class ElementSelector {
       }
     }
     if (vnode.children) {
-
-      alert("OK parent /vnode.sel:" + vnode.sel);
+      //alert("OK parent /vnode.sel:" + vnode.sel);
       for (let indexA in vnode.children) {
         let child = vnode.children[indexA];
         if (!child) {

@@ -103,6 +103,6 @@ export default class Login extends BaseView {
     return h('h1#signinInputArea', 'ok!');
   }
   showResult() {
-    this.patch(this.currentVnode, "#signinInputArea", this.createResultVnode());
+    this.patch("#signinInputArea", this.createResultVnode());
   }
 }
