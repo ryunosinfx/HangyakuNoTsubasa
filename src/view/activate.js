@@ -53,12 +53,12 @@ export default class Activate extends BaseView {
 
     return newVnode;
   }
-  onPageShow(newNode, viewState, data){
+  onPageShow(viewState, data){
     const state = this.getCurrentState();
   //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
     if(state && state.isActivated){
       let resultNode = h('h1#activateInputArea', 'ok! you are logedin!');
-      this.prePatch(newNode, "#activateInputArea", resultNode);
+      this.prePatch("#activateInputArea", resultNode);
     }
   }
   activate() {
@@ -91,6 +91,6 @@ export default class Activate extends BaseView {
   }
   showResult() {
     let resultNode = h('h1#activateInputArea', 'ok!');
-    this.patch(this.currentVnode,"#activateInputArea",resultNode);
+    this.patch("#activateInputArea",resultNode);
   }
 }

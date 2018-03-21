@@ -15,17 +15,17 @@ export default class BaseView {
     }
     this.service = service;
     this.router = this.service.getRouter();
-    this.currentVnode = null;
     this.viewState = null;
+    this.currentVnode = null;//this.createVnode(this.viewState, null);
     //console.log('name=' + name + '/key:' + key);
     this.onPageLoaded(service, name, key);
   }
   refresh(viewStateImput, data) {
     const viewState = viewStateImput ? viewStateImput : this.viewState;
-    const newNode = this.createVnode(viewState, data);
-    this.onPageShow(newNode, viewState, data);
-    this.patch(this.currentVnode, newNode);
-    this.onPageShown(newNode, viewState, data);
+    const oldVnode = this.currentVnode;
+    this.onPageShow(viewState, data);
+    this.patch(oldVnodet, this.currentVnode);
+    this.onPageShown(viewState, data);
     this.viewState = viewState;
   }
   patch(currentVnode, selector, newVnode) {
@@ -34,9 +34,10 @@ export default class BaseView {
     this.currentVnode = result;
     return result;
   }
-  prePatch(currentVnode, selector, newVnode){
-    currentVnode.data['name']= this.name+Date.now();
-    return this.es.prePatch(currentVnode, selector, newVnode);
+  prePatch(selector, newVnode){
+    this.currentVnode.data['name']= this.name+Date.now();
+    this.currentVnode = this.es.prePatch(this.currentVnode, selector, newVnode);
+    return this.currentVnode;
   }
 
   refreshView(viewState, data) {
@@ -46,27 +47,27 @@ export default class BaseView {
     let viewState = viewStateImput ? viewStateImput : this.viewState;
     this.onPrePageBuild(oldNode, viewState, data);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
-    let newNode = !this.currentVnode ? this.createVnode(viewState) : this.currentVnode;
-    this.onPageShow(newNode, viewState, data);
-    console.log("show oldNode:" + oldNode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + newNode);
+    this.currentVnode = !this.currentVnode ? this.createVnode(viewState) : this.currentVnode;
+    this.onPageShow(viewState, data);
+    console.log("show oldNode:" + oldNode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + this.currentVnode);
     if (oldNode) {
-      this.patch(oldNode, newNode);
+      this.patch(oldNode, this.currentVnode);
     } else {
-      this.patch(this.currentVnode, newNode);
+      this.patch(this.currentVnode, this.currentVnode);
     }
-    this.onPageShown(newNode, viewState, data);
+    this.onPageShown(viewState, data);
     this.viewState = viewState;
   }
   //
-  goAnotherPage(page, viewStateImput, data, nextViewStateImput) {
+  goAnotherPage(nextPage, viewStateImput, data, nextViewStateImput) {
     let viewState = viewStateImput ? viewStateImput : this.viewState;
-    if (this.onPageHide(page, viewState, data) === false) {
+    if (this.onPageHide(nextPage, viewState, data) === false) {
       return;
     };
     //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
-    console.log('A02 baseView.goAnotherPage from ' + this.getName() + ' to page;' + page.getName());
-    page.show(this.currentVnode, nextViewStateImput, data);
-    this.onPageHidden(page, viewState, data)
+    console.log('A02 baseView.goAnotherPage from ' + this.getName() + ' to nextPage;' + nextPage.getName());
+    nextPage.show(this.currentVnode, nextViewStateImput, data);
+    this.onPageHidden(nextPage, viewState, data)
     this.viewState = viewState;
   }
   // Event listener
@@ -80,20 +81,20 @@ export default class BaseView {
   onPrePageBuild(oldNode, viewState, data) {
     console.log('m003a baseView.onPrePageBuild oldNode:' + oldNode + '/viewState:' + viewState + '/data:' + data);
   }
-  onPageShow(newNode, viewState, data) {
-    console.log('m003 baseView.onPageShow newNode:' + newNode + '/viewState:' + viewState + '/data:' + data);
+  onPageShow(viewState, data) {
+    console.log('m003 baseView.onPageShow newNode:'  + '/viewState:' + viewState + '/data:' + data);
   }
-  onPageShown(newNode, viewState, data) {
-    console.log('m004 baseView.onPageShown newNode:' + newNode + '/viewState:' + viewState + '/data:' + data);
+  onPageShown(viewState, data) {
+    console.log('m004 baseView.onPageShown newNode:'  + '/viewState:' + viewState + '/data:' + data);
       console.log(JSON.stringify(this.currentVnode));
   }
-  onPageHide(page, viewState, data) {
-    console.log('m005 baseView.onPageHide page:' + page + '/viewState:' + viewState + '/data:' + data);
+  onPageHide(nextPage, viewState, data) {
+    console.log('m005 baseView.onPageHide nextPage:' + nextPage + '/viewState:' + viewState + '/data:' + data);
       console.log(JSON.stringify(this.currentVnode));
     return true;
   }
-  onPageHidden(page, viewState, data) {
-    console.log('m006 baseView.onPageHidden page:' + page + '/viewState:' + viewState + '/data:' + data);
+  onPageHidden(nextPage, viewState, data) {
+    console.log('m006 baseView.onPageHidden nextPage:' + nextPage + '/viewState:' + viewState + '/data:' + data);
   }
   createVnode(viewStatev, data) {
     let newVnode = h('div', {

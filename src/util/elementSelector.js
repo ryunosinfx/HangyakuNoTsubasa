@@ -15,51 +15,74 @@ export default class ElementSelector {
     return this.getElements(vnode, "." + className);
   }
   patch(vnode, selector, newNode) {
-    // console.log('patch00 START of Patch');
-    // if (!newNode) {
-    //   let re = patch(vnode, selector);
-    //   console.log('patch01  END of Patch');
-    //   return selector;
-    // }
-    // let cloneNode = ObjectUtil.deepVnodeClone(vnode);
-    // const parentMap = new Map();
-    // console.log('patch01aa:' + JSON.stringify(vnode));
-    // let nodes = this.getElements(cloneNode, selector, false, parentMap, null);
-    // for (let node of nodes) {
-    //   console.log('patch01a');
-    //   let newOne = ObjectUtil.deepVnodeClone(newNode);
-    //   console.log('patch01b');
-    //
-    //   for (let [key, parentNode] of parentMap) {
-    //     if (key === node) {
-    //       for (let index in parentNode.children) {
-    //         let target = parentNode.children[index];
-    //         if (target === node) {
-    //           parentNode.children[index] = newOne;
-    //           console.log('★patch01c AS REPLACE!');
-    //           break;
-    //         }
-    //       }
-    //       break;
-    //     }
-    //   }
-    // }
-    console.log('patch00 START of Patch newNode:'+newNode);
+    console.log('patch00 START of Patch newNode:' + newNode);
     if (!newNode) {
+      this.isValidNode(vnode, "vnode");
       const re = patch(vnode, selector);
       return selector;
     }
-    const cloneNode = this.prePatch(ObjectUtil.deepVnodeClone(vnode), selector, newNode);
+    const cloneNode = this.prePatch(vnode, selector, newNode);
     const re = patch(vnode, cloneNode);
-    //console.log(re);
-    console.log('patch02 END of Patch');
+    const nodes = this.getElements(cloneNode, selector, false, new Map(), null);
+    console.log('patch02 END of Patch ====' + "/node:" + newNode.elm + "/parent:" + (
+      newNode.elm
+      ? newNode.elm.parentNode
+      : null) + "/count:" + nodes.length + "/" + (
+      nodes.length > 0
+      ? nodes[0].elm.parentNode
+      : null));
+    this.isValidNode(cloneNode, "cloneNode");
     return cloneNode;
+  }
+
+  isValidNode(vnode, name, parentNode, index) {
+    if (!vnode) {
+      alert("null node!" + name + "/parentNode:" + parentNode);
+      return;
+    }
+    if (vnode.elm && !vnode.elm.parentNode) {
+      console.log(vnode.elm);
+      if (parentNode) {
+        const length = parentNode.childNodes.length;
+        if (length > index) {
+          vnode.elm = parentNode.childNodes[index];
+        } else {
+          parentNode.appendChild(vnode.elm);
+        }
+      }
+      alert("invalid node!" + name);
+    } else if (!vnode.elm) {
+      if (parentNode) {
+        const length = parentNode.childNodes.length;
+        if (length > index) {
+          vnode.elm = parentNode.childNodes[index];
+        } else {
+          alert("invalid parent index!" + index + "/length:" + length + "/vnode.sel:" + vnode.sel);
+        }
+      }
+    }
+    if (vnode.children) {
+
+      alert("OK parent /vnode.sel:" + vnode.sel);
+      for (let indexA in vnode.children) {
+        let child = vnode.children[indexA];
+        if (!child) {
+          continue;
+        }
+        this.isValidNode(child, name + "_c_", (
+          vnode.elm
+          ? vnode.elm.parentNode
+          : null), indexA)
+      }
+    }
   }
   // Not cloneNode
   prePatch(vnode, selector, newNode) {
+    const cloneNode = ObjectUtil.deepVnodeClone(vnode);
     const parentMap = new Map();
     console.log('prepatch01aa:' + JSON.stringify(vnode));
-    let nodes = this.getElements(vnode, selector, false, parentMap, null);
+    const nodes = this.getElements(cloneNode, selector, false, parentMap, null);
+    let isShuldPatch = false;
     for (let node of nodes) {
       console.log('prepatch01a');
       let newOne = ObjectUtil.deepVnodeClone(newNode);
@@ -67,12 +90,17 @@ export default class ElementSelector {
 
       for (let [key, parentNode] of parentMap) {
         if (key === node) {
-          for (let index in parentNode.children) {
-            let target = parentNode.children[index];
+          let children = parentNode.children;
+          for (let index in children) {
+            let target = children[index];
             if (target === node) {
-              parentNode.children[index] = newOne;
-              console.log('★patch01c AS REPLACE!');
+              children[index] = newOne;
+              //newOne.text = newOne.text+"/"+Date.now();
+              isShuldPatch = true;
+              console.log('★patch01c AS REPLACE! children.length:' + children.length + "/index:" + index + "/target.sel:" + target.sel + "/newOne.sel:" + newOne.sel + "/text:" + newOne.text);
               break;
+            } else {
+              console.log('-patch01d ! children.length:' + children.length + "/index:" + index + "/target.sel:" + target.sel);
             }
           }
           break;
@@ -80,14 +108,19 @@ export default class ElementSelector {
       }
     }
     console.log('patch02 END of prePatch');
-    return vnode;
+    return isShuldPatch
+      ? cloneNode
+      : vnode;
   }
   getElements(vnode, selector, isEnd = false, parentMap = new Map(), parentVnode) {
     let result = [];
+    if (!selector) {
+      return result;
+    }
     let selectors = selector.split(/ |>/);
     let nextSelector = selector;
     if (selectors.length >= 1) {
-      let firstOne = selectors.pop();
+      let firstOne = selectors.shift();
       if (!firstOne) {
         return result;
       }
@@ -113,7 +146,7 @@ export default class ElementSelector {
       let isNextEnd = delimiter === '>';
 
       for (let child of vnode.children) {
-        result = result.concat(this.getElements(child, selector, isNextEnd, parentMap, vnode));
+        result = result.concat(this.getElements(child, nextSelector, isNextEnd, parentMap, vnode));
       }
     }
     return result;
@@ -125,7 +158,7 @@ export default class ElementSelector {
       return map;
     }
     map = new Map();
-    if(!selector){
+    if (!selector) {
       return map;
     }
     let tokens = selector.split(/\.|#/g);

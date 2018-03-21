@@ -23,9 +23,10 @@ export default class ObjectUtil {
       elm: target.elm,
       key: target.key
     };
-    const key = 'on';
-    if (target.data[key]) {
-      obj.data[key] = target.data[key];
+    for(let key in target.data){
+      if (target.data[key]) {
+        obj.data[key] = target.data[key];
+      }
     }
     if (target.children && target.children.length > 0) {
       obj.children = [];

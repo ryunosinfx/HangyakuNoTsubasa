@@ -15,7 +15,7 @@ export default class Logout extends BaseView {
     }, [h('h1', 'i am Logout!')]);
     return newVnode;
   }
-  onPageShown(newNode, viewState, data) {
+  onPageShown(viewState, data) {
     ECIDBEMfunc.signout().then(
       ()=>{
         this.goToAnotherPage('Login');

@@ -24,13 +24,13 @@ export default class Login extends BaseView {
     ]);
     return newVnode;
   }
-  onPageShow(newNode, viewState, data) {
+  onPageShow(viewState, data) {
     const state = this.getCurrentState();
     if (state && state.isActivated === true) {
       alert(viewState + '/state.isLogedIn:' + state.isLogedIn + '/state.isActivated:' + state.isActivated);
-      this.prePatch(newNode, "#signinInputArea", this.createResultVnode());
+      this.prePatch( "#signinInputArea", this.createResultVnode());
     } else {
-      this.prePatch(newNode, "#signinInputArea", this.createFormVnode());
+      this.prePatch( "#signinInputArea", this.createFormVnode());
     }
   }
   signin() {
@@ -38,9 +38,9 @@ export default class Login extends BaseView {
     return (event)=> {
       //alert('ok!');
       let pwNode = self.es.getElementById(self.currentVnode, "signinPasswd");
+      let signinPasswd = pwNode.elm.value;
       let idNode = self.es.getElementById(self.currentVnode, "signinId");
       let signinId = idNode.elm.value;
-      let signinPasswd = pwNode.elm.value;
       alert('ok! pwNode:' + signinPasswd + '/idNode:' + signinId);
       if (!!signinId && !!signinPasswd) {
         self.executeSignin(signinId, signinPasswd);
@@ -103,6 +103,6 @@ export default class Login extends BaseView {
     return h('h1#signinInputArea', 'ok!');
   }
   showResult() {
-    this.currentVnode = this.patch(this.currentVnode, "#signinInputArea", this.createResultVnode());
+    this.patch(this.currentVnode, "#signinInputArea", this.createResultVnode());
   }
 }

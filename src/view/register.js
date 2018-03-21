@@ -52,12 +52,12 @@ export default class Register extends BaseView {
     ]);
     return newVnode;
   }
-  onPageShow(newNode, viewState, data){
+  onPageShow(viewState, data){
     const state = this.getCurrentState();
   //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
     if(state && state.isActivated){
       let resultNode = h('h1#signupInputArea', 'ok! you are logedin!');
-      this.prePatch(newNode, "#signupInputArea", resultNode);
+      this.prePatch("#signupInputArea", resultNode);
     }
   }
   signup() {
@@ -90,6 +90,6 @@ export default class Register extends BaseView {
     let resultNode = h('h1#signupInputArea', 'ok!');
     //let signupInputArea = this.es.getElementById(this.currentVnode, "signupInputArea");
     //this.patch(signupInputArea,resultNode);
-    this.currentVnode = this.patch(this.currentVnode,"#signupInputArea",resultNode);
+    this.patch("#signupInputArea",resultNode);
   }
 }
