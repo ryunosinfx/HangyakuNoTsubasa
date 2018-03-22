@@ -20,8 +20,11 @@ export default class BaseView {
     //console.log('name=' + name + '/key:' + key);
     this.onPageLoaded(service, name, key);
   }
-  refresh(viewStateImput, data) {
-    const viewState = viewStateImput ? viewStateImput : this.viewState;
+  isAccessable(){
+    return true;
+  }
+  update(action, data) {
+    const viewState = this.viewState;
     const oldVnode = this.currentVnode;
     this.onPageShow(viewState, data);
     this.patch(oldVnodet, this.currentVnode);

@@ -1,43 +1,56 @@
-import {patch, h} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
+import {
+  patch,
+  h
+} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 import BaseView from './baseView'
 import css from './css'
 export default class Menue extends BaseView {
-  constructor(service,layoutView) {
+  constructor(service, layoutView) {
     super(service);
     this.layoutView = layoutView;
     this.currentVnode = null;
     this.menuPageList = [];
     this.layout = [];
   }
-  init(data){
+  init(data) {
     this.menuPageList = data;
   }
   createVnode(viewState) {
-    let liNides = this.createMenuLink();
     let newVnode = h('div', {
       style: {
         color: '#000'
       }
     }, [
       h('h1', 'i am menue'),
-      h('ul', liNides)
+      h('ul#menueList', 'init menu!')
     ]);
     return newVnode;
   }
-  createMenuLink(){
+  onPageShow(viewState, data) {
+    const state = this.getCurrentState();
+    this.prePatch("#menueList", this.createMenuLink(state));
+  }
+  createMenuLink(state) {
     let liNides = [];
     for (let value of this.menuPageList) {
-      liNides.push(this.createMenuItem(value));
+      let menuItem = this.createMenuItem(value,state);
+      if (menuItem) {
+        liNides.push(menuItem);
+      }
     }
-    return liNides;
+    return h('ul#menueList', liNides);
   }
-  createMenuItem(data) {
+  createMenuItem(page,state) {
+    if(page.isAccessable(state) === false){
+      return null;
+    }
     let self = this;
     return h('li', {
       style: css.menu.item
-    }, h('a',{
-    on: {
-        click: self.router.getGoNextEventhandler(data)
-      }}, data.getName()));
+    }, h('a', {
+      on: {
+        click: self.router.getGoNextEventhandler(page)
+      }
+    }, page.getName()));
   }
 }
