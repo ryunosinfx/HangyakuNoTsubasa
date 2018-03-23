@@ -57,7 +57,10 @@ export default class ServiceImpl {
   async login(userId, password) {
     return await ECIDBEMfunc.signin(userId, password);
   }
-  async activste(userId, password) {
+  async logout() {
+    return await ECIDBEMfunc.signout();
+  }
+  async activate(userId, password) {
     await ECIDBEMfunc.activate(userId, password);
   }
   /*

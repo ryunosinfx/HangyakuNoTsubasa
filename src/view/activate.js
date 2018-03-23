@@ -5,7 +5,6 @@ import {
 import Router from '../util/router'
 import BaseView from './parts/baseView'
 import css from './parts/css'
-import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Activate extends BaseView {
   constructor(service) {
     super(service, 'Activate', 'Activate');
@@ -80,7 +79,7 @@ export default class Activate extends BaseView {
     }
   }
   async registerActivate(userId, passwd) {
-    let isNotActivated = await ECIDBEMfunc.activate(userId, passwd);
+    let isNotActivated = await this.service.activate(userId, passwd);
     console.log("Activate! isNotActivated:" + isNotActivated);
     if (isNotActivated) {
       this.showResult();

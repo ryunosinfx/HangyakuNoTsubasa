@@ -1,7 +1,6 @@
 import {patch, h} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 import BaseView from './parts/baseView'
 import css from './parts/css'
-import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Logout extends BaseView {
   constructor(service) {
     super(service, 'Logout','Logout');
@@ -16,7 +15,7 @@ export default class Logout extends BaseView {
     return newVnode;
   }
   onPageShown(viewState, data) {
-    ECIDBEMfunc.signout().then(
+    this.service.logout().then(
       ()=>{
         this.goToAnotherPage('Login');
       }

@@ -4,7 +4,6 @@ import {
 } from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 import BaseView from './parts/baseView'
 import css from './parts/css'
-import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Login extends BaseView {
   constructor(service) {
     super(service, 'Login', 'Login');
@@ -52,7 +51,7 @@ export default class Login extends BaseView {
     }
   }
   async executeSignin(userId, passwd) {
-    let isActivated = await ECIDBEMfunc.signin(userId, passwd);
+    let isActivated = await this.service.login(userId, passwd);
     console.log("executeSignin isActivated:" + isActivated);
     if (isActivated) {
       this.showResult();

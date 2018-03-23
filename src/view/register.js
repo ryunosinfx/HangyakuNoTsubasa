@@ -1,11 +1,7 @@
-import {
-  patch,
-  h
-} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
+import {patch, h} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 import Router from '../util/router'
 import BaseView from './parts/baseView'
 import css from './parts/css'
-import ECIDBEMfunc from 'encrypt-indexeddb-entity-manager/src/functions'
 export default class Register extends BaseView {
   constructor(service) {
     super(service, 'Register', 'Register');
@@ -40,29 +36,27 @@ export default class Register extends BaseView {
             }
           }, '')
         ], 'aaaa'),
-        h('div', {}, [
-          h('button', {
+        h('div', {}, [h('button', {
             props: {},
             on: {
               click: self.signup()
             }
-          }, "SugnUP！")
-        ], 'cccc')
+          }, "SugnUP！")], 'cccc')
       ])
     ]);
     return newVnode;
   }
-  onPageShow(viewState, data){
+  onPageShow(viewState, data) {
     const state = this.getCurrentState();
-  //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
-    if(state && state.isActivated){
+    //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
+    if (state && state.isActivated) {
       let resultNode = h('h1#signupInputArea', 'ok! you are logedin!');
       this.prePatch("#signupInputArea", resultNode);
     }
   }
   signup() {
     let self = this;
-    return (event) => {
+    return(event) => {
       //alert('ok!');
       let pwNode = this.es.getElementById(this.currentVnode, "signupPasswd");
       let idNode = this.es.getElementById(this.currentVnode, "signupId");
@@ -71,7 +65,7 @@ export default class Register extends BaseView {
       alert('ok! pwNode:' + signupPasswd + '/idNode:' + signupId);
       if (!!signupId && !!signupPasswd) {
         this.registerSignUp(signupId, signupPasswd);
-      }else{
+      } else {
         alert("not empty!");
       }
       event.stopPropagation();
@@ -79,17 +73,15 @@ export default class Register extends BaseView {
     }
   }
   async registerSignUp(userId, passwd) {
-    let isNotActivated = await ECIDBEMfunc.signup(userId, passwd);
-      console.log("registerSignUp isNotActivated:"+isNotActivated);
-    if(isNotActivated){
+    let isNotActivated = await this.service.registerUser(userId, passwd);
+    console.log("registerSignUp isNotActivated:" + isNotActivated);
+    if (isNotActivated) {
       this.showResult();
-      this.goToAnotherPage('Activate',{isNotActivated:isNotActivated});
+      this.goToAnotherPage('Activate', {isNotActivated: isNotActivated});
     }
   }
   showResult() {
     let resultNode = h('h1#signupInputArea', 'ok!');
-    //let signupInputArea = this.es.getElementById(this.currentVnode, "signupInputArea");
-    //this.patch(signupInputArea,resultNode);
-    this.patch("#signupInputArea",resultNode);
+    this.patch("#signupInputArea", resultNode);
   }
 }
