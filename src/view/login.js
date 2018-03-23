@@ -33,6 +33,9 @@ export default class Login extends BaseView {
       this.prePatch( "#signinInputArea", this.createFormVnode());
     }
   }
+  isAccessable(state){
+    return !(state && state.isLogedIn);
+  }
   signin() {
     let self = this;
     return (event)=> {

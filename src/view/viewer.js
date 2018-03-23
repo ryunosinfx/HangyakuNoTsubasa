@@ -15,4 +15,7 @@ export default class Viewer extends BaseView {
     }, [h('h1', 'i am Viewer!')]);
     return newVnode;
   }
+  isAccessable(state){
+    return (state && state.isLogedIn);
+  }
 }

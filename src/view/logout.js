@@ -22,4 +22,7 @@ export default class Logout extends BaseView {
       }
     )
   }
+  isAccessable(state){
+    return (state && state.isLogedIn);
+  }
 }

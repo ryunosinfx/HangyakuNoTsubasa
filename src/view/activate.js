@@ -61,6 +61,9 @@ export default class Activate extends BaseView {
       this.prePatch("#activateInputArea", resultNode);
     }
   }
+  isAccessable(state){
+    return !(state && state.isLogedIn);
+  }
   activate() {
     let self = this;
     return (event) => {

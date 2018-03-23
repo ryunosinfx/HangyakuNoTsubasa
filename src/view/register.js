@@ -60,6 +60,9 @@ export default class Register extends BaseView {
       this.prePatch("#signupInputArea", resultNode);
     }
   }
+  isAccessable(state){
+    return !(state && state.isLogedIn);
+  }
   signup() {
     let self = this;
     return (event) => {

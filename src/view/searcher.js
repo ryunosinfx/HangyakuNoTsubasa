@@ -15,4 +15,7 @@ export default class Searcher extends BaseView {
     }, [h('h1', 'i am Search!')]);
     return newVnode;
   }
+  isAccessable(state){
+    return (state && state.isLogedIn);
+  }
 }
