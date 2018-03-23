@@ -15,7 +15,7 @@ export default class Menue extends BaseView {
   init(data) {
     this.menuPageList = data;
   }
-  createVnode(viewState) {
+  rendarer(viewState) {
     let newVnode = h('div', {
       style: {
         color: '#000'

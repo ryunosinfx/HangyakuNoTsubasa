@@ -16,7 +16,7 @@ export default class BaseView {
     this.service = service;
     this.router = this.service.getRouter();
     this.viewState = null;
-    this.currentVnode = null;//this.createVnode(this.viewState, null);
+    this.currentVnode = null;//this.rendarer(this.viewState, null);
     //console.log('name=' + name + '/key:' + key);
     this.onPageLoaded(service, name, key);
   }
@@ -50,7 +50,7 @@ export default class BaseView {
     let viewState = viewStateImput ? viewStateImput : this.viewState;
     this.onPrePageBuild(oldNode, viewState, data);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
-    this.currentVnode = !this.currentVnode ? this.createVnode(viewState) : this.currentVnode;
+    this.currentVnode = !this.currentVnode ? this.rendarer(viewState) : this.currentVnode;
     this.onPageShow(viewState, data);
     console.log("show oldNode:" + oldNode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + this.currentVnode);
     if (oldNode) {
@@ -99,7 +99,7 @@ export default class BaseView {
   onPageHidden(nextPage, viewState, data) {
     console.log('m006 baseView.onPageHidden nextPage:' + nextPage + '/viewState:' + viewState + '/data:' + data);
   }
-  createVnode(viewStatev, data) {
+  rendarer(viewStatev, data) {
     let newVnode = h('div', {
       style: {
         color: '#099'

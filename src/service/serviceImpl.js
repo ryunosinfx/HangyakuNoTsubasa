@@ -10,38 +10,33 @@ import Register from '../view/register'
 import Router from '../util/router'
 import Layout from '../view/parts/layout'
 import State from './state'
+import BaseService from './baseService'
 
-export default class ServiceImpl {
+export default class ServiceImpl extends BaseService{
   constructor(state) {
-    const layout = new Layout(this);
-    const router = new Router(layout);
-    this.store = new Map();
-    this.layout = layout;
-    this.state = state;
-    this.router = router;
-    layout.initialize();
-    router.add(new Login(this), (state) => {
+    super(state);
+    this.router.add(new Login(this), (state) => {
       return state.isLogiedIn === false
     });
-    router.add(new Logout(this), (state) => {
+    this.router.add(new Logout(this), (state) => {
       return state.isLogiedIn
     });
-    router.add(new Activate(this), (state) => {
+    this.router.add(new Activate(this), (state) => {
       return state.isActivated === false
     });
-    router.add(new Viewer(this), (state) => {
+    this.router.add(new Viewer(this), (state) => {
       return state.isLogiedIn
     });
-    router.add(new Manage(this), (state) => {
+    this.router.add(new Manage(this), (state) => {
       return state.isLogiedIn
     });
-    router.add(new Editor(this), (state) => {
+    this.router.add(new Editor(this), (state) => {
       return state.isLogiedIn
     });
-    router.add(new Viewer(this), (state) => {
+    this.router.add(new Viewer(this), (state) => {
       return state.isLogiedIn
     });
-    router.add(new Register(this), (state) => {
+    this.router.add(new Register(this), (state) => {
       return state.isLogiedIn === false
     });
     this.layout.setMenuList(router.getMenuList());
@@ -67,9 +62,6 @@ export default class ServiceImpl {
    */
   async getCurrentState() {
     let retState = this.state ? this.state : new State();
-    //alert ('ECIDBEMfunc;'+ECIDBEMfunc);
-    //retState.isActivated = await ECIDBEMfunc.isActivate();
-    //alert("retState.isActivated :"+retState.isActivated );
     retState.isLogedIn = await ECIDBEMfunc.isLogedIn();
     retState.isActivated = retState.isLogedIn;
     this.state = retState;

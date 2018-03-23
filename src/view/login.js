@@ -9,9 +9,9 @@ export default class Login extends BaseView {
     super(service, 'Login', 'Login');
   }
 
-  createVnode(viewState) {
+  rendarer(viewState) {
     let self = this;
-    console.log('Login.createVnode');
+    console.log('Login.rendarer');
     let newVnode = h('div', {
       style: {
         color: '#000'

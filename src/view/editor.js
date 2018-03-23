@@ -7,7 +7,7 @@ export default class Editor extends BaseView {
     super(service, 'Editor','Editor');
   }
 
-  createVnode(viewState) {
+  rendarer(viewState) {
     let newVnode = h('div', {
       style: {
         color: '#990'
