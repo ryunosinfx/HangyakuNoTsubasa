@@ -15,6 +15,9 @@ export default class Manager extends BaseView {
     }, [h('h1', 'i am Manager!')]);
     return newVnode;
   }
+  isAccessable(state){
+    return (state && state.isLogedIn);
+  }
 
   createList(){
     //select data

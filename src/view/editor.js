@@ -20,4 +20,7 @@ export default class Editor extends BaseView {
   undo() {}
   redo() {}
   record() {}
+  isAccessable(state){
+    return (state && state.isLogedIn);
+  }
 }

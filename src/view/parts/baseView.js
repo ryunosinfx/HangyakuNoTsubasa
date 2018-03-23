@@ -20,7 +20,7 @@ export default class BaseView {
     //console.log('name=' + name + '/key:' + key);
     this.onPageLoaded(service, name, key);
   }
-  isAccessable(){
+  isAccessable(state){
     return true;
   }
   update(action, data) {
@@ -46,9 +46,6 @@ export default class BaseView {
     return this.currentVnode;
   }
 
-  refreshView(viewState, data) {
-    this.refresh(viewState, data)
-  }
   show(oldNode, viewStateImput, data) {
     let viewState = viewStateImput ? viewStateImput : this.viewState;
     this.onPrePageBuild(oldNode, viewState, data);
@@ -92,11 +89,11 @@ export default class BaseView {
   }
   onPageShown(viewState, data) {
     console.log('m004 baseView.onPageShown newNode:'  + '/viewState:' + viewState + '/data:' + data);
-      console.log(JSON.stringify(this.currentVnode));
+      //console.log(JSON.stringify(this.currentVnode));
   }
   onPageHide(nextPage, viewState, data) {
     console.log('m005 baseView.onPageHide nextPage:' + nextPage + '/viewState:' + viewState + '/data:' + data);
-      console.log(JSON.stringify(this.currentVnode));
+      //console.log(JSON.stringify(this.currentVnode));
     return true;
   }
   onPageHidden(nextPage, viewState, data) {
@@ -112,9 +109,6 @@ export default class BaseView {
   }
   isEquals(baseView) {
     return baseView, name === this, name;
-  }
-  update(action) {
-
   }
   getKey() {
     return this.key;

@@ -41,7 +41,8 @@ export default class Menue extends BaseView {
     return h('ul#menueList', liNides);
   }
   createMenuItem(page,state) {
-    if(page.isAccessable(state) === false){
+    console.log('------------------createMenuItem:'+state+'/page.isAccessable(state):'+page.isAccessable(state)+'/name:'+page.getName());
+    if(!!page.isAccessable(state) === false){
       return null;
     }
     let self = this;
