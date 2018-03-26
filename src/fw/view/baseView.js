@@ -3,7 +3,7 @@ import {
   h
 } from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 
-import ElementSelector from '../../util/elementSelector'
+import ElementSelector from './elementSelector'
 export default class BaseView {
   constructor(service, name, key) {
     this.onPageLoad(service, name, key);

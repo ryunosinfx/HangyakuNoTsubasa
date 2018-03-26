@@ -2,7 +2,7 @@ import {
   patch,
   h
 } from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
-import BaseView from './baseView'
+import BaseView from '../../fw/view/baseView'
 import Header from './header'
 import Footer from './footer'
 import Menue from './menu'

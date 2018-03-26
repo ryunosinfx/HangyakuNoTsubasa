@@ -1,6 +1,5 @@
 import Router from '../util/router'
 import Layout from '../view/parts/layout'
-import State from './state'
 import Store from '../store/store'
 
 export default class BaseServiceImpl {
@@ -21,18 +20,14 @@ export default class BaseServiceImpl {
   }
 
   async goToNext(key) {
-    let state = await this.getCurrentState();
     let page = this.router.getPage(state, key);
     page.show();
     return;
   }
   async goToAnotherPage(key, data) {
-    let state = await this.getCurrentState();
-    this.store.set('state',state);
+    this.store.set('state',this.state);
     let page = this.router.getPage(state, key);
     console.log('geToAnotherPage page:' + page.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
-    //  page.show(currentVnode, state, data);
-    // TODO add history recording
     this.layout.show(page, null, data);
     return;
   }

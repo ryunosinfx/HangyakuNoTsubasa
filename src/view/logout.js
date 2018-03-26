@@ -1,5 +1,5 @@
 import {patch, h} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
-import BaseView from './parts/baseView'
+import BaseView from '../fw/view/baseView'
 import css from './parts/css'
 export default class Logout extends BaseView {
   constructor(service) {

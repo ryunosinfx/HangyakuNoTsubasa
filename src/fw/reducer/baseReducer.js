@@ -4,7 +4,7 @@ export default class BaseReducer {
   static createAction(key ,data){
 
   }
-  dispatch(){
+  connect(){
 
   }
 }
