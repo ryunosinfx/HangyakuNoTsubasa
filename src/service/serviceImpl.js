@@ -39,7 +39,7 @@ export default class ServiceImpl extends BaseService{
     this.router.add(new Register(this), (state) => {
       return state.isLogiedIn === false
     });
-    this.layout.setMenuList(router.getMenuList());
+    this.layout.setMenuList(this.router.getMenuList());
   }
   start() {
     let search = location.search;

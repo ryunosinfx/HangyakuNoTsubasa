@@ -2,8 +2,8 @@ export default class Store {
   constructor(service) {
     this.service = service;
   }
-  static create(service){
-    return new Store(service);
+  update(service){
+    this.service = service;
   }
   commit(key){
     this.service.onCommit(key);
