@@ -4,8 +4,10 @@ import {
 } from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 
 import ElementSelector from './elementSelector'
+import ActionDispatcher from '../action/actionDispatcher'
 export default class BaseView {
   constructor(service, name, key) {
+    this.dispatcher = ActionDispatcher.create(this);
     this.onPageLoad(service, name, key);
     this.name = name;
     this.key = key;
