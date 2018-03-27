@@ -1,10 +1,15 @@
+import ActionListener from '../action/actionListener'
 export default class BaseReducer {
   constructor() {
+    thsi.actionLitener = ActionListener.getActionListener();
   }
-  static createAction(key ,data){
-
+  atatch(action) {
+    thsi.actionLitener.add(action,this);
   }
-  connect(){
-
+  detach(action) {
+    thsi.actionLitener.delete(action,this);
+  }
+  call(action) {
+    
   }
 }

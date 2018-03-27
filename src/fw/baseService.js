@@ -1,6 +1,6 @@
 import Router from '../util/router'
 import Layout from '../view/parts/layout'
-import Store from '../store/store'
+import Store from './store/store'
 
 export default class BaseServiceImpl {
   constructor(state) {
