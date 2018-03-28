@@ -32,7 +32,7 @@ export default class ActionDispatcherImple {
     if (actionMap.has(type)) {
       const reducers = actionMap.get(type);
       if (!reducers.includes(reducer)) {
-        const index= reducers.indexof(reducer);
+        const index = reducers.indexof(reducer);
         reducers.splice(index, 1)
       } else {
         return false;
@@ -41,18 +41,23 @@ export default class ActionDispatcherImple {
     return true;
   }
 
-  call(action) {
+  async dispatch(action) {
     const type = action.type;
-    
+
     if (!type) {
       return false;
     }
+    const storeKey = action.storeKey;
+    let store = Store.getStore(storeKey);
     if (actionMap.has(type)) {
       const reducers = actionMap.get(type);
-      for (let handler of reducers) {
-        reducers(action);
+      for (let reducer of reducers) {
+        store = await reducer.reduce(store, action);
       }
+      Store.setStore(store);
     }
+    store = Store.getStore(storeKey);
+    this.page.update(store);
     return true;
   }
 }
