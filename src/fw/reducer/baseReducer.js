@@ -9,7 +9,7 @@ export default class BaseReducer {
   detach(action) {
     thsi.actionLitener.delete(action,this);
   }
-  call(action) {
-    
+  call(store,action) {
+    return store;
   }
 }

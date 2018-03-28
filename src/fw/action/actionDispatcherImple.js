@@ -1,3 +1,5 @@
+import Store from '../store/store';
+
 const actionMap = new Map();
 export default class ActionDispatcherImple {
   constructor(page) {
@@ -21,6 +23,7 @@ export default class ActionDispatcherImple {
     }
     return true;
   }
+
   static remove(action) {
     const type = action.type;
     if (!type) {
@@ -37,8 +40,10 @@ export default class ActionDispatcherImple {
     }
     return true;
   }
+
   call(action) {
     const type = action.type;
+    
     if (!type) {
       return false;
     }

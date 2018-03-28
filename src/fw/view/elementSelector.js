@@ -1,5 +1,5 @@
 import {patch, h} from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
-import ObjectUtil from '../objectUtil'
+import ObjectUtil from '../util/objectUtil'
 export default class ElementSelector {
   constructor() {
     this.selectorMap = new Map();
