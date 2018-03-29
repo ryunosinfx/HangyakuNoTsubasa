@@ -5,6 +5,7 @@ import {
 
 import ElementSelector from './elementSelector'
 import ActionDispatcher from '../action/actionDispatcher'
+import ViewBaseActions from '../action/viewBaseActions'
 export default class BaseView {
   constructor(service, name, key) {
     this.dispatcher = ActionDispatcher.create(this);
@@ -25,7 +26,7 @@ export default class BaseView {
   isAccessable(state){
     return true;
   }
-  update(store) {
+  update(store,oldVnode) {
     const viewState = this.viewState;
     const oldVnode = this.currentVnode;
     this.onPageShow(viewState, store);
@@ -48,27 +49,28 @@ export default class BaseView {
     return this.currentVnode;
   }
 
-  show(oldNode, data) {
-    this.onPrePageBuild(oldNode, data);
+  show(oldNode, store) {
+    const viewState = this.viewState;
+    this.onPrePageBuild(oldNode, store);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
     this.currentVnode = !this.currentVnode ? this.rendarer(store) : this.currentVnode;
-    this.onPageShow(viewState, data);
+    this.onPageShow(viewState, store);
     console.log("show oldNode:" + oldNode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + this.currentVnode);
     if (oldNode) {
       this.patchFromOtherVnode(oldNode, this.currentVnode);
     } else {
       this.patchFromOtherVnode(this.currentVnode, this.currentVnode);
     }
-    this.onPageShown(viewState, data);
+    this.onPageShown(viewState,store);
   }
   //
-  goAnotherPage(nextPage, data, nextViewStateImput) {
+  goAnotherPage(nextPage, data) {
     if (this.onPageHide(nextPage, data) === false) {
       return;
     };
     //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
     console.log('A02 baseView.goAnotherPage from ' + this.getName() + ' to nextPage;' + nextPage.getName());
-    nextPage.show(this.currentVnode, nextViewStateImput, data);
+    nextPage.show(this.currentVnode, data);
     this.onPageHidden(nextPage, data)
   }
   // Event listener
