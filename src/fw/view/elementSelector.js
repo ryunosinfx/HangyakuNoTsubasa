@@ -16,10 +16,15 @@ export default class ElementSelector {
   }
   patch(vnode, selector, newNode) {
     console.log('patch00 START of Patch newNode:' + newNode);
-    if (!newNode) {
+    if (!newNode ) {
       this.isValidNode(vnode, "vnode");
       const re = patch(vnode, selector);
       return selector;
+    }
+    if (!selector ) {
+      this.isValidNode(vnode, "vnode");
+      const re = patch(vnode, newNode);
+      return newNode;
     }
     const cloneNode = this.prePatch(vnode, selector, newNode);
     const re = patch(vnode, cloneNode);

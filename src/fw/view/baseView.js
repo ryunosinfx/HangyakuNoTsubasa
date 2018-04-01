@@ -49,7 +49,7 @@ export default class BaseView {
     return this.currentVnode;
   }
 
-  show(oldNode, store) {
+  show(oldNode, selector,store) {
     const viewState = this.viewState;
     this.onPrePageBuild(oldNode, store);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
@@ -57,7 +57,7 @@ export default class BaseView {
     this.onPageShow(viewState, store);
     console.log("show oldNode:" + oldNode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + this.currentVnode);
     if (oldNode) {
-      this.patchFromOtherVnode(oldNode, this.currentVnode);
+      this.patchFromOtherVnode(oldNode, selector, this.currentVnode);
     } else {
       this.patchFromOtherVnode(this.currentVnode, this.currentVnode);
     }
