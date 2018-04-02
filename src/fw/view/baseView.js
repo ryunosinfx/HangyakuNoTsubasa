@@ -19,18 +19,34 @@ export default class BaseView {
     this.service = service;
     this.router = this.service.getRouter();
     this.viewState = null;
-    this.currentVnode = null;//this.rendarer(this.viewState, null);
+    this.currentVnode = null; //this.rendarer(this.viewState, null);
     //console.log('name=' + name + '/key:' + key);
     this.onPageLoaded(service, name, key);
   }
-  isAccessable(state){
+  isAccessable(state) {
     return true;
   }
-  update(store,oldVnode) {
+  update(store) {
     const viewState = this.viewState;
-    const oldVnode = this.currentVnode;
+    const oldVnode = store.oldVnode;
+    const selector = store.selector;
+    const isOrverride = store.isOrverride;
+    const currentVnode = oldVnode ? oldVnode : this.currentVnode;
+    if (isOrverride) {
+      this.onPrePageBuild(oldNode, store);
+      console.log('A01 baseView.goAnotherPage page;' + this.getName());
+      this.currentVnode = !this.currentVnode ? this.rendarer(store) : this.currentVnode;
+    }
     this.onPageShow(viewState, store);
-    this.patch(oldVnodet, this.currentVnode);
+    if (isOrverride) {
+      if (oldVnode) {
+        this.patchFromOtherVnode(oldVnode, selector, this.currentVnode);
+      } else {
+        this.patchFromOtherVnode(this.currentVnode, this.currentVnode);
+      }
+    } else {
+      this.patch(currentVnode, this.currentVnode);
+    }
     this.onPageShown(viewState, store);
     this.viewState = viewState;
   }
@@ -39,17 +55,17 @@ export default class BaseView {
   }
   patchFromOtherVnode(currentVnode, selector, newVnode) {
     const result = this.es.patch(currentVnode, selector, newVnode);
-    result.data['name']= this.name+Date.now();
+    result.data['name'] = this.name + Date.now();
     this.currentVnode = result;
     return result;
   }
-  prePatch(selector, newVnode){
-    this.currentVnode.data['name']= this.name+Date.now();
+  prePatch(selector, newVnode) {
+    this.currentVnode.data['name'] = this.name + Date.now();
     this.currentVnode = this.es.prePatch(this.currentVnode, selector, newVnode);
     return this.currentVnode;
   }
 
-  show(oldNode, selector,store) {
+  show(oldNode, selector, store) {
     const viewState = this.viewState;
     this.onPrePageBuild(oldNode, store);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
@@ -61,7 +77,7 @@ export default class BaseView {
     } else {
       this.patchFromOtherVnode(this.currentVnode, this.currentVnode);
     }
-    this.onPageShown(viewState,store);
+    this.onPageShown(viewState, store);
   }
   //
   goAnotherPage(nextPage, data) {
@@ -85,19 +101,19 @@ export default class BaseView {
     console.log('m003a baseView.onPrePageBuild oldNode:' + oldNode + '/data:' + data);
   }
   onPageShow(viewState, store) {
-    console.log('m003 baseView.onPageShow newNode:'  + '/store:' + store);
+    console.log('m003 baseView.onPageShow newNode:' + '/store:' + store);
   }
   onPageShown(viewState, store) {
     console.log('m004 baseView.onPageShown newNode:' + '/store:' + store);
-      //console.log(JSON.stringify(this.currentVnode));
+    //console.log(JSON.stringify(this.currentVnode));
   }
   onPageHide(nextPage, data) {
-    console.log('m005 baseView.onPageHide nextPage:' + nextPage+ '/data:' + data);
-      //console.log(JSON.stringify(this.currentVnode));
+    console.log('m005 baseView.onPageHide nextPage:' + nextPage + '/data:' + data);
+    //console.log(JSON.stringify(this.currentVnode));
     return true;
   }
   onPageHidden(nextPage, data) {
-    console.log('m006 baseView.onPageHidden nextPage:' + nextPage+ '/data:' + data);
+    console.log('m006 baseView.onPageHidden nextPage:' + nextPage + '/data:' + data);
   }
   rendarer(viewStatev, data) {
     let newVnode = h('div', {
