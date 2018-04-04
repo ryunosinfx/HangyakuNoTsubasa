@@ -52,7 +52,9 @@ export default class ActionDispatcherImple {
     if (actionMap.has(type)) {
       const reducers = actionMap.get(type);
       for (let reducer of reducers) {
+        store = await reducer.preReduce(store, action);
         store = await reducer.reduce(store, action);
+        store = await reducer.postReduce(store, action);
       }
       Store.setStore(store);
     }
