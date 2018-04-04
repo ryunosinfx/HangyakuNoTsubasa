@@ -3,9 +3,15 @@ export default class VsiewBaseActions {
   constructor() {
   }
   static getGotoAnotherPageAction(page){
-    return ActionCreator.cretate('GotoAnotherPage',{page;page})
+    if(!page){
+      alert('getGotoAnotherPageAction page:'+page);
+    }
+    return ActionCreator.cretate('GotoAnotherPage',{page:page});
   }
-  static getShowPageAction(){
-    return ActionCreator.cretate('ShowPage',{})
+  static getShowPageAction(oldVnode){
+    if(!page){
+      alert('getShowPageAction oldVnode:'+oldVnode);
+    }
+    return ActionCreator.cretate('ShowPage',{oldVnode:oldVnode})
   }
 }
