@@ -6,6 +6,7 @@ import {
 import ElementSelector from './elementSelector'
 import ActionDispatcher from '../action/actionDispatcher'
 import ViewBaseActions from '../action/viewBaseActions'
+import ActionCreator from '../util/actionCreator'
 export default class BaseView {
   constructor(service, name, key) {
     this.dispatcher = ActionDispatcher.create(this);
@@ -66,6 +67,8 @@ export default class BaseView {
   }
 
   show(oldNode, selector, store) {
+    //TODO dispatchaction
+ActionCreator.createGoOstherViewAction(key, page, oldVnode, selector, sdata);
     const viewState = this.viewState;
     this.onPrePageBuild(oldNode, store);
     console.log('A01 baseView.goAnotherPage page;' + this.getName());
@@ -81,6 +84,7 @@ export default class BaseView {
   }
   //
   goAnotherPage(nextPage, data) {
+    // TODO dispatchaction
     if (this.onPageHide(nextPage, data) === false) {
       return;
     };

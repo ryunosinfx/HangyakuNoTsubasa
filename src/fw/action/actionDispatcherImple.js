@@ -49,6 +49,7 @@ export default class ActionDispatcherImple {
     }
     const storeKey = action.storeKey;
     let store = Store.getStore(storeKey);
+    let targetPage = this.page;
     if (actionMap.has(type)) {
       const reducers = actionMap.get(type);
       for (let reducer of reducers) {
@@ -58,8 +59,18 @@ export default class ActionDispatcherImple {
       }
       Store.setStore(store);
     }
+    if (store.isOrverride) {
+      targetPage = action.data.page;
+      if (this.page.onPageHide(nextPage, data) === false) {
+        return;
+      };
+      targetPage.update(store);
+      this.page.onPageHidden(targetPage, data);
+    } else {
+      targetPage.update(store);
+    }
     store = Store.getStore(storeKey);
-    this.page.update(store);
+
     return true;
   }
 }
