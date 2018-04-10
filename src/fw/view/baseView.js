@@ -5,6 +5,7 @@ import {
 
 import ElementSelector from './elementSelector'
 import ActionDispatcher from '../action/actionDispatcher'
+import ViewBaseReducer from '../reducer/viewBaseReducer'
 import ViewBaseActions from '../action/viewBaseActions'
 import ActionCreator from '../util/actionCreator'
 export default class BaseView {
@@ -66,21 +67,22 @@ export default class BaseView {
     return this.currentVnode;
   }
 
-  show(oldNode, selector, store) {
+  show(oldVnode, selector, store) {
     //TODO dispatchaction
-ActionCreator.createGoOstherViewAction(key, page, oldVnode, selector, sdata);
-    const viewState = this.viewState;
-    this.onPrePageBuild(oldNode, store);
-    console.log('A01 baseView.goAnotherPage page;' + this.getName());
-    this.currentVnode = !this.currentVnode ? this.rendarer(store) : this.currentVnode;
-    this.onPageShow(viewState, store);
-    console.log("show oldNode:" + oldNode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + this.currentVnode);
-    if (oldNode) {
-      this.patchFromOtherVnode(oldNode, selector, this.currentVnode);
-    } else {
-      this.patchFromOtherVnode(this.currentVnode, this.currentVnode);
-    }
-    this.onPageShown(viewState, store);
+    let action = ViewBaseActions.getShowPageAction(oldVnode, selector, store);
+    this.dispatcher.dispatch(action);
+    // const viewState = this.viewState;
+    // this.onPrePageBuild(oldVnode, store);
+    // console.log('A01 baseView.goAnotherPage page;' + this.getName());
+    // this.currentVnode = !this.currentVnode ? this.rendarer(store) : this.currentVnode;
+    // this.onPageShow(viewState, store);
+    // console.log("show oldVnode:" + oldVnode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + this.currentVnode);
+    // if (oldVnode) {
+    //   this.patchFromOtherVnode(oldVnode, selector, this.currentVnode);
+    // } else {
+    //   this.patchFromOtherVnode(this.currentVnode, this.currentVnode);
+    // }
+    // this.onPageShown(viewState, store);
   }
   //
   goAnotherPage(nextPage, data) {

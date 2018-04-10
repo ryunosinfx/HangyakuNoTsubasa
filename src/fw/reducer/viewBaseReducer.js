@@ -14,6 +14,8 @@ export default class ViewBaseReducer extends BaseReducer {
       store.oldVnode=action.data.oldVnode;
       tore.selector=action.data.selector;
     }
+    alert('aaaaaa');
     return store;
   }
 }
+const ViewBaseReducer = new ViewBaseReducer();

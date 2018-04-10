@@ -1,17 +1,17 @@
 import ActionCreator from '../util/actionCreator'
-export default class VsiewBaseActions {
+export default class ViewBaseActions {
   constructor() {
   }
-  static getGotoAnotherPageAction(page){
+  static getGotoAnotherPageAction(page, selector, data){
     if(!page){
       alert('getGotoAnotherPageAction page:'+page);
     }
-    return ActionCreator.cretate('GotoAnotherPage',{page:page});
+    return ActionCreator.createGoOtherViewAction('GotoAnotherPage',page,null, selector, data);
   }
-  static getShowPageAction(oldVnode){
-    if(!page){
+  static getShowPageAction(oldVnode, selector, data){
+    if(!oldVnode){
       alert('getShowPageAction oldVnode:'+oldVnode);
     }
-    return ActionCreator.cretate('ShowPage',{oldVnode:oldVnode})
+    return ActionCreator.createShowViewAction('ShowPage',oldVnode, selector, data);
   }
 }

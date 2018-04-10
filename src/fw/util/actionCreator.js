@@ -1,16 +1,16 @@
 export default class ActionCreator {
   constructor() {}
   static createAction(key, data, storeKey = null) {
-    return new {
+    return  {
       tyep: key,
       data: data,
       storeKey: storeKey
     };
   }
   static createShowViewAction(key, oldVnode, data, storeKey = null) {
-    return ActionCreator.createGoOstherViewAction(key, null, oldVnode, null, data, storeKey);
+    return ActionCreator.createGoOtherViewAction(key, null, oldVnode, null, data, storeKey);
   }
-  static createGoOstherViewAction(key, page, oldVnode, selector, data, storeKey = null) {
+  static createGoOtherViewAction(key, page, oldVnode, selector, data, storeKey = null) {
     let addData = data;
     if (!page && !oldVnode) {
       alert('createOGotherViewAction is null!');
@@ -22,7 +22,7 @@ export default class ActionCreator {
     addData.page = page;
     addData.oldVnode = oldVnode;
     addData.selector = selector;
-    return new {
+    return  {
       tyep: key,
       data: addData,
       storeKey: storeKey
