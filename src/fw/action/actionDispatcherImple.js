@@ -7,6 +7,9 @@ export default class ActionDispatcherImple {
   }
 
   static add(action, reducer) {
+  if (!action) {
+    return false;
+  }
     const type = action.type;
     if (!type) {
       return false;

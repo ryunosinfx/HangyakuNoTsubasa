@@ -69,6 +69,8 @@ export default class BaseView {
 
   show(oldVnode, selector, store) {
     //TODO dispatchaction
+    console.log('show oldVnode');
+    console.log(oldVnode);
     let action = ViewBaseActions.getShowPageAction(oldVnode, selector, store);
     this.dispatcher.dispatch(action);
     // const viewState = this.viewState;

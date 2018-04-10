@@ -3,9 +3,12 @@ import ActionCreator from '../util/actionCreator'
 import BaseReducer from './baseReducer'
 export default class ViewBaseReducer extends BaseReducer {
   constructor() {
-    this.add(ViewBaseActions.getGotoAnotherPageAction());
+    super();
+    this.atatch(ViewBaseActions.getGotoAnotherPageAction());
+    this.atatch(ViewBaseActions.getShowPageAction());
   }
   async reduce(store,action) {
+    alert('reduce!');
     if(ActionCreator.isEquals(ViewBaseActions.getGotoAnotherPageAction(),action)){
 
     }else if(ActionCreator.isEquals(ViewBaseActions.getShowPageAction(),action)){
@@ -18,4 +21,4 @@ export default class ViewBaseReducer extends BaseReducer {
     return store;
   }
 }
-const ViewBaseReducer = new ViewBaseReducer();
+const viewBaseReducer = new ViewBaseReducer();
