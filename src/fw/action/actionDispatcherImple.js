@@ -47,12 +47,14 @@ export default class ActionDispatcherImple {
   async dispatch(action) {
     const type = action.type;
 
+    console.log('dispatch00 type='+type+'/action='+JSON.stringify(action));
     if (!type) {
       return false;
     }
     const storeKey = action.storeKey;
     let store = Store.getStore(storeKey);
     let targetPage = this.page;
+    console.log('dispatch01');
     if (actionMap.has(type)) {
       const reducers = actionMap.get(type);
       for (let reducer of reducers) {

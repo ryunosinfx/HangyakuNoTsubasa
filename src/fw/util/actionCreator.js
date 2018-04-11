@@ -2,7 +2,7 @@ export default class ActionCreator {
   constructor() {}
   static createAction(key, data, storeKey = null) {
     return  {
-      tyep: key,
+      type: key,
       data: data,
       storeKey: storeKey
     };
@@ -23,7 +23,7 @@ export default class ActionCreator {
     addData.oldVnode = oldVnode;
     addData.selector = selector;
     return  {
-      tyep: key,
+      type: key,
       data: addData,
       storeKey: storeKey
     };

@@ -34,6 +34,8 @@ export default class BaseView {
     const selector = store.selector;
     const isOrverride = store.isOrverride;
     const currentVnode = oldVnode ? oldVnode : this.currentVnode;
+
+    console.log(oldVnode+'/isOrverride='+isOrverride+'/selector='+selector);
     if (isOrverride) {
       this.onPrePageBuild(oldVnode, store);
       console.log('A01 baseView.goAnotherPage page;' + this.getName());
@@ -72,6 +74,7 @@ export default class BaseView {
     console.log('show oldVnode');
     console.log(oldVnode);
     let action = ViewBaseActions.getShowPageAction(oldVnode, selector, store);
+    console.log(action);
     this.dispatcher.dispatch(action);
     // const viewState = this.viewState;
     // this.onPrePageBuild(oldVnode, store);
