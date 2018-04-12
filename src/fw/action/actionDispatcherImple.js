@@ -7,9 +7,12 @@ export default class ActionDispatcherImple {
   }
 
   static add(action, reducer) {
+    console.log('ActionDispatcherImple add00'+action);
   if (!action) {
     return false;
   }
+
+  console.log('ActionDispatcherImple add01'+action.type);
     const type = action.type;
     if (!type) {
       return false;
@@ -64,6 +67,7 @@ export default class ActionDispatcherImple {
       }
       Store.setStore(store);
     }
+    console.log('dispatch02');
     if (store.isOrverride) {
       targetPage = action.data.page;
       if (this.page.onPageHide(nextPage, data) === false) {

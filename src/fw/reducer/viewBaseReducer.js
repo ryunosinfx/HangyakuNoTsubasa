@@ -4,8 +4,11 @@ import BaseReducer from './baseReducer'
 export default class ViewBaseReducer extends BaseReducer {
   constructor() {
     super();
+    console.log('ViewBaseReducer 01');
     this.atatch(ViewBaseActions.getGotoAnotherPageAction());
+    console.log('ViewBaseReducer 02');
     this.atatch(ViewBaseActions.getShowPageAction());
+    console.log('ViewBaseReducer 03');
   }
   async reduce(store,action) {
     alert('reduce!');
