@@ -46,7 +46,7 @@ export default class Register extends BaseView {
     ]);
     return newVnode;
   }
-  onPageShow(viewState, data) {
+  onViewShow(viewState, data) {
     const state = this.getCurrentState();
     //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
     if (state && state.isActivated) {
@@ -80,7 +80,7 @@ export default class Register extends BaseView {
     console.log("registerSignUp isNotActivated:" + isNotActivated);
     if (isNotActivated) {
       this.showResult();
-      this.goToAnotherPage('Activate', {isNotActivated: isNotActivated});
+      this.goToAnotherView('Activate', {isNotActivated: isNotActivated});
     }
   }
   showResult() {

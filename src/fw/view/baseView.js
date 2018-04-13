@@ -11,7 +11,7 @@ import ActionCreator from '../util/actionCreator'
 export default class BaseView {
   constructor(service, name, key) {
     this.dispatcher = ActionDispatcher.create(this);
-    this.onPageLoad(service, name, key);
+    this.onViewLoad(service, name, key);
     this.name = name;
     this.key = key;
     this.es = new ElementSelector();
@@ -23,7 +23,7 @@ export default class BaseView {
     this.viewState = null;
     this.currentVnode = null; //this.rendarer(this.viewState, null);
     //console.log('name=' + name + '/key:' + key);
-    this.onPageLoaded(service, name, key);
+    this.onViewLoaded(service, name, key);
   }
   isAccessable(state) {
     return true;
@@ -37,11 +37,11 @@ export default class BaseView {
 
     console.log('A00 oldVnode:'+oldVnode+'/isOrverride='+isOrverride+'/selector='+selector+'/currentVnode:'+currentVnode);
     if (isOrverride) {
-      this.onPrePageBuild(oldVnode, store);
-      console.log('A01 baseView.goAnotherPage page;' + this.getName());
+      this.onPreViewBuild(oldVnode, store);
+      console.log('A01 baseView.goAnotherView view;' + this.getName());
       this.currentVnode = !this.currentVnode ? this.rendarer(store) : this.currentVnode;
     }
-    this.onPageShow(viewState, store);
+    this.onViewShow(viewState, store);
     if (isOrverride) {
       if (oldVnode) {
         this.patchFromOtherVnode(oldVnode, selector, this.currentVnode);
@@ -51,7 +51,7 @@ export default class BaseView {
     } else {
       this.patch(currentVnode, this.currentVnode);
     }
-    this.onPageShown(viewState, store);
+    this.onViewShown(viewState, store);
     this.viewState = viewState;
   }
   patch(selector, newVnode) {
@@ -73,58 +73,58 @@ export default class BaseView {
     //TODO dispatchaction
     console.log('show oldVnode');
     console.log(oldVnode);
-    let action = ViewBaseActions.getShowPageAction(oldVnode, selector, store);
+    let action = ViewBaseActions.getShowViewAction(oldVnode, selector, store);
     console.log(action);
     this.dispatcher.dispatch(action);
     // const viewState = this.viewState;
-    // this.onPrePageBuild(oldVnode, store);
-    // console.log('A01 baseView.goAnotherPage page;' + this.getName());
+    // this.onPreViewBuild(oldVnode, store);
+    // console.log('A01 baseView.goAnotherView view;' + this.getName());
     // this.currentVnode = !this.currentVnode ? this.rendarer(store) : this.currentVnode;
-    // this.onPageShow(viewState, store);
+    // this.onViewShow(viewState, store);
     // console.log("show oldVnode:" + oldVnode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + this.currentVnode);
     // if (oldVnode) {
     //   this.patchFromOtherVnode(oldVnode, selector, this.currentVnode);
     // } else {
     //   this.patchFromOtherVnode(this.currentVnode, this.currentVnode);
     // }
-    // this.onPageShown(viewState, store);
+    // this.onViewShown(viewState, store);
   }
   //
-  goAnotherPage(nextPage, data) {
+  goAnotherView(nextView, data) {
     // TODO dispatchaction
-    if (this.onPageHide(nextPage, data) === false) {
+    if (this.onViewHide(nextView, data) === false) {
       return;
     };
-    //console.log('A00 baseView.goAnotherPage page;' + page.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
-    console.log('A02 baseView.goAnotherPage from ' + this.getName() + ' to nextPage;' + nextPage.getName());
-    nextPage.show(this.currentVnode, data);
-    this.onPageHidden(nextPage, data)
+    //console.log('A00 baseView.goAnotherView view;' + view.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
+    console.log('A02 baseView.goAnotherView from ' + this.getName() + ' to nextView;' + nextView.getName());
+    nextView.show(this.currentVnode, data);
+    this.onViewHidden(nextView, data)
   }
   // Event listener
-  onPageLoad(service, name, key) {
-    console.log('m001 baseView.onPageLoad service:' + service + '/name:' + name + '/key:' + key);
+  onViewLoad(service, name, key) {
+    console.log('m001 baseView.onViewLoad service:' + service + '/name:' + name + '/key:' + key);
   }
-  onPageLoaded(service, name, key) {
-    console.log('m002 baseView.onPageLoaded service:' + service + '/name:' + name + '/key:' + key);
+  onViewLoaded(service, name, key) {
+    console.log('m002 baseView.onViewLoaded service:' + service + '/name:' + name + '/key:' + key);
 
   }
-  onPrePageBuild(oldNode, data) {
-    console.log('m003a baseView.onPrePageBuild oldNode:' + oldNode + '/data:' + data);
+  onPreViewBuild(oldNode, data) {
+    console.log('m003a baseView.onPreViewBuild oldNode:' + oldNode + '/data:' + data);
   }
-  onPageShow(viewState, store) {
-    console.log('m003 baseView.onPageShow newNode:' + '/store:' + store);
+  onViewShow(viewState, store) {
+    console.log('m003 baseView.onViewShow newNode:' + '/store:' + store);
   }
-  onPageShown(viewState, store) {
-    console.log('m004 baseView.onPageShown newNode:' + '/store:' + store);
+  onViewShown(viewState, store) {
+    console.log('m004 baseView.onViewShown newNode:' + '/store:' + store);
     //console.log(JSON.stringify(this.currentVnode));
   }
-  onPageHide(nextPage, data) {
-    console.log('m005 baseView.onPageHide nextPage:' + nextPage + '/data:' + data);
+  onViewHide(nextView, data) {
+    console.log('m005 baseView.onViewHide nextView:' + nextView + '/data:' + data);
     //console.log(JSON.stringify(this.currentVnode));
     return true;
   }
-  onPageHidden(nextPage, data) {
-    console.log('m006 baseView.onPageHidden nextPage:' + nextPage + '/data:' + data);
+  onViewHidden(nextView, data) {
+    console.log('m006 baseView.onViewHidden nextView:' + nextView + '/data:' + data);
   }
   rendarer(viewStatev, data) {
     let newVnode = h('div', {
@@ -151,12 +151,12 @@ export default class BaseView {
     console.log('href=' + href);
     return href;
   }
-  async goToAnotherPage(key, data) {
-    console.log('A03 baseView.goToAnotherPage key;' + key);
-    return await this.service.goToAnotherPage(key, data);
+  async goToAnotherView(key, data) {
+    console.log('A03 baseView.goToAnotherView key;' + key);
+    return await this.service.goToAnotherView(key, data);
   }
   async goBack(data) {
-    return await this.service.goToAnotherPage(key, data);
+    return await this.service.goToAnotherView(key, data);
   }
   getCurrentState() {
     return this.service.store.get('state');

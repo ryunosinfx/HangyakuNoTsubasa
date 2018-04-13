@@ -9,11 +9,11 @@ export default class Menue extends BaseView {
     super(service);
     this.layoutView = layoutView;
     this.currentVnode = null;
-    this.menuPageList = [];
+    this.menuViewList = [];
     this.layout = [];
   }
   init(data) {
-    this.menuPageList = data;
+    this.menuViewList = data;
   }
   rendarer(viewState) {
     let newVnode = h('div', {
@@ -26,13 +26,13 @@ export default class Menue extends BaseView {
     ]);
     return newVnode;
   }
-  onPageShow(viewState, data) {
+  onViewShow(viewState, data) {
     const state = this.getCurrentState();
     this.prePatch("#menueList", this.createMenuLink(state));
   }
   createMenuLink(state) {
     let liNides = [];
-    for (let value of this.menuPageList) {
+    for (let value of this.menuViewList) {
       let menuItem = this.createMenuItem(value,state);
       if (menuItem) {
         liNides.push(menuItem);
@@ -40,9 +40,9 @@ export default class Menue extends BaseView {
     }
     return h('ul#menueList', liNides);
   }
-  createMenuItem(page,state) {
-    console.log('------------------createMenuItem:'+state+'/page.isAccessable(state):'+page.isAccessable(state)+'/name:'+page.getName());
-    if(!!page.isAccessable(state) === false){
+  createMenuItem(view,state) {
+    console.log('------------------createMenuItem:'+state+'/view.isAccessable(state):'+view.isAccessable(state)+'/name:'+view.getName());
+    if(!!view.isAccessable(state) === false){
       return null;
     }
     let self = this;
@@ -50,8 +50,8 @@ export default class Menue extends BaseView {
       style: css.menu.item
     }, h('a', {
       on: {
-        click: self.router.getGoNextEventhandler(page)
+        click: self.router.getGoNextEventhandler(view)
       }
-    }, page.getName()));
+    }, view.getName()));
   }
 }

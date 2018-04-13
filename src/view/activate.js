@@ -52,7 +52,7 @@ export default class Activate extends BaseView {
 
     return newVnode;
   }
-  onPageShow(viewState, data){
+  onViewShow(viewState, data){
     const state = this.getCurrentState();
   //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
     if(state && state.isActivated){
@@ -86,7 +86,7 @@ export default class Activate extends BaseView {
     console.log("Activate! isNotActivated:" + isNotActivated);
     if (isNotActivated) {
       this.showResult();
-      this.goToAnotherPage('Login', {
+      this.goToAnotherView('Login', {
         isNotActivated: isNotActivated
       });
     }

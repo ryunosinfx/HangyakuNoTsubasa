@@ -79,18 +79,18 @@ export default class ServiceImpl extends BaseService{
 
   async goToNext(key) {
     let state = await this.getCurrentState();
-    let page = this.router.getPage(state, key);
-    page.show();
+    let view = this.router.getView(state, key);
+    view.show();
     return;
   }
-  async goToAnotherPage(key, data) {
+  async goToAnotherView(key, data) {
     let state = await this.getCurrentState();
     this.store.set('state',state);
-    let page = this.router.getPage(state, key);
-    console.log('geToAnotherPage page:' + page.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
-    //  page.show(currentVnode, state, data);
+    let view = this.router.getView(state, key);
+    console.log('geToAnotherView view:' + view.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
+    //  view.show(currentVnode, state, data);
     // TODO add history recording
-    this.layout.show(page, null, data);
+    this.layout.show(view, null, data);
     return;
   }
   async loadState() {

@@ -1,18 +1,18 @@
 import constants from './constants'
 
-const pageList = [];
-const pageKeyMap = {};
+const viewList = [];
+const viewKeyMap = {};
 export default class Router {
   constructor(layoutView) {
     this.layoutView = layoutView;
   }
-  add(page, filter) {
-    let key = page.getKey();
-    pageKeyMap[key] = {
-      page: page,
+  add(view, filter) {
+    let key = view.getKey();
+    viewKeyMap[key] = {
+      view: view,
       filter: filter
     };
-    pageList.push(key);
+    viewList.push(key);
   }
   init(state) {
     let search = (location.search + "").relpace(/\?/, '');
@@ -20,41 +20,41 @@ export default class Router {
   }
   filter(state, search) {
     // TODO state ni izon
-    let targetRoute = pageKeyMap[search];
+    let targetRoute = viewKeyMap[search];
     if (targetRoute) {
       if (targetRoute && targetRoute.filter && targetRoute.filter(state)) {
-        return targetRoute.page;
+        return targetRoute.view;
       }
     }
-    let defaultRouteKey = pageList[0];
-    let defaultRoute = pageKeyMap[defaultRouteKey];
+    let defaultRouteKey = viewList[0];
+    let defaultRoute = viewKeyMap[defaultRouteKey];
     if (defaultRoute && defaultRoute.filter && defaultRoute.filter(state)) {
-      return defaultRoute.page;
+      return defaultRoute.view;
     }
-    for (let key of pageList) {
-      let route = pageKeyMap[key];
+    for (let key of viewList) {
+      let route = viewKeyMap[key];
       if (route && route.filter && route.filter(state)) {
-        //return route.page;
+        //return route.view;
       }
     }
-    return defaultRoute.page;
+    return defaultRoute.view;
   }
-  getPage(state, key) {
+  getView(state, key) {
     return this.filter(state, key);
   }
   getMenuList() {
-    let menuPageList = [];
-    for (let key of pageList) {
-      let route = pageKeyMap[key];
-      menuPageList.push(route.page);
+    let menuViewList = [];
+    for (let key of viewList) {
+      let route = viewKeyMap[key];
+      menuViewList.push(route.view);
     }
-    return menuPageList;
+    return menuViewList;
   }
-  getGoNextEventhandler(page){
+  getGoNextEventhandler(view){
     let self = this;
     return (event) => {
-      console.log("I am getGoNextEventhandler! here we are!"+ event+'/'+page.getHref());
-      self.layoutView.show(page);
+      console.log("I am getGoNextEventhandler! here we are!"+ event+'/'+view.getHref());
+      self.layoutView.show(view);
       event.stopPropagation();
       return false;
     }

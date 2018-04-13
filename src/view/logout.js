@@ -14,10 +14,10 @@ export default class Logout extends BaseView {
     }, [h('h1', 'i am Logout!')]);
     return newVnode;
   }
-  onPageShown(viewState, data) {
+  onViewShown(viewState, data) {
     this.service.logout().then(
       ()=>{
-        this.goToAnotherPage('Login');
+        this.goToAnotherView('Login');
       }
     )
   }

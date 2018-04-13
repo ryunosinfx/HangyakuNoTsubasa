@@ -10,9 +10,9 @@ export default class ActionCreator {
   static createShowViewAction(key, oldVnode, data, storeKey = null) {
     return ActionCreator.createGoOtherViewAction(key, null, oldVnode, null, data, storeKey);
   }
-  static createGoOtherViewAction(key, page, oldVnode, selector, data, storeKey = null) {
+  static createGoOtherViewAction(key, view, oldVnode, selector, data, storeKey = null) {
     let addData = data;
-    if (!page && !oldVnode) {
+    if (!view && !oldVnode) {
       alert('createGoOtherViewAction is null!');
       return {
         type: key,
@@ -23,7 +23,7 @@ export default class ActionCreator {
     if (!data) {
       addData = {};
     }
-    addData.page = page;
+    addData.view = view;
     addData.oldVnode = oldVnode;
     addData.selector = selector;
     return  {
@@ -34,7 +34,7 @@ export default class ActionCreator {
   }
   static isEquals(a, b) {
     if (a && b && a.type === b.type) {
-      return ture;
+      return true;
     }
     return false;
   }

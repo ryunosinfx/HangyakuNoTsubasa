@@ -5,22 +5,22 @@ export default class ViewBaseReducer extends BaseReducer {
   constructor() {
     super();
     console.log('ViewBaseReducer 01');
-    this.atatch(ViewBaseActions.getGotoAnotherPageAction());
+    this.atatch(ViewBaseActions.getGotoAnotherViewAction());
     console.log('ViewBaseReducer 02');
-    this.atatch(ViewBaseActions.getShowPageAction());
+    this.atatch(ViewBaseActions.getShowViewAction());
     console.log('ViewBaseReducer 03');
   }
   async reduce(store,action) {
-    alert('reduce!');
-    if(ActionCreator.isEquals(ViewBaseActions.getGotoAnotherPageAction(),action)){
+    console.log('reduce!');
+    if(ActionCreator.isEquals(ViewBaseActions.getGotoAnotherViewAction(),action)){
 
-    }else if(ActionCreator.isEquals(ViewBaseActions.getShowPageAction(),action)){
+    }else if(ActionCreator.isEquals(ViewBaseActions.getShowViewAction(),action)){
       store.isOrverride=true;
 
       store.oldVnode=action.data.oldVnode;
-      tore.selector=action.data.selector;
+      store.selector=action.data.selector;
     }
-    alert('aaaaaa');
+    console.log('reduced...');
     return store;
   }
 }

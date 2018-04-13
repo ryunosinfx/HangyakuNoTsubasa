@@ -15,20 +15,20 @@ export default class BaseServiceImpl {
 
   }
 
-  registView(page){
-    router.add(page);
+  registView(view){
+    router.add(view);
   }
 
   async goToNext(key) {
-    let page = this.router.getPage(state, key);
-    page.show();
+    let view = this.router.getView(state, key);
+    view.show();
     return;
   }
-  async goToAnotherPage(key, data) {
+  async goToAnotherView(key, data) {
     this.store.set('state',this.state);
-    let page = this.router.getPage(state, key);
-    console.log('geToAnotherPage page:' + page.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
-    this.layout.show(page, null, data);
+    let view = this.router.getView(state, key);
+    console.log('geToAnotherView view:' + view.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
+    this.layout.show(view, null, data);
     return;
   }
   async loadState() {

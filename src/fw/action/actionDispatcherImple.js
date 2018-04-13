@@ -2,8 +2,8 @@ import Store from '../store/store';
 
 const actionMap = new Map();
 export default class ActionDispatcherImple {
-  constructor(page) {
-    this.page = page;
+  constructor(view) {
+    this.view = view;
   }
 
   static add(action, reducer) {
@@ -54,9 +54,10 @@ export default class ActionDispatcherImple {
     if (!type) {
       return false;
     }
+    const data = action.data;
     const storeKey = action.storeKey;
     let store = Store.getStore(storeKey);
-    let targetPage = this.page;
+    let targetView = this.view;
     console.log('dispatch01');
     if (actionMap.has(type)) {
       const reducers = actionMap.get(type);
@@ -69,14 +70,14 @@ export default class ActionDispatcherImple {
     }
     console.log('dispatch02');
     if (store.isOrverride) {
-      targetPage = action.data.page;
-      if (this.page.onPageHide(nextPage, data) === false) {
+      targetView = action.data.view;
+      if (this.view.onViewHide(targetView, data) === false) {
         return;
       };
-      targetPage.update(store);
-      this.page.onPageHidden(targetPage, data);
+      targetView.update(store);
+      this.view.onViewHidden(targetView, data);
     } else {
-      targetPage.update(store);
+      targetView.update(store);
     }
     store = Store.getStore(storeKey);
 
