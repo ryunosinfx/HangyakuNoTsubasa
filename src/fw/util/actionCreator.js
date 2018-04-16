@@ -13,7 +13,7 @@ export default class ActionCreator {
   static createGoOtherViewAction(key, view, oldVnode, selector, data, storeKey = null) {
     let addData = data;
     if (!view && !oldVnode) {
-      alert('createGoOtherViewAction is null!');
+      console.log('createGoOtherViewAction is null!');
       return {
         type: key,
         data: addData,

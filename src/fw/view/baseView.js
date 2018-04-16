@@ -28,6 +28,20 @@ export default class BaseView {
   isAccessable(state) {
     return true;
   }
+  patch(selector, newVnode) {
+    return this.patchFromOtherVnode(this.currentVnode, selector, newVnode);
+  }
+  patchFromOtherVnode(currentVnode, selector, newVnode) {
+    const result = this.es.patch(currentVnode, selector, newVnode);
+    result.data['name'] = this.name + Date.now();
+    this.currentVnode = result;
+    return result;
+  }
+  prePatch(selector, newVnode) {
+    this.currentVnode.data['name'] = this.name + Date.now();
+    this.currentVnode = this.es.prePatch(this.currentVnode, selector, newVnode);
+    return this.currentVnode;
+  }
   update(store) {
     const viewState = this.viewState;
     const oldVnode = store.oldVnode;
@@ -54,40 +68,12 @@ export default class BaseView {
     this.onViewShown(viewState, store);
     this.viewState = viewState;
   }
-  patch(selector, newVnode) {
-    return this.patchFromOtherVnode(this.currentVnode, selector, newVnode);
-  }
-  patchFromOtherVnode(currentVnode, selector, newVnode) {
-    const result = this.es.patch(currentVnode, selector, newVnode);
-    result.data['name'] = this.name + Date.now();
-    this.currentVnode = result;
-    return result;
-  }
-  prePatch(selector, newVnode) {
-    this.currentVnode.data['name'] = this.name + Date.now();
-    this.currentVnode = this.es.prePatch(this.currentVnode, selector, newVnode);
-    return this.currentVnode;
-  }
-
   show(oldVnode, selector, store) {
-    //TODO dispatchaction
     console.log('show oldVnode');
     console.log(oldVnode);
     let action = ViewBaseActions.getShowViewAction(oldVnode, selector, store);
     console.log(action);
     this.dispatcher.dispatch(action);
-    // const viewState = this.viewState;
-    // this.onPreViewBuild(oldVnode, store);
-    // console.log('A01 baseView.goAnotherView view;' + this.getName());
-    // this.currentVnode = !this.currentVnode ? this.rendarer(store) : this.currentVnode;
-    // this.onViewShow(viewState, store);
-    // console.log("show oldVnode:" + oldVnode + "/this.currentVnode:" + this.currentVnode + '/newNode:' + this.currentVnode);
-    // if (oldVnode) {
-    //   this.patchFromOtherVnode(oldVnode, selector, this.currentVnode);
-    // } else {
-    //   this.patchFromOtherVnode(this.currentVnode, this.currentVnode);
-    // }
-    // this.onViewShown(viewState, store);
   }
   //
   goAnotherView(nextView, data) {

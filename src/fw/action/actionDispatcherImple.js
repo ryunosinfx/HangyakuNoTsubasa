@@ -69,7 +69,7 @@ export default class ActionDispatcherImple {
       Store.setStore(store);
     }
     console.log('dispatch02');
-    if (store.isOrverride) {
+    if (store.isOrverride && action.data.view) {
       targetView = action.data.view;
       if (this.view.onViewHide(targetView, data) === false) {
         return;
