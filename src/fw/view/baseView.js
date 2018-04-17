@@ -86,6 +86,13 @@ export default class BaseView {
     nextView.show(this.currentVnode, data);
     this.onViewHidden(nextView, data)
   }
+  // atache to
+  atach(vnode,selector){
+    this.show(oldVnode, selector);
+  }
+  detach(vnode,selector){
+
+  }
   // Event listener
   onViewLoad(service, name, key) {
     console.log('m001 baseView.onViewLoad service:' + service + '/name:' + name + '/key:' + key);
