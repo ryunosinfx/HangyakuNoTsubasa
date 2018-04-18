@@ -25,10 +25,8 @@ export default class Layout extends BaseView {
   init(view, state) {
     //alert(currentVnode);
     this.view = view;
-    let elements = document.getElementsByTagName("body");
-    //let layout = document.createNode('div');
-    elements[0].innerHTML = this.createBsaeFrame();
     // build frme
+    this.createBsaeFrame();
     let header = document.getElementById("header");
     let footer = document.getElementById("footer");
     let menu = document.getElementById("menu");
@@ -46,6 +44,10 @@ export default class Layout extends BaseView {
   }
   add(view) {}
   createBsaeFrame() {
+  let elements = document.getElementsByTagName("body");
+  //let layout = document.createNode('div');
+  elements[0].innerHTML =
+    this.show
     return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';
   }
 }
