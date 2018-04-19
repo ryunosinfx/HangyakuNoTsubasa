@@ -27,27 +27,72 @@ export default class Layout extends BaseView {
     this.view = view;
     // build frme
     this.createBsaeFrame();
-    let header = document.getElementById("header");
-    let footer = document.getElementById("footer");
-    let menu = document.getElementById("menu");
-    let content = document.getElementById("content");
-    this.header.show(header);
-    this.footer.show(footer);
-    this.menu.show(menu);
-    this.view.show(content);
   }
   // from service
   show(view, viewState, data) {
+    alert('layout show?');
     let oldView = this.view;
     this.view = view;
     oldView.goAnotherView(view, viewState, data);
   }
+
+  onViewShow(viewState, data){
+    const state = this.getCurrentState();
+  //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
+    if(state && state.isActivated){
+      let resultNode = h('h1#activateInputArea', 'ok! you are logedin!');
+      this.prePatch("#activateInputArea", resultNode);
+    }
+    this.header.attach(this.currentVnode,'#header');
+    this.footer.attach(this.currentVnode,'#footer');
+    this.menu.attach(this.currentVnode,'#menu');
+    this.view.attach(this.currentVnode,'#content');
+  }
   add(view) {}
+  rendarer(viewState) {
+    let newVnode = h('body', {}, [
+      h('header#header', {
+        style: {
+          color: '#000'
+        }
+      }, [
+
+      ], 'hellow!!'),
+      h('div#menu', {
+        style: {
+          color: '#000'
+        }
+      }, [
+
+      ], 'menu!!'),
+      h('div#container', {
+        style: {
+          color: '#000'
+        }
+      }, [
+        h('div#content', {
+          style: {
+            color: '#000'
+          }
+        }, [
+
+        ], 'content!!')
+      ], 'container!!'),
+      h('div#footer', {
+        style: {
+          color: '#000'
+        }
+      }, [
+
+      ], 'footer!!')
+    ]);
+    return newVnode;
+  }
   createBsaeFrame() {
-  let elements = document.getElementsByTagName("body");
-  //let layout = document.createNode('div');
-  elements[0].innerHTML =
-    this.show
-    return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';
+    let elements = document.getElementsByTagName("body");
+    //let layout = document.createNode('div');
+    //elements[0].innerHTML = '<div id="root"></div>';
+    this.show(elements[0]);
+    //return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';
   }
 }
