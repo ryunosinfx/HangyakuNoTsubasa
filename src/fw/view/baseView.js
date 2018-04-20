@@ -82,7 +82,7 @@ export default class BaseView {
       return;
     };
     //console.log('A00 baseView.goAnotherView view;' + view.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
-    console.log('A02 baseView.goAnotherView from ' + this.getName() + ' to nextView;' + nextView.getName());
+    console.log('A02 baseView.goAnotherView from ' + this.getName() + ' to nextView;' + (nextView.getName?nextView.getName():'none'));
     nextView.show(this.currentVnode, data);
     this.onViewHidden(nextView, data)
   }
@@ -91,7 +91,7 @@ export default class BaseView {
     if(!selector){
       console.log("attach selector is null :"+selector);
     }
-    this.show(oldVnode, selector);
+    this.show(vnode, selector);
   }
   detach(vnode,selector){
 

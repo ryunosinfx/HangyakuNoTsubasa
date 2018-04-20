@@ -30,7 +30,10 @@ export default class Layout extends BaseView {
   }
   // from service
   show(view, viewState, data) {
-    alert('layout show?');
+    alert('layout show?'+view);
+    if(!view.name){
+      return;
+    }
     let oldView = this.view;
     this.view = view;
     oldView.goAnotherView(view, viewState, data);
@@ -92,7 +95,7 @@ export default class Layout extends BaseView {
     let elements = document.getElementsByTagName("body");
     //let layout = document.createNode('div');
     //elements[0].innerHTML = '<div id="root"></div>';
-    this.show(elements[0]);
+    this.attach(elements[0]);
     //return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';
   }
 }

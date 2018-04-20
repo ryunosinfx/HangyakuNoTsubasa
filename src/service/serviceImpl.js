@@ -87,7 +87,7 @@ export default class ServiceImpl extends BaseService{
     let state = await this.getCurrentState();
     this.store.set('state',state);
     let view = this.router.getView(state, key);
-    console.log('geToAnotherView view:' + view.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
+    console.log('ServiceImpl geToAnotherView view:' + view.name + '/state:' + JSON.stringify(state) + '/data:' + JSON.stringify(data));
     //  view.show(currentVnode, state, data);
     // TODO add history recording
     this.layout.show(view, null, data);
