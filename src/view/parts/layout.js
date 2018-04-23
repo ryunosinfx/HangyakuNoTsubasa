@@ -32,6 +32,7 @@ export default class Layout extends BaseView {
   show(view, viewState, data) {
     alert('layout show?'+view);
     if(!view.name){
+
       return;
     }
     let oldView = this.view;
@@ -93,9 +94,11 @@ export default class Layout extends BaseView {
   }
   createBsaeFrame() {
     let elements = document.getElementsByTagName("body");
-    //let layout = document.createNode('div');
-    //elements[0].innerHTML = '<div id="root"></div>';
-    this.attach(elements[0]);
+    elements[0].innerHTML = '<div id="root"></div>';
+    let layout = document.getElementById('root');
+    //this.attach();
+
+    this.patchFromOtherVnode(layout,null,this.rendarer());
     //return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';
   }
 }
