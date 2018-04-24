@@ -35,6 +35,7 @@ export default class BaseView {
     const result = this.es.patch(currentVnode, selector, newVnode);
     result.data['name'] = this.name + Date.now();
     this.currentVnode = result;
+    console.log('C01 baseView.patchFromOtherVnode currentVnode;' + currentVnode);
     return result;
   }
   prePatch(selector, newVnode) {

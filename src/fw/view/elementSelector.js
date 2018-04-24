@@ -17,11 +17,13 @@ export default class ElementSelector {
   patch(vnode, selector, newNode) {
     console.log('patch00 START of Patch newNode:' + newNode);
     if (!newNode ) {
+      console.log('patch01a of Patch newNode:' + newNode);
       this.isValidNode(vnode, "vnode");
       const re = patch(vnode, selector);
       return selector;
     }
     if (!selector ) {
+      console.log('patch01b of Patch newNode:' + newNode);
       this.isValidNode(vnode, "vnode");
       const re = patch(vnode, newNode);
       return newNode;

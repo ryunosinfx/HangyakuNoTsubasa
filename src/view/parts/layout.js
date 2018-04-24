@@ -94,11 +94,14 @@ export default class Layout extends BaseView {
   }
   createBsaeFrame() {
     let elements = document.getElementsByTagName("body");
-    elements[0].innerHTML = '<div id="root"></div>';
-    let layout = document.getElementById('root');
+    elements[0].innerHTML = '<div id="rootA"><p>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p></div>';
+    let layout = document.getElementById('rootA');
+    let div= document.createElement("div");
+    elements[0].appendChild(div);
     //this.attach();
 
-    this.patchFromOtherVnode(layout,null,this.rendarer());
+    //this.patchFromOtherVnode(layout,null,this.rendarer());
+    alert("aaa");
     //return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';
   }
 }
