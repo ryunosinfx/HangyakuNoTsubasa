@@ -52,9 +52,8 @@ export default class Layout extends BaseView {
     this.menu.attach(this.currentVnode,'#menu');
     this.view.attach(this.currentVnode,'#content');
   }
-  add(view) {}
   rendarer(viewState) {
-    let newVnode = h('body', {}, [
+    let newVnode = h('div', {}, [
       h('header#header', {
         style: {
           color: '#000'
@@ -96,11 +95,13 @@ export default class Layout extends BaseView {
     let elements = document.getElementsByTagName("body");
     elements[0].innerHTML = '<div id="rootA"><p>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p></div>';
     let layout = document.getElementById('rootA');
-    let div= document.createElement("div");
-    elements[0].appendChild(div);
+    //let div= document.createElement("div");
+    //elements[0].appendChild(div);
     //this.attach();
 
-    //this.patchFromOtherVnode(layout,null,this.rendarer());
+    this.patchFromOtherVnode(layout,null,this.rendarer());
+
+    this.update({oldVnode:layout,selector:null,isOrverride:true});
     alert("aaa");
     //return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';
   }
