@@ -7,8 +7,8 @@ export default class ActionCreator {
       storeKey: storeKey
     };
   }
-  static createShowViewAction(key, oldVnode, data, storeKey = null) {
-    return ActionCreator.createGoOtherViewAction(key, null, oldVnode, null, data, storeKey);
+  static createShowViewAction(key, oldVnode, selector, data, storeKey = null) {
+    return ActionCreator.createGoOtherViewAction(key, null, oldVnode, selector, data, storeKey);
   }
   static createGoOtherViewAction(key, view, oldVnode, selector, data, storeKey = null) {
     let addData = data;

@@ -44,7 +44,7 @@ export default class ElementSelector {
 
   isValidNode(vnode, name, parentNode, index) {
     if (!vnode) {
-      alert("null node!" + name + "/parentNode:" + parentNode);
+      console.log("★★null node!" + name + "/parentNode:" + parentNode);
       return;
     }
     if (vnode.elm && !vnode.elm.parentNode) {
@@ -57,14 +57,14 @@ export default class ElementSelector {
           parentNode.appendChild(vnode.elm);
         }
       }
-      alert("invalid node!" + name);
+      console.log("★★★invalid node!" + name);
     } else if (!vnode.elm) {
       if (parentNode) {
         const length = parentNode.childNodes.length;
         if (length > index) {
           vnode.elm = parentNode.childNodes[index];
         } else {
-          alert("invalid parent index!" + index + "/length:" + length + "/vnode.sel:" + vnode.sel);
+          console.log("★★★invalid parent index!" + index + "/length:" + length + "/vnode.sel:" + vnode.sel);
         }
       }
     }

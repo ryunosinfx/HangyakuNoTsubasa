@@ -102,7 +102,7 @@ export default class Layout extends BaseView {
     this.patchFromOtherVnode(layout,null,this.rendarer());
 
     this.update({oldVnode:layout,selector:null,isOrverride:true});
-    alert("aaa");
+    //alert("aaa");
     //return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';
   }
 }
