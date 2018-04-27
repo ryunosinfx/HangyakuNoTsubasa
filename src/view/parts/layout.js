@@ -47,10 +47,10 @@ export default class Layout extends BaseView {
       let resultNode = h('h1#activateInputArea', 'ok! you are logedin!');
       this.prePatch("#activateInputArea", resultNode);
     }
-    this.header.attach(this.currentVnode,'#header');
-    this.footer.attach(this.currentVnode,'#footer');
-    this.menu.attach(this.currentVnode,'#menu');
-    this.view.attach(this.currentVnode,'#content');
+    this.header.attach(this,'#header');
+    this.footer.attach(this,'#footer');
+    this.menu.attach(this,'#menu');
+    this.view.attach(this,'#content');
   }
   rendarer(viewState) {
     let newVnode = h('div', {}, [

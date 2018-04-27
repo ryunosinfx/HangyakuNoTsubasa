@@ -87,12 +87,13 @@ export default class BaseView {
     nextView.show(this.currentVnode, data);
     this.onViewHidden(nextView, data)
   }
-  // atache to
-  attach(vnode,selector){
+  // attache to
+  attach(parentView,selector){
     if(!selector){
       console.log("attach selector is null :"+selector);
     }
-    this.show(vnode, selector);
+    let vnode = this.currentVnode?this.currentVnode:this.rendarer();
+    parentView.prePatch(selector,vnode);
   }
   detach(vnode,selector){
 
