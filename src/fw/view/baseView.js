@@ -4,10 +4,12 @@ import {
 } from 'encrypt-indexeddb-entity-manager/src/view/preLoader'
 
 import ElementSelector from './elementSelector'
+import ViewAttachQueue from './viewAttachQueue'
 import ActionDispatcher from '../action/actionDispatcher'
 import ViewBaseReducer from '../reducer/viewBaseReducer'
 import ViewBaseActions from '../action/viewBaseActions'
 import ActionCreator from '../util/actionCreator'
+const viewAttachQueue = new ViewAttachQueue();
 export default class BaseView {
   constructor(service, name, key) {
     this.dispatcher = ActionDispatcher.create(this);
@@ -50,7 +52,7 @@ export default class BaseView {
     const isOrverride = store.isOrverride;
     const currentVnode = oldVnode ? oldVnode : this.currentVnode;
 
-    console.log('A00 oldVnode:'+oldVnode+'/isOrverride='+isOrverride+'/selector='+selector+'/currentVnode:'+currentVnode);
+    console.log('A00 oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
     if (isOrverride) {
       this.onPreViewBuild(oldVnode, store);
       console.log('A01 baseView.goAnotherView view;' + this.getName());
@@ -66,6 +68,7 @@ export default class BaseView {
     } else {
       this.patch(currentVnode, this.currentVnode);
     }
+    this.onAfterAttach(store);
     this.onViewShown(viewState, store);
     this.viewState = viewState;
   }
@@ -83,19 +86,36 @@ export default class BaseView {
       return;
     };
     //console.log('A00 baseView.goAnotherView view;' + view.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
-    console.log('A02 baseView.goAnotherView from ' + this.getName() + ' to nextView;' + (nextView.getName?nextView.getName():'none'));
+    console.log('A02 baseView.goAnotherView from ' + this.getName() + ' to nextView;' + (nextView.getName ? nextView.getName() : 'none'));
     nextView.show(this.currentVnode, data);
     this.onViewHidden(nextView, data)
   }
   // attache to
-  attach(parentView,selector){
-    if(!selector){
-      console.log("attach selector is null :"+selector);
+  attach(parentView, selector, store) {
+    if (!selector) {
+      console.log("attach selector is null :" + selector);
     }
-    let vnode = this.currentVnode?this.currentVnode:this.rendarer();
-    parentView.prePatch(selector,vnode);
+    viewAttachQueue.add(this, selector);
+
+    const viewState = this.viewState;
+    const oldVnode = store.oldVnode;
+    const currentVnode = oldVnode ? oldVnode : this.currentVnode;
+    let vnode = this.currentVnode ? this.currentVnode : this.rendarer();
+
+    console.log('X00 oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
+    this.onPreViewBuild(oldVnode, store);
+    console.log('X01 baseView.attach view;' + this.getName());
+    this.currentVnode = vnode;
+    this.onViewShow(viewState, store);
+    parentView.prePatch(selector, vnode);
   }
-  detach(vnode,selector){
+  onAfterAttach(store) {
+    while(viewAttachQueue.hasItem()){
+      let item = viewAttachQueue.poll();
+      item.view.currentVnode = this.es.
+    }
+  }
+  detach(vnode, selector) {
 
   }
   // Event listener

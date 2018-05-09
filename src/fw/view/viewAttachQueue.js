@@ -4,10 +4,16 @@ export default class ViewAttachQueue {
     this.queue = [];
 
   }
-  add(value){
-    this.queue.unshift(value);
+  add(view, selector) {
+    this.queue.unshift({
+      view: view,
+      selector: selector
+    });
   }
-  poll(){
+  poll() {
     return this.queue.pop();
+  }
+  hasItem() {
+    return this.queue.length > 0;
   }
 }
