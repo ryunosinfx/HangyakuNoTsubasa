@@ -26,7 +26,7 @@ export default class Login extends BaseView {
   onViewShow(viewState, data) {
     const state = this.getCurrentState();
     if (state && state.isActivated === true) {
-      alert(viewState + '/state.isLogedIn:' + state.isLogedIn + '/state.isActivated:' + state.isActivated);
+      alert('onViewShow;'+viewState + '/state.isLogedIn:' + state.isLogedIn + '/state.isActivated:' + state.isActivated);
       this.prePatch( "#signinInputArea", this.createResultVnode());
     } else {
       this.prePatch( "#signinInputArea", this.createFormVnode());

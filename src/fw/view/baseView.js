@@ -91,28 +91,29 @@ export default class BaseView {
     this.onViewHidden(nextView, data)
   }
   // attache to
-  attach(parentView, selector, store) {
+  attach(parentView, selector ,data) {
     if (!selector) {
       console.log("attach selector is null :" + selector);
     }
-    viewAttachQueue.add(this, selector);
-
-    const viewState = this.viewState;
-    const oldVnode = store.oldVnode;
-    const currentVnode = oldVnode ? oldVnode : this.currentVnode;
-    let vnode = this.currentVnode ? this.currentVnode : this.rendarer();
-
-    console.log('X00 oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
-    this.onPreViewBuild(oldVnode, store);
-    console.log('X01 baseView.attach view;' + this.getName());
-    this.currentVnode = vnode;
-    this.onViewShow(viewState, store);
-    parentView.prePatch(selector, vnode);
+    // viewAttachQueue.add(this, selector);
+    //
+    // const viewState = this.viewState;
+    // const currentVnode = this.currentVnode;
+    // let vnode = this.currentVnode ? this.currentVnode : this.rendarer();
+    //
+    // console.log('X00 oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
+    // this.onPreViewBuild(oldVnode, store);
+    // console.log('X01 baseView.attach view;' + this.getName());
+    // this.currentVnode = vnode;
+    // this.onViewShow(viewState, store);
+    // parentView.prePatch(selector, vnode);
+    this.show(parentView.currentVnode,selector, data);
   }
   onAfterAttach(store) {
-    while(viewAttachQueue.hasItem()){
+    const currentVnode = this.currentVnode;
+    while (viewAttachQueue.hasItem()) {
       let item = viewAttachQueue.poll();
-      item.view.currentVnode = this.es.
+      item.view.currentVnode = this.es.getElements(currentVnode, item.selector);
     }
   }
   detach(vnode, selector) {

@@ -30,9 +30,8 @@ export default class Layout extends BaseView {
   }
   // from service
   show(view, viewState, data) {
-    alert('layout show?'+view);
+    console.log('layout show?'+view);
     if(!view.name){
-
       return;
     }
     let oldView = this.view;
