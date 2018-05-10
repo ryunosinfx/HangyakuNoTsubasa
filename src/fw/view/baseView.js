@@ -36,7 +36,7 @@ export default class BaseView {
   patchFromOtherVnode(currentVnode, selector, newVnode) {
     const result = this.es.patch(currentVnode, selector, newVnode);
     result.data['name'] = this.name + Date.now();
-    this.currentVnode = result;
+    this.currentVnode = selector && newVnode ? this.es.getElements(result, selector)[0] :result;
     console.log('C01 baseView.patchFromOtherVnode currentVnode;' + currentVnode);
     return result;
   }
@@ -60,6 +60,7 @@ export default class BaseView {
     }
     this.onViewShow(viewState, store);
     if (isOrverride) {
+      console.log('A02 baseView.goAnotherView selector;' + selector);
       if (oldVnode) {
         this.patchFromOtherVnode(oldVnode, selector, this.currentVnode);
       } else {
@@ -73,7 +74,7 @@ export default class BaseView {
     this.viewState = viewState;
   }
   show(oldVnode, selector, store) {
-    console.log('show oldVnode');
+    console.log('---show selector:' + selector + '/oldVnode');
     console.log(oldVnode);
     let action = ViewBaseActions.getShowViewAction(oldVnode, selector, store);
     console.log(action);
@@ -91,7 +92,7 @@ export default class BaseView {
     this.onViewHidden(nextView, data)
   }
   // attache to
-  attach(parentView, selector ,data) {
+  attach(parentView, selector, data) {
     if (!selector) {
       console.log("attach selector is null :" + selector);
     }
@@ -107,7 +108,7 @@ export default class BaseView {
     // this.currentVnode = vnode;
     // this.onViewShow(viewState, store);
     // parentView.prePatch(selector, vnode);
-    this.show(parentView.currentVnode,selector, data);
+    this.show(parentView.currentVnode, selector, data);
   }
   onAfterAttach(store) {
     const currentVnode = this.currentVnode;

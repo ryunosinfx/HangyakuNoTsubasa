@@ -88,7 +88,7 @@ export default class ElementSelector {
     const parentMap = new Map();
     console.log('prepatch01aa:' + JSON.stringify(vnode));
     const nodes = this.getElements(cloneNode, selector, false, parentMap, null);
-    let isShuldPatch = false;
+    let isShouldPatch = false;
     for (let node of nodes) {
       console.log('prepatch01a');
       let newOne = ObjectUtil.deepVnodeClone(newNode);
@@ -102,7 +102,7 @@ export default class ElementSelector {
             if (target === node) {
               children[index] = newOne;
               //newOne.text = newOne.text+"/"+Date.now();
-              isShuldPatch = true;
+              isShouldPatch = true;
               console.log('★patch01c AS REPLACE! children.length:' + children.length + "/index:" + index + "/target.sel:" + target.sel + "/newOne.sel:" + newOne.sel + "/text:" + newOne.text);
               break;
             } else {
@@ -114,7 +114,7 @@ export default class ElementSelector {
       }
     }
     console.log('patch02 END of prePatch');
-    return isShuldPatch
+    return isShouldPatch
       ? cloneNode
       : vnode;
   }
