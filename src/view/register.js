@@ -6,7 +6,7 @@ export default class Register extends BaseView {
   constructor(service) {
     super(service, 'Register', 'Register');
   }
-  rendarer(viewState) {
+  render(viewState) {
     let self = this;
     let newVnode = h('div', {
       style: {

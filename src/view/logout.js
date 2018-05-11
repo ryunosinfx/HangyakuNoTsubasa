@@ -6,7 +6,7 @@ export default class Logout extends BaseView {
     super(service, 'Logout','Logout');
   }
 
-  rendarer(oldNode, viewState) {
+  render(oldNode, viewState) {
     let newVnode = h('div', {
       style: {
         color: '#00a'

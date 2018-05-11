@@ -7,7 +7,7 @@ export default class Searcher extends BaseView {
     super(service, 'Searcher','Searcher');
   }
 
-  rendarer(oldNode, viewState) {
+  render(oldNode, viewState) {
     let newVnode = h('div', {
       style: {
         color: '#0a0'

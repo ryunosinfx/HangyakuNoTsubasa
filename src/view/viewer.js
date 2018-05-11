@@ -7,7 +7,7 @@ export default class Viewer extends BaseView {
     super(service, 'Viewer','Viewer');
   }
 
-  rendarer(oldNode, viewState) {
+  render(oldNode, viewState) {
     let newVnode = h('div', {
       style: {
         color: '#00a'

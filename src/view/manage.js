@@ -7,7 +7,7 @@ export default class Manager extends BaseView {
     super(service, 'Manager','Manager');
   }
 
-  rendarer(viewState) {
+  render(viewState) {
     let newVnode = h('div', {
       style: {
         color: '#a00'
