@@ -36,8 +36,8 @@ export default class BaseView {
   patchFromOtherVnode(currentVnode, selector, newVnode) {
     const result = this.es.patch(currentVnode, selector, newVnode);
     result.data['name'] = this.name + Date.now();
-    this.currentVnode = selector && newVnode ? this.es.getElements(result, selector)[0] :result;
-    console.log('C01 --baseView.patchFromOtherVnode currentVnode;' + currentVnode+ '/this:'+this.currentVnode+'/'+this.es.getElements(result, selector));
+    this.currentVnode = this.key && newVnode ? this.es.getElements(result, '#'+this.key)[0] : result;
+    console.log('C01 --baseView.patchFromOtherVnode currentVnode;' + currentVnode + '/this:' + this.currentVnode + '/' + this.es.getElements(result, selector));
     return result;
   }
   prePatch(selector, newVnode) {
@@ -56,7 +56,7 @@ export default class BaseView {
     if (isOrverride) {
       this.onPreViewBuild(oldVnode, store);
       console.log('A01 --baseView.goAnotherView view;' + this.getName());
-      this.currentVnode = !this.currentVnode ? this.render(store) : this.currentVnode;
+      this.currentVnode = !this.currentVnode ? this.renderWrap(store) : this.currentVnode;
     }
     this.onViewShow(viewState, store);
     if (isOrverride) {
@@ -157,10 +157,10 @@ export default class BaseView {
     return newVnode;
   }
   renderWrap(viewStatev, data) {
-    let newVnode = h('div', {
+    let newVnode = h('div#' + this.key, {
       style: {
-        margin: 0
-          padding: 0
+        margin: 0,
+        padding: 0
       }
     }, [this.render(viewStatev, data)]);
     return newVnode;
