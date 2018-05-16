@@ -10,7 +10,9 @@ import ViewBaseReducer from '../reducer/viewBaseReducer'
 import ViewBaseActions from '../action/viewBaseActions'
 import ActionCreator from '../util/actionCreator'
 const viewAttachQueue = new ViewAttachQueue();
-const nodeFrame = {rootVnode:null};
+const nodeFrame = {
+  rootVnode: null
+};
 export default class BaseView {
   constructor(service, name, key) {
     this.dispatcher = ActionDispatcher.create(this);
@@ -28,8 +30,8 @@ export default class BaseView {
     //console.log('name=' + name + '/key:' + key);
     this.onViewLoaded(service, name, key);
   }
-  static setRootVnode(rootVnode){
-    nodeFrame.rootVnode =rootVnode;
+  static setRootVnode(rootVnode) {
+    nodeFrame.rootVnode = rootVnode;
   }
   isAccessable(state) {
     return true;
@@ -38,10 +40,17 @@ export default class BaseView {
     return this.patchFromOtherVnode(this.rootVonde, selector, newVnode);
   }
   patchFromOtherVnode(currentVnode, selector, newVnode) {
-    const result = this.es.patch(currentVnode, selector, newVnode);
+    let currentRootNode = selector !== null ? nodeFrame.rootVnode : currentVnode;
+    let currentSelector = selector;
+    let currentNewNode = newVnode;
+    if (selector !== null && !!newVnode === false) {
+      currentSelector = this.key;
+      currentNewNode = selector;
+    }
+    const result = this.es.patch(currentRootNode, currentSelector, currentNewNode);
     result.data['name'] = this.name + Date.now();
-
-    this.currentVnode = this.key && newVnode ? this.es.getElements(result, '#'+this.key)[0] : result;
+    nodeFrame.rootVnode = result;
+    this.currentVnode = this.key && newVnode ? this.es.getElements(result, c)[0] : result;
     console.log('C01 --baseView.patchFromOtherVnode currentVnode;' + currentVnode + '/this:' + this.currentVnode + '/' + this.es.getElements(result, selector));
     return result;
   }
