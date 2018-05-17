@@ -11,6 +11,7 @@ export default class ViewBaseReducer extends BaseReducer {
     console.log('ViewBaseReducer 03');
   }
   async reduce(store,action) {
+    console.log('reduce! action:'+action);
     console.log('reduce! oldVnode:'+action.data.oldVnode);
     if(ActionCreator.isEquals(ViewBaseActions.getGotoAnotherViewAction(),action)){
 
