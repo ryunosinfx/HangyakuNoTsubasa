@@ -48,10 +48,10 @@ export default class BaseView {
     const result = this.es.patch(currentRootNode, currentSelector, currentNewNode);
     result.data['name'] = this.name + Date.now();
     nodeFrame.rootVnode = result;
-    this.currentVnode = this.key && newVnode ? this.es.getElements(result, currentSelector)[0] : result;
-    if(!this.currentVnode){
+    // this.currentVnode = this.key && newVnode ? this.es.getElements(result, currentSelector)[0] : result;
+    // if(!this.currentVnode){
       this.currentVnode = this.es.getElements(result, '#'+this.key)[0];
-    }
+    // }
     console.log('C01 --baseV}iew.patchFromOtherVnode currentVnode;' + currentVnode + '/selector:'+selector+'/currentSelector:'+currentSelector+'/this:' + this.currentVnode + '/' + this.es.getElements(result, selector));
     return result;
   }
@@ -106,7 +106,7 @@ export default class BaseView {
     //console.log('A00 baseView.goAnotherView view;' + view.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
     console.log('A02 baseView.goAnotherView from ' + this.getName() + ' to nextView;' + (nextView.getName ? nextView.getName() : 'none'));
     nextView.show(this.currentVnode, '#' + this.key, data);
-    this.onViewHidden(nextView, data)
+    this.onViewHidden(nextView, data);
   }
   // attache to
   attach(parentView, selector, data) {

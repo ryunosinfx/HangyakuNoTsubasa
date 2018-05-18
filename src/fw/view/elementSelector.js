@@ -120,7 +120,8 @@ export default class ElementSelector {
   }
   getElements(vnode, selector, isEnd = false, parentMap = new Map(), parentVnode) {
     let result = [];
-    if (!selector) {
+    if (!selector || typeof selector !== 'string') {
+      console.log('getElements selector:'+selector);
       return result;
     }
     let selectors = selector.split(/ |>/);
