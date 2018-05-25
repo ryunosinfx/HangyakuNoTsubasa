@@ -95,6 +95,7 @@ export default class Layout extends BaseView {
     elements[0].innerHTML = '<div id="rootA"><p>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p></div>';
     let layout = document.getElementById('rootA');
     this.patchFromOtherVnode(layout,null,this.render());
+
     this.update({oldVnode:this.currentVnode,selector:null,isOrverride:true});
     //alert("aaa");
     //return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';

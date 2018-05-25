@@ -10,7 +10,10 @@ import ViewBaseReducer from '../reducer/viewBaseReducer'
 import ViewBaseActions from '../action/viewBaseActions'
 import ActionCreator from '../util/actionCreator'
 const viewAttachQueue = new ViewAttachQueue();
-const nodeFrame = {rootVnode:null};
+const nodeFrame = {
+  rootVnode: null
+};
+const avtiveViews = new Map();
 export default class BaseView {
   constructor(service, name, key) {
     this.dispatcher = ActionDispatcher.create(this);
@@ -18,6 +21,7 @@ export default class BaseView {
     this.name = name;
     this.key = key;
     this.es = new ElementSelector();
+    this.activeViewTree = null;
     this.filter = (state) => {
       return true
     }
@@ -28,8 +32,8 @@ export default class BaseView {
     //console.log('name=' + name + '/key:' + key);
     this.onViewLoaded(service, name, key);
   }
-  static setRootVnode(rootVnode){
-    nodeFrame.rootVnode =rootVnode;
+  static setRootVnode(rootVnode) {
+    nodeFrame.rootVnode = rootVnode;
   }
   isAccessable(state) {
     return true;
@@ -38,21 +42,21 @@ export default class BaseView {
     return this.patchFromOtherVnode(nodeFrame.rootVnode, selector, newVnode);
   }
   patchFromOtherVnode(currentVnode, selector, newVnode) {
-    let currentRootNode = selector!==null?nodeFrame.rootVnode:currentVnode;
+    let currentRootNode = selector !== null ? nodeFrame.rootVnode : currentVnode;
     let currentSelector = selector;
     let currentNewNode = newVnode;
-    if(selector!==null && !!newVnode === false){
-      currentSelector= this.key;
-        currentNewNode= selector;
+    if (selector !== null && !!newVnode === false) {
+      currentSelector = this.key;
+      currentNewNode = selector;
     }
     const result = this.es.patch(currentRootNode, currentSelector, currentNewNode);
     result.data['name'] = this.name + Date.now();
     nodeFrame.rootVnode = result;
     // this.currentVnode = this.key && newVnode ? this.es.getElements(result, currentSelector)[0] : result;
     // if(!this.currentVnode){
-      this.currentVnode = this.es.getElements(result, '#'+this.key)[0];
+    this.currentVnode = this.es.getElements(result, '#' + this.key)[0];
     // }
-    console.log('C01 --baseV}iew.patchFromOtherVnode currentVnode;' + currentVnode + '/selector:'+selector+'/currentSelector:'+currentSelector+'/this:' + this.currentVnode + '/' + this.es.getElements(result, selector));
+    console.log('C01 --baseV}iew.patchFromOtherVnode currentVnode;' + currentVnode + '/selector:' + selector + '/currentSelector:' + currentSelector + '/this:' + this.currentVnode + '/' + this.es.getElements(result, selector));
     return result;
   }
   prePatch(selector, newVnode) {
@@ -90,7 +94,25 @@ export default class BaseView {
     this.onViewShown(viewState, store);
     this.viewState = viewState;
   }
+  updateReactive(store) {
+    const viewState = this.viewState;
+    const oldVnode = store.oldVnode;
+    const selector = store.selector;
+    const isOrverride = store.isOrverride;
+    const currentVnode = oldVnode ? oldVnode : this.currentVnode;
+
+    console.log('A101 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
+    this.onViewShow(viewState, store);
+    this.patch(selector, this.currentVnode);
+    this.onAfterAttach(store);
+    this.onViewShown(viewState, store);
+    this.viewState = viewState;
+  }
+  static getActiveViews() {
+    return avtiveViews;
+  }
   show(oldVnode, selector, store) {
+    avtiveViews.set(this.key, this);
     console.log('---show selector:' + selector + '/oldVnode');
     console.log(oldVnode);
     let action = ViewBaseActions.getShowViewAction(oldVnode, selector, store);
@@ -103,6 +125,7 @@ export default class BaseView {
     if (this.onViewHide(nextView, data) === false) {
       return;
     };
+    this.activeViewTree = viewAttachQueue.changeActiveView(this, nextView, nextView.activeViewTree);
     //console.log('A00 baseView.goAnotherView view;' + view.getName() + '/this.name:' + this.name + '/current:' + this.currentVnode);
     console.log('A02 baseView.goAnotherView from ' + this.getName() + ' to nextView;' + (nextView.getName ? nextView.getName() : 'none'));
     nextView.show(this.currentVnode, '#' + this.key, data);
@@ -113,6 +136,7 @@ export default class BaseView {
     if (!selector) {
       console.log("attach selector is null :" + selector);
     }
+    this.activeViewTree = viewAttachQueue.addActiveView(parentView, this, this.activeViewTree);
     // viewAttachQueue.add(this, selector);
     //
     // const viewState = this.viewState;

@@ -1,4 +1,5 @@
 import Store from '../store/store';
+import ViewAttachQueue from '../view/viewAttachQueue'
 
 const actionMap = new Map();
 export default class ActionDispatcherImple {
@@ -70,17 +71,30 @@ export default class ActionDispatcherImple {
     }
     console.log('dispatch02');
     if (store.isOrverride && action.data.view) {
-      targetView = action.data.view;
+      targetView = action.data.views;
       if (this.view.onViewHide(targetView, data) === false) {
         return;
       };
-      targetView.update(store);
+      //targetView.update(store);
+      this.callUpdat(targetView,storeKey);
       this.view.onViewHidden(targetView, data);
     } else {
-      targetView.update(store);
+      //targetView.update(store);
+      this.callUpdat(targetView,storeKey);
     }
     store = Store.getStore(storeKey);
 
     return true;
+  }
+  callUpdat(targetView,storeKey){
+    const activViews = ViewAttachQueue.getActiveViewList();
+    for(let activView of activViews){
+      const store = Store.getStore(storeKey);
+      if(targetView === activView){
+        targetView.update(store);
+      }else{
+        activView.updateReactive(store);
+      }
+    }
   }
 }

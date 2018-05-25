@@ -14,7 +14,8 @@ export default class ViewBaseReducer extends BaseReducer {
     console.log('reduce! action:'+action);
     console.log('reduce! oldVnode:'+action.data.oldVnode);
     if(ActionCreator.isEquals(ViewBaseActions.getGotoAnotherViewAction(),action)){
-
+      // todo update menue
+      console.log('getGotoAnotherViewAction!');
     }else if(ActionCreator.isEquals(ViewBaseActions.getShowViewAction(),action)){
       store.isOrverride=true;
 
