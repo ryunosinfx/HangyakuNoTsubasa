@@ -56,7 +56,8 @@ export default class BaseView {
     // if(!this.currentVnode){
     this.currentVnode = this.es.getElements(result, '#' + this.key)[0];
     // }
-    console.log('C01 --baseV}iew.patchFromOtherVnode currentVnode;' + currentVnode + '/selector:' + selector + '/currentSelector:' + currentSelector + '/this:' + this.currentVnode + '/' + this.es.getElements(result, selector));
+    console.log('C01 this.key:'+this.key);
+    console.log('C01 --baseView.patchFromOtherVnode currentVnode;' + currentVnode + '/selector:' + selector + '/currentSelector:' + currentSelector + '/this:' + this.currentVnode + '/' + this.es.getElements(result, selector));
     return result;
   }
   prePatch(selector, newVnode) {
@@ -111,7 +112,7 @@ export default class BaseView {
     console.log('A101 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
     this.onViewShow(viewState, store);
     console.log('A102 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
-    this.patch(selector, this.currentVnode);
+    this.patch("#"+this.key, this.currentVnode);
     console.log('A103 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
     this.onAfterAttach(store);
     console.log('A104 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
