@@ -6,7 +6,7 @@ import BaseView from '../../fw/view/baseView'
 import css from './css'
 export default class Menue extends BaseView {
   constructor(service, layoutView) {
-    super(service);
+    super(service,'Menue','Menue');
     this.layoutView = layoutView;
     this.currentVnode = null;
     this.menuViewList = [];

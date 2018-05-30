@@ -60,6 +60,13 @@ export default class BaseView {
     return result;
   }
   prePatch(selector, newVnode) {
+    if (!this.currentVnode) {
+      this.currentVnode = this.es.getElements(nodeFrame.rootVnode, '#' + this.key)[0];
+    }
+    if (!this.currentVnode) {
+      console.log('prePatch nodeFrame.rootVnode: ' + JSON.stringify(nodeFrame.rootVnode));
+      console.log('prePatch ' + this.currentVnode + '/this.key:' + this.key);
+    }
     this.currentVnode.data['name'] = this.name + Date.now();
     this.currentVnode = this.es.prePatch(this.currentVnode, selector, newVnode);
     return this.currentVnode;
@@ -103,9 +110,13 @@ export default class BaseView {
 
     console.log('A101 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
     this.onViewShow(viewState, store);
+    console.log('A102 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
     this.patch(selector, this.currentVnode);
+    console.log('A103 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
     this.onAfterAttach(store);
+    console.log('A104 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
     this.onViewShown(viewState, store);
+    console.log('A105 --oldVnode:' + oldVnode + '/isOrverride=' + isOrverride + '/selector=' + selector + '/currentVnode:' + currentVnode);
     this.viewState = viewState;
   }
   static getActiveViews() {

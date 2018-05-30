@@ -1,6 +1,7 @@
 import Store from '../store/store';
-import ViewAttachQueue from '../view/viewAttachQueue'
+import ViewAttachQueue from '../view/viewAttachQueue';
 
+const viewAttachQueue = new ViewAttachQueue();
 const actionMap = new Map();
 export default class ActionDispatcherImple {
   constructor(view) {
@@ -76,25 +77,28 @@ export default class ActionDispatcherImple {
         return;
       };
       //targetView.update(store);
-      this.callUpdat(targetView,storeKey);
+      this.callUpdate(targetView,storeKey);
       this.view.onViewHidden(targetView, data);
     } else {
       //targetView.update(store);
-      this.callUpdat(targetView,storeKey);
+      this.callUpdate(targetView,storeKey);
     }
     store = Store.getStore(storeKey);
 
     return true;
   }
-  callUpdat(targetView,storeKey){
-    const activViews = ViewAttachQueue.getActiveViewList();
-    for(let activView of activViews){
+  callUpdate(targetView,storeKey){
+    const activViews = viewAttachQueue.getActiveViewList();
+    for(let activeView of activViews){
       const store = Store.getStore(storeKey);
-      if(targetView === activView){
+      if(targetView === activeView){
+      console.log('callUpdate update key:'+activeView.key);
         targetView.update(store);
       }else{
-        activView.updateReactive(store);
+      console.log('callUpdate updateReactive key:'+activeView.key);
+        activeView.updateReactive(store);
       }
     }
+    console.log('callUpdate END----------------');
   }
 }

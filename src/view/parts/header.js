@@ -6,7 +6,7 @@ import BaseView from '../../fw/view/baseView'
 import css from './css'
 export default class Header extends BaseView {
   constructor(service,layoutView) {
-    super(service);
+    super(service,'Header','Header');
     this.layoutView = layoutView;
     this.currentVnode = null;
   }

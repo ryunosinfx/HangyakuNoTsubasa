@@ -9,7 +9,7 @@ import Menue from './menu'
 import css from './css'
 export default class Layout extends BaseView {
   constructor(service) {
-    super(service);
+    super(service,'Layout','Layout');
   }
   initialize() {
     this.router = this.service.getRouter();
