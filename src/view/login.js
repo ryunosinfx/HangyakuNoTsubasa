@@ -26,7 +26,7 @@ export default class Login extends BaseView {
   onViewShow(viewState, data) {
     const state = this.getCurrentState();
     if (state && state.isActivated === true) {
-      alert('onViewShow;'+viewState + '/state.isLogedIn:' + state.isLogedIn + '/state.isActivated:' + state.isActivated);
+      alert('onViewShow;'+viewState + '/\nstate.isLogedIn:' + state.isLogedIn + '/\nstate.isActivated:' + state.isActivatedv+ '/\nthis.key:' + this.key);
       this.prePatch( "#signinInputArea", this.createResultVnode());
     } else {
       this.prePatch( "#signinInputArea", this.createFormVnode());
@@ -38,7 +38,6 @@ export default class Login extends BaseView {
   signin() {
     let self = this;
     return (event)=> {
-      //alert('ok!');
       let pwNode = self.es.getElementById(self.currentVnode, "signinPasswd");
       let signinPasswd = pwNode.elm.value;
       let idNode = self.es.getElementById(self.currentVnode, "signinId");
@@ -67,7 +66,6 @@ export default class Login extends BaseView {
   }
   createFormVnode() {
     let self = this;
-    //alert("self.signin():"+self.signin()+"/(typeof on[nameA]):"+(typeof self.signin()));
     const button = h('button', {
       on: {
         click: self.signin()

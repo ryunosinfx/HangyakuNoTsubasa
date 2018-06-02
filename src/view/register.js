@@ -48,7 +48,6 @@ export default class Register extends BaseView {
   }
   onViewShow(viewState, data) {
     const state = this.getCurrentState();
-    //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
     if (state && state.isActivated) {
       let resultNode = h('h1#signupInputArea', 'ok! you are logedin!');
       this.prePatch("#signupInputArea", resultNode);
@@ -60,7 +59,6 @@ export default class Register extends BaseView {
   signup() {
     let self = this;
     return(event) => {
-      //alert('ok!');
       let pwNode = this.es.getElementById(this.currentVnode, "signupPasswd");
       let idNode = this.es.getElementById(this.currentVnode, "signupId");
       let signupId = idNode.elm.value;

@@ -54,7 +54,6 @@ export default class Activate extends BaseView {
   }
   onViewShow(viewState, data){
     const state = this.getCurrentState();
-  //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
     if(state && state.isActivated){
       let resultNode = h('h1#activateInputArea', 'ok! you are logedin!');
       this.prePatch("#activateInputArea", resultNode);
@@ -66,7 +65,6 @@ export default class Activate extends BaseView {
   activate() {
     let self = this;
     return (event) => {
-      //alert('ok!');
       let pwNode = this.es.getElementById(this.currentVnode, "activatePasswd");
       let idNode = this.es.getElementById(this.currentVnode, "activateId");
       let activateId = idNode.elm.value;

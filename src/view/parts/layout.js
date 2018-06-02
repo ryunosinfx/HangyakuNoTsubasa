@@ -23,7 +23,6 @@ export default class Layout extends BaseView {
     this.menu.init(menuViewList);
   }
   init(view, state) {
-    //alert(currentVnode);
     this.view = view;
     // build frme
     this.createBsaeFrame();
@@ -41,7 +40,6 @@ export default class Layout extends BaseView {
 
   onViewShow(viewState, data){
     const state = this.getCurrentState();
-  //  alert(viewState+'/state.isLogedIn:'+state.isLogedIn+'/state.isActivated:'+state.isActivated);
     if(state && state.isActivated){
       let resultNode = h('h1#activateInputArea', 'ok! you are logedin!');
       this.prePatch("#activateInputArea", resultNode);
@@ -97,7 +95,6 @@ export default class Layout extends BaseView {
     this.patchFromOtherVnode(layout,null,this.render());
 
     this.update({oldVnode:this.currentVnode,selector:null,isOrverride:true});
-    //alert("aaa");
     //return '<header id="header">Hellow!</header><div id="menu"></div><div id="container"><div id="content"></div></div><footer id="footer"></footer>';
   }
 }
